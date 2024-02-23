@@ -18,9 +18,10 @@ pkgs.stdenv.mkDerivation rec {
   # Define a shell script to activate the environment
   shellHook = ''
     export JAVA_HOME="$JAVA_HOME"
-    export PATH="$PWD/bin:$PATH"
+    export PATH="$PWD/scripts:$PATH"
+    export PROJECT_DIR="$PWD"
 
-    chmod +x $PWD/bin/*
+    chmod +x $PWD/scripts/*
 
     # Read the dev.env file and set the environment variables
     # while IFS= read -r line; do
