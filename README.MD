@@ -23,4 +23,7 @@ $ mvnw  dependency:tree -Ddetail=true
 
 # Create a module
 $ mvnw archetype:generate -DgroupId=package.name -DartifactId=snake-case-name
+
+# Increment versions
+$ mvnw versions:set -DnewVersion=1.0.4
 ```
