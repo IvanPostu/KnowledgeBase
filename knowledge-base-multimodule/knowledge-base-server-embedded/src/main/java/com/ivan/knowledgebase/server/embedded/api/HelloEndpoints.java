@@ -6,7 +6,8 @@ import javax.ws.rs.PathParam;
 import javax.ws.rs.Produces;
 import javax.ws.rs.core.MediaType;
 
-import com.ivan.knowledgebase.server.embedded.impl.HelloEndpointsImpl.Person;
+import com.fasterxml.jackson.annotation.JsonCreator;
+import com.fasterxml.jackson.annotation.JsonProperty;
 
 @Path("/hello")
 public interface HelloEndpoints {
@@ -19,4 +20,18 @@ public interface HelloEndpoints {
 	@GET
 	@Produces(MediaType.APPLICATION_JSON)
 	Person getPerson();
+	
+	public static final class Person {
+		private final String name;
+
+		@JsonCreator
+		public Person(@JsonProperty("name") String name) {
+			this.name = name;
+		}
+
+		@JsonProperty("name")
+		public String getName() {
+			return name;
+		}
+	}
 }
