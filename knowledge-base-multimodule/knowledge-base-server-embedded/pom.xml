@@ -45,6 +45,7 @@
 			<version>${jetty.version}</version>
 		</dependency>
 
+		<!-- Jersey -->
 		<dependency>
 			<groupId>org.glassfish.jersey.containers</groupId>
 			<artifactId>jersey-container-servlet</artifactId>

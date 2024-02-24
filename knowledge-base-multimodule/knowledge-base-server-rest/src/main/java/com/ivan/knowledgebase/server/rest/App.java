@@ -1,4 +1,4 @@
-package com.ivan.knowledgebase.server.api;
+package com.ivan.knowledgebase.server.rest;
 
 /**
  * Hello world!

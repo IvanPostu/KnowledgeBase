@@ -10,7 +10,7 @@ $ mvnw clean eclipse:clean eclipse:eclipse
 
 # Package artifact
 $ cd knowledge-base-standalone/
-$ mvnw package
+$ mvnw clean install
 $ java -jar $PROJECT_DIR/knowledge-base-multimodule/knowledge-base-server-embedded/target/knowledge-base-server-embedded.jar
 
 # Run 
@@ -18,4 +18,10 @@ $ cd $PROJECT_DIR/knowledge-base-multimodule
 $ mvnw package
 $ cd $PROJECT_DIR/knowledge-base-multimodule/knowledge-base-server-embedded
 $ mvnw package exec:java
+
+# Show tree of dependencies
+$ mvnw  dependency:tree -Ddetail=true
+
+# Create a module
+$ mvnw archetype:generate -DgroupId=com.ivan.knowledgebase... -DartifactId=knowledge-base-...
 ```
