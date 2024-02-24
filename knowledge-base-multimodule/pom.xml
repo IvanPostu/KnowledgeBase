@@ -6,11 +6,10 @@
 
 	<groupId>com.ivan.knowledgebase</groupId>
 	<artifactId>knowledge-base-multimodule</artifactId>
-	<version>1.0.1</version>
+	<version>1.0.2</version>
 	<packaging>pom</packaging>
 
 	<name>${project.artifactId}</name>
-
 
 
 	<properties>
@@ -40,5 +39,12 @@
 	</dependencies>
 
 	<build>
+		<plugins>
+			<plugin>
+				<groupId>org.codehaus.mojo</groupId>
+				<artifactId>versions-maven-plugin</artifactId>
+				<version>2.8.1</version>
+			</plugin>
+		</plugins>
 	</build>
 </project>
