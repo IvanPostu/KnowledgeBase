@@ -6,6 +6,7 @@ import org.eclipse.jetty.server.Server;
 import org.eclipse.jetty.webapp.WebAppContext;
 
 public class EmbeddedServer {
+
 	public static void run(String[] args, String resourcesPath) throws Exception {
 		Server server = new Server(8080);
 		WebAppContext webAppContext = new WebAppContext();
@@ -22,4 +23,5 @@ public class EmbeddedServer {
 
 		server.join();
 	}
+
 }
