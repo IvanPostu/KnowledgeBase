@@ -6,6 +6,8 @@ A standalone web server with a set of utilities intended to keep notes and infor
 ```sh
 $ nix-shell --run bash
 
+$ mvnw clean eclipse:clean eclipse:eclipse
+
 $ cd knowledge-base-standalone/
 $ mvnw package
 $ java -jar $PROJECT_DIR/knowledge-base-standalone/target/knowledge-base-standalone-demo.jar
