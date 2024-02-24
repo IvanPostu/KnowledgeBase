@@ -8,9 +8,14 @@ $ nix-shell --run bash
 
 $ mvnw clean eclipse:clean eclipse:eclipse
 
+# Package artifact
 $ cd knowledge-base-standalone/
 $ mvnw package
-$ java -jar $PROJECT_DIR/knowledge-base-standalone/target/knowledge-base-standalone-demo.jar
+$ java -jar $PROJECT_DIR/knowledge-base-multimodule/knowledge-base-server-embedded/target/knowledge-base-server-embedded.jar
 
-$ mvnw exec:java
+# Run 
+$ cd $PROJECT_DIR/knowledge-base-multimodule
+$ mvnw package
+$ cd $PROJECT_DIR/knowledge-base-multimodule/knowledge-base-server-embedded
+$ mvnw package exec:java
 ```
