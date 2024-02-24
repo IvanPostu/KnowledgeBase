@@ -8,11 +8,12 @@ import org.glassfish.jersey.server.ResourceConfig;
 
 import com.fasterxml.jackson.jaxrs.json.JacksonJsonProvider;
 
-public class ApplicationConfig extends ResourceConfig {
-	public ApplicationConfig() {
+public class JerseyConfig extends ResourceConfig {
+	public JerseyConfig() {
 		register(JacksonJsonProvider.class);
 
 		packages("com.ivan.knowledgebase.server.embedded.impl");
+		packages("com.ivan.knowledgebase.server.rest.impl");
 
 		setProperties(properties());
 	}

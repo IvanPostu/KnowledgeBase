@@ -46,7 +46,7 @@ public class EmbeddedServer {
 	}
 
 	private static ResourceConfig configureJerseyResources() {
-		ResourceConfig config = new ApplicationConfig();
+		ResourceConfig config = new JerseyConfig();
 		return config;
 	}
 

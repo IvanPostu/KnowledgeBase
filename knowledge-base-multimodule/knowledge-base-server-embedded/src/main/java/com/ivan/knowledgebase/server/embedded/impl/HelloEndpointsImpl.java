@@ -1,8 +1,5 @@
 package com.ivan.knowledgebase.server.embedded.impl;
 
-import java.util.HashMap;
-import java.util.Map;
-
 import javax.ws.rs.ext.Provider;
 
 import com.fasterxml.jackson.annotation.JsonCreator;
