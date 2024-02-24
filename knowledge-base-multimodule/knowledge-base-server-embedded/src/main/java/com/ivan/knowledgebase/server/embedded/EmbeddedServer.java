@@ -1,13 +1,11 @@
 package com.ivan.knowledgebase.server.embedded;
 
-import java.net.URISyntaxException;
 import java.net.URL;
 
 import org.eclipse.jetty.server.Server;
 import org.eclipse.jetty.servlet.DefaultServlet;
 import org.eclipse.jetty.servlet.ServletContextHandler;
 import org.eclipse.jetty.servlet.ServletHolder;
-import org.eclipse.jetty.webapp.WebAppContext;
 import org.glassfish.jersey.server.ResourceConfig;
 import org.glassfish.jersey.servlet.ServletContainer;
 
@@ -34,9 +32,10 @@ public class EmbeddedServer {
 			server.join();
 		} catch (Exception e) {
 			System.err.println("Error starting Jetty server: " + e.getMessage());
+			server.destroy();
 			System.exit(1);
 		} finally {
-			server.destroy();
+			
 		}
 	}
 
@@ -47,8 +46,7 @@ public class EmbeddedServer {
 	}
 
 	private static ResourceConfig configureJerseyResources() {
-		ResourceConfig config = new ResourceConfig();
-		config.packages("com.ivan.knowledgebase.server.embedded.api");
+		ResourceConfig config = new ApplicationConfig();
 		return config;
 	}
 
