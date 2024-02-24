@@ -6,14 +6,10 @@ import javax.ws.rs.Produces;
 import javax.ws.rs.core.MediaType;
 
 @Path("/healthcheck")
-public interface HealthCheckEndpoint {
+public interface HealthCheckEndpoints {
 
 	@GET
 	@Produces(MediaType.APPLICATION_JSON)
 	HealthCheckResponse getHealthCheckStatus();
 
-	@Path("/test")
-	@GET
-	@Produces(MediaType.TEXT_PLAIN)
-	String test();
 }

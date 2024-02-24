@@ -6,22 +6,21 @@ A standalone web server with a set of utilities intended to keep notes and infor
 ```sh
 $ nix-shell --run bash
 
-$ mvnw clean eclipse:clean eclipse:eclipse
-
 # Package artifact
-$ cd knowledge-base-standalone/
-$ mvnw clean install
-$ java -jar $PROJECT_DIR/knowledge-base-multimodule/knowledge-base-server-embedded/target/knowledge-base-server-embedded.jar
+$ run-rebuild-multimodule.sh
 
 # Run 
-$ cd $PROJECT_DIR/knowledge-base-multimodule
-$ mvnw package
-$ cd $PROJECT_DIR/knowledge-base-multimodule/knowledge-base-server-embedded
-$ mvnw package exec:java
+$ run-rebuild-multimodule.sh  && java -jar $PROJECT_DIR/knowledge-base-multimodule/knowledge-base-server-embedded/target/knowledge-base-server-embedded.jar
+# Or
+$ run-rebuild-multimodule.sh  && run-exec-embedded-server.sh
+
+
+# Init project for eclipse
+$ mvnw clean eclipse:clean eclipse:eclipse
 
 # Show tree of dependencies
 $ mvnw  dependency:tree -Ddetail=true
 
 # Create a module
-$ mvnw archetype:generate -DgroupId=com.ivan.knowledgebase... -DartifactId=knowledge-base-...
+$ mvnw archetype:generate -DgroupId=package.name -DartifactId=snake-case-name
 ```

@@ -11,7 +11,7 @@ public final class HealthCheckResponse {
 		this.status = status;
 	}
 
-	@JsonProperty("name")
+	@JsonProperty("status")
 	public String getStatus() {
 		return status;
 	}
