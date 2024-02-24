@@ -6,7 +6,7 @@
 	<parent>
 		<artifactId>knowledge-base-multimodule</artifactId>
 		<groupId>com.ivan.knowledgebase</groupId>
-		<version>1.0-SNAPSHOT</version>
+		<version>1.0.1</version>
 	</parent>
 
 	<groupId>com.ivan.knowledgebase.server.rest.impl</groupId>
@@ -26,7 +26,7 @@
 		<dependency>
 			<groupId>com.ivan.knowledgebase.server.rest</groupId>
 			<artifactId>knowledge-base-server-rest</artifactId>
-			<version>1.0-SNAPSHOT</version>
+			<version>1.0.1</version>
 		</dependency>
 		
 		<dependency>
