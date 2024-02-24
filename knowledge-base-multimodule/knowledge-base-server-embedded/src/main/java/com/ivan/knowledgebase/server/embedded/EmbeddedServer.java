@@ -1,27 +1,61 @@
 package com.ivan.knowledgebase.server.embedded;
 
+import java.net.URISyntaxException;
 import java.net.URL;
 
 import org.eclipse.jetty.server.Server;
+import org.eclipse.jetty.servlet.DefaultServlet;
+import org.eclipse.jetty.servlet.ServletContextHandler;
+import org.eclipse.jetty.servlet.ServletHolder;
 import org.eclipse.jetty.webapp.WebAppContext;
+import org.glassfish.jersey.server.ResourceConfig;
+import org.glassfish.jersey.servlet.ServletContainer;
 
 public class EmbeddedServer {
 
+	private static final int DEFAULT_PORT = 8080;
+
 	public static void run(String[] args, String resourcesPath) throws Exception {
-		Server server = new Server(8080);
-		WebAppContext webAppContext = new WebAppContext();
-		server.setHandler(webAppContext);
+		Server server = new Server(DEFAULT_PORT);
 
+		ServletContextHandler context = createServletContextHandler(resourcesPath);
+		ResourceConfig config = configureJerseyResources();
+		createJerseyServletContainer(context, config);
+		
 		URL webAppDir = EmbeddedServer.class.getClassLoader().getResource(resourcesPath);
-		webAppContext.setResourceBase(webAppDir.toURI().toString());
+        context.setResourceBase(webAppDir.toURI().toString());
+        context.addServlet(DefaultServlet.class, "/*");
+		
+		server.setHandler(context);
 
-		webAppContext.setAttribute("org.eclipse.jetty.server.webapp.ContainerIncludeJarPattern",
-				".*/target/classes/|.*\\.jar");
+		try {
+			server.start();
+			System.out.println("Jetty server started on port " + DEFAULT_PORT);
+			server.join();
+		} catch (Exception e) {
+			System.err.println("Error starting Jetty server: " + e.getMessage());
+			System.exit(1);
+		} finally {
+			server.destroy();
+		}
+	}
 
-		server.start();
-		System.out.println("Server started!");
+	private static void createJerseyServletContainer(ServletContextHandler context, ResourceConfig config) {
+		ServletContainer container = new ServletContainer(config);
+		ServletHolder servletHolder = new ServletHolder(container);
+		context.addServlet(servletHolder, "/api/*");
+	}
 
-		server.join();
+	private static ResourceConfig configureJerseyResources() {
+		ResourceConfig config = new ResourceConfig();
+		config.packages("com.ivan.knowledgebase.server.embedded.api");
+		return config;
+	}
+
+	private static ServletContextHandler createServletContextHandler(String resourcesPath) throws Exception {
+		ServletContextHandler context = new ServletContextHandler(ServletContextHandler.SESSIONS);
+		context.setContextPath("/");
+		return context;
 	}
 
 }
