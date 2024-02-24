@@ -8,7 +8,7 @@ $ nix-shell --run bash
 
 $ cd knowledge-base-standalone/
 $ mvnw package
-$ java -jar $PROJECT_DIR/knowledge-base-standalone/target/knowledge-base-standalone-1.0-SNAPSHOT.jar
+$ java -jar $PROJECT_DIR/knowledge-base-standalone/target/knowledge-base-standalone-demo.jar
 
 $ mvnw exec:java
 ```
