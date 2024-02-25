@@ -8,8 +8,8 @@ import javax.ws.rs.core.MediaType;
 @Path("/healthcheck")
 public interface HealthCheckEndpoints {
 
-	@GET
-	@Produces(MediaType.APPLICATION_JSON)
-	HealthCheckResponse getHealthCheckStatus();
+    @GET
+    @Produces(MediaType.APPLICATION_JSON)
+    HealthCheckResponse getHealthCheckStatus();
 
 }

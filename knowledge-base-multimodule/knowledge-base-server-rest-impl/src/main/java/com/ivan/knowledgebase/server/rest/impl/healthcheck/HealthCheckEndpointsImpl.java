@@ -8,9 +8,9 @@ import com.ivan.knowledgebase.server.rest.healthcheck.HealthCheckResponse;
 @Provider
 public class HealthCheckEndpointsImpl implements HealthCheckEndpoints {
 
-	@Override
-	public HealthCheckResponse getHealthCheckStatus() {
-		return new HealthCheckResponse("SUCCESS");
-	}
+    @Override
+    public HealthCheckResponse getHealthCheckStatus() {
+        return new HealthCheckResponse("SUCCESS");
+    }
 
 }
