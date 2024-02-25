@@ -2,4 +2,4 @@
 
 set -e
 
-mvnw -f $PROJECT_DIR/knowledge-base-multimodule/pom.xml clean install 
+mvnw -f $PROJECT_DIR/knowledge-base-multimodule/pom.xml clean install

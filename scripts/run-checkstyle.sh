@@ -2,7 +2,12 @@
 
 pathToTheCheckstyleReport="$PROJECT_DIR/knowledge-base-multimodule/target/checkstyle-result.xml"
 
-mvnw -f $PROJECT_DIR/knowledge-base-multimodule/pom.xml checkstyle:checkstyle-aggregate
+mvnw -f $PROJECT_DIR/knowledge-base-multimodule/pom.xml \
+    resources:resources@copy-checkstyle-configuration-files \
+    checkstyle:checkstyle-aggregate \
+    -DPROJECT_DIR=$PROJECT_DIR \
+    -Dcheckstyle.enableExternalDtdLoad=true  \
+    -Dproject.build.directory=$PROJECT_DIR 
 
 mvnReturnCode=$?
 

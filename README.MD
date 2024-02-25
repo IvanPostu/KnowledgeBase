@@ -27,3 +27,15 @@ $ mvnw archetype:generate -DgroupId=package.name -DartifactId=snake-case-name
 # Increment versions
 $ mvnw versions:set -DnewVersion=1.0.4
 ```
+
+## How to supress checkstyle rules
+```java
+    // CHECKSTYLE.SUPPRESS: MagicNumber
+    private int number = 32;
+
+    // CHECKSTYLE.OFF: MagicNumber
+    private int number2 = 32;
+    // CHECKSTYLE.ON: MagicNumber
+
+    private int number3 = 32;
+```

@@ -10,7 +10,6 @@ import org.glassfish.jersey.server.ResourceConfig;
 import org.glassfish.jersey.servlet.ServletContainer;
 
 public class EmbeddedServer {
-
     private static final int DEFAULT_PORT = 8080;
 
     public static void run(String[] args, String resourcesPath) throws Exception {
@@ -34,8 +33,6 @@ public class EmbeddedServer {
             System.err.println("Error starting Jetty server: " + e.getMessage());
             server.destroy();
             System.exit(1);
-        } finally {
-
         }
     }
 
