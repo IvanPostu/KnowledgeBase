@@ -5,6 +5,8 @@ import java.net.URL;
 import org.eclipse.jetty.server.Server;
 import org.eclipse.jetty.servlet.DefaultServlet;
 import org.eclipse.jetty.servlet.ServletContextHandler;
+
+
 import org.eclipse.jetty.servlet.ServletHolder;
 import org.glassfish.jersey.server.ResourceConfig;
 import org.glassfish.jersey.servlet.ServletContainer;
@@ -19,11 +21,11 @@ public class EmbeddedServer {
 		ServletContextHandler context = createServletContextHandler(resourcesPath);
 		ResourceConfig config = configureJerseyResources();
 		createJerseyServletContainer(context, config);
-		
+
 		URL webAppDir = EmbeddedServer.class.getClassLoader().getResource(resourcesPath);
         context.setResourceBase(webAppDir.toURI().toString());
         context.addServlet(DefaultServlet.class, "/*");
-		
+
 		server.setHandler(context);
 
 		try {
@@ -35,7 +37,7 @@ public class EmbeddedServer {
 			server.destroy();
 			System.exit(1);
 		} finally {
-			
+
 		}
 	}
 

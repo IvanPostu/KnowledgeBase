@@ -1,7 +1,5 @@
 package com.ivan.knowledgebase.server.rest.impl.healthcheck;
 
-
-
 import javax.ws.rs.ext.Provider;
 
 import com.ivan.knowledgebase.server.rest.healthcheck.HealthCheckEndpoints;
