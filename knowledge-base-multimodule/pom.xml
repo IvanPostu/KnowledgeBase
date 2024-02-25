@@ -10,6 +10,7 @@
     <packaging>pom</packaging>
 
     <name>${project.artifactId}</name>
+    <url>https://github.com/IvanPostu/KnowledgeBase</url>
 
 
     <properties>
@@ -26,21 +27,17 @@
         <maven-resources-plugin.version>3.2.0</maven-resources-plugin.version>
     </properties>
 
-
     <modules>
         <module>knowledge-base-server-embedded</module>
         <module>knowledge-base-server-rest</module>
         <module>knowledge-base-server-rest-impl</module>
+        <module>knowledge-base-model</module>
+        <module>knowledge-base-model-impl</module>
+        <module>knowledge-base-persistence</module>
+        <module>knowledge-base-persistence-impl</module>
+        <module>knowledge-base-database-migrator</module>
+        <module>knowledge-base-user-acceptance-test</module>
     </modules>
-
-    <dependencies>
-        <dependency>
-            <groupId>org.junit.jupiter</groupId>
-            <artifactId>junit-jupiter-engine</artifactId>
-            <version>${junit.version}</version>
-            <scope>test</scope>
-        </dependency>
-    </dependencies>
 
     <build>
         <plugins>
