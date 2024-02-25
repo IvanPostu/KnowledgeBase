@@ -43,6 +43,7 @@
 		<module name="SuppressionXpathSingleFilter">
 			<property name="checks" value="ImportOrder" />
 			<property name="message" value="^'java\..*'.*" />
+			
 		</module>
 	</module>
 </module>
