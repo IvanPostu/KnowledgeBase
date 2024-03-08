@@ -1,0 +1,29 @@
+package com.ivan.knowledgebase.user.acceptance.test;
+
+import java.net.URI;
+
+import com.ivan.knowledgebase.common.rest.exception.translation.RestExceptionTranslationStrategy;
+
+public final class Blackbox<ENDPOINT> {
+    private final Class<ENDPOINT> endpointInterface;
+    private final EndpointsConfig endpointsConfig;
+
+    private URI baseUri;
+    private RestExceptionTranslationStrategy restExceptionTranslationStrategy = new RestExceptionTranslationStrategy() {
+    };
+
+    private Blackbox(Class<ENDPOINT> endpointInterface) {
+        this.endpointInterface = endpointInterface;
+        this.endpointsConfig = new EndpointsConfig();
+    }
+
+    public static <ENDPOINT> Blackbox<ENDPOINT> createEndpoint(Class<ENDPOINT> endpointInterface) {
+        return new Blackbox<ENDPOINT>(endpointInterface);
+    }
+
+    public Blackbox<ENDPOINT> forKnowledgeBaseApi() {
+        this.baseUri = URI.create(endpointsConfig.getApiUrl());
+        return this;
+    }
+
+}
