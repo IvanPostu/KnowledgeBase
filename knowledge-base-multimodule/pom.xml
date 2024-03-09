@@ -24,6 +24,7 @@
         <jakarta.ws.rs.version>2.1.6</jakarta.ws.rs.version>
         <checkstyle-maven-plugin.version>3.3.1</checkstyle-maven-plugin.version>
         <maven-resources-plugin.version>3.2.0</maven-resources-plugin.version>
+        <jackson.version>2.16.1</jackson.version>
     </properties>
 
     <modules>

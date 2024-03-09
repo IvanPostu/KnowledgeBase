@@ -2,6 +2,11 @@ package com.ivan.knowledgebase.user.acceptance.test;
 
 import java.net.URI;
 
+import javax.ws.rs.client.Client;
+import javax.ws.rs.client.WebTarget;
+import javax.ws.rs.core.MediaType;
+import javax.ws.rs.core.Response;
+
 import com.ivan.knowledgebase.common.rest.exception.translation.RestExceptionTranslationStrategy;
 
 public final class Blackbox<ENDPOINT> {
@@ -24,6 +29,12 @@ public final class Blackbox<ENDPOINT> {
     public Blackbox<ENDPOINT> forKnowledgeBaseApi() {
         this.baseUri = URI.create(endpointsConfig.getApiUrl());
         return this;
+    }
+
+    public ENDPOINT build() {
+        Client client = BlackboxJerseyClient.INSTANCE.getClient();
+
+        return null;
     }
 
 }
