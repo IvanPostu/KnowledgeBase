@@ -12,7 +12,7 @@ final class EndpointsConfig {
     }
 
     public String getApiUrl() {
-        return getProperty("blackbox.api.url", "http://127.0.0.1:8080");
+        return getProperty("blackbox.api.url", "http://127.0.0.1:8080/api");
     }
 
     private String getProperty(String propertyName, String defaultValue, Object... args) {

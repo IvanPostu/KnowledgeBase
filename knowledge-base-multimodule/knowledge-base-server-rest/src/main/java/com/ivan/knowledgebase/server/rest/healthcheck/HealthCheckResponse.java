@@ -7,7 +7,7 @@ public final class HealthCheckResponse {
     private final String status;
 
     @JsonCreator
-    public HealthCheckResponse(String status) {
+    public HealthCheckResponse(@JsonProperty("status") String status) {
         this.status = status;
     }
 

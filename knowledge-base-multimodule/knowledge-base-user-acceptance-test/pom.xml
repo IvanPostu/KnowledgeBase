@@ -29,6 +29,11 @@
             <artifactId>knowledge-base-common-rest</artifactId>
             <version>1.0.4</version>
         </dependency>
+        <dependency>
+            <groupId>com.ivan.knowledgebase.server.rest</groupId>
+            <artifactId>knowledge-base-server-rest</artifactId>
+            <version>1.0.4</version>
+        </dependency>
 
         <dependency>
             <groupId>org.junit.jupiter</groupId>
@@ -48,6 +53,13 @@
             <artifactId>commons-lang3</artifactId>
             <version>3.14.0</version>
         </dependency>
+        <dependency>
+            <groupId>org.assertj</groupId>
+            <artifactId>assertj-core</artifactId>
+            <version>3.25.3</version>
+            <scope>test</scope>
+        </dependency>
+
     </dependencies>
 
     <build>

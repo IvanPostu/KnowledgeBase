@@ -1,12 +1,14 @@
 package com.ivan.knowledgebase.user.acceptance.test;
 
 import java.net.URI;
+import java.util.Collections;
 
 import javax.ws.rs.client.Client;
 import javax.ws.rs.client.WebTarget;
-import javax.ws.rs.core.MediaType;
-import javax.ws.rs.core.Response;
+import javax.ws.rs.core.Form;
+import javax.ws.rs.core.MultivaluedHashMap;
 
+import com.ivan.knowledgebase.common.rest.WebResourceFactory;
 import com.ivan.knowledgebase.common.rest.exception.translation.RestExceptionTranslationStrategy;
 
 public final class Blackbox<ENDPOINT> {
@@ -33,8 +35,10 @@ public final class Blackbox<ENDPOINT> {
 
     public ENDPOINT build() {
         Client client = BlackboxJerseyClient.INSTANCE.getClient();
+        WebTarget webTarget = client.target(baseUri);
 
-        return null;
+        return WebResourceFactory.newResource(endpointInterface, webTarget, false,
+                new MultivaluedHashMap<String, Object>(), Collections.emptyList(), new Form());
     }
 
 }
