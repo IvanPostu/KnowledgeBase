@@ -8,6 +8,7 @@ in
 pkgs.stdenv.mkDerivation rec {
   name = "nix-shell";
   buildInputs = [
+    nodejs_21
     jdk
     sqlitebrowser
   ];

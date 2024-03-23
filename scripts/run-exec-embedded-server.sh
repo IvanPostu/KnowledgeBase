@@ -2,4 +2,4 @@
 
 set -e
 
-mvnw -f $PROJECT_DIR/knowledge-base-multimodule/knowledge-base-server-embedded/pom.xml exec:java
+mvnw -f $PROJECT_DIR/_knowledge-base-multimodule/knowledge-base-server-embedded/pom.xml exec:java

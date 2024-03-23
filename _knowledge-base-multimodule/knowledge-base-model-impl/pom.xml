@@ -5,13 +5,13 @@
   <modelVersion>4.0.0</modelVersion>
 
   <parent>
-      <artifactId>knowledge-base-multimodule</artifactId>
+      <artifactId>_knowledge-base-multimodule</artifactId>
       <groupId>com.ivan.knowledgebase</groupId>
       <version>1.0.4</version>
   </parent>
 
-  <groupId>com.ivan.knowledgebase.persistence.impl</groupId>
-  <artifactId>knowledge-base-persistence-impl</artifactId>
+  <groupId>com.ivan.knowledgebase.model.impl</groupId>
+  <artifactId>knowledge-base-model-impl</artifactId>
   <name>${project.artifactId}</name>
 
   <properties>

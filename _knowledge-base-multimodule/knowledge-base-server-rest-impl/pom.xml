@@ -4,14 +4,13 @@
     xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
     <modelVersion>4.0.0</modelVersion>
     <parent>
-        <artifactId>knowledge-base-multimodule</artifactId>
+        <artifactId>_knowledge-base-multimodule</artifactId>
         <groupId>com.ivan.knowledgebase</groupId>
         <version>1.0.4</version>
     </parent>
 
-    <groupId>com.ivan.knowledgebase.server.rest</groupId>
-    <artifactId>knowledge-base-server-rest</artifactId>
-    <packaging>jar</packaging>
+    <groupId>com.ivan.knowledgebase.server.rest.impl</groupId>
+    <artifactId>knowledge-base-server-rest-impl</artifactId>
 
     <name>${project.artifactId}</name>
 
@@ -25,14 +24,14 @@
 
     <dependencies>
         <dependency>
+            <groupId>com.ivan.knowledgebase.server.rest</groupId>
+            <artifactId>knowledge-base-server-rest</artifactId>
+            <version>1.0.4</version>
+        </dependency>
+
+        <dependency>
             <groupId>org.glassfish.jersey.containers</groupId>
             <artifactId>jersey-container-servlet</artifactId>
-            <version>${jersey.version}</version>
-            <scope>provided</scope>
-        </dependency>
-        <dependency>
-            <groupId>org.glassfish.jersey.media</groupId>
-            <artifactId>jersey-media-json-jackson</artifactId>
             <version>${jersey.version}</version>
             <scope>provided</scope>
         </dependency>

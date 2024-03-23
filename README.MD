@@ -10,7 +10,7 @@ $ nix-shell --run bash
 $ run-rebuild-multimodule.sh
 
 # Run 
-$ run-rebuild-multimodule.sh  && java -jar $PROJECT_DIR/knowledge-base-multimodule/knowledge-base-server-embedded/target/knowledge-base-server-embedded.jar
+$ run-rebuild-multimodule.sh  && java -jar $PROJECT_DIR/_knowledge-base-multimodule/knowledge-base-server-embedded/target/knowledge-base-server-embedded.jar
 # Or
 $ run-rebuild-multimodule.sh  && run-exec-embedded-server.sh
 
