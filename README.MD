@@ -26,6 +26,10 @@ $ mvnw archetype:generate -DgroupId=package.name -DartifactId=snake-case-name
 
 # Increment versions
 $ mvnw versions:set -DnewVersion=1.0.4
+
+# Generate report
+# REsult path: /home/ivan/Projects/KnowledgeBase/_knowledge-base-multimodule/target/staging/
+$ mvnw -f $PROJECT_DIR/_knowledge-base-multimodule/pom.xml clean site site:stage
 ```
 
 ## How to supress checkstyle rules
