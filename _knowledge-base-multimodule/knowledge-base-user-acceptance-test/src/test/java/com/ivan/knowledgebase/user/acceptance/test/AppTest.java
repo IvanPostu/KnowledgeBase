@@ -1,13 +1,13 @@
 package com.ivan.knowledgebase.user.acceptance.test;
 
-import static org.junit.jupiter.api.Assertions.assertTrue;
-
-import org.junit.jupiter.api.Test;
+import org.assertj.core.api.Assertions;
+import org.testng.TestNG;
 
 public class AppTest {
 
-    @Test
+    @org.testng.annotations.Test
     public void shouldAnswerWithTrue() {
-        assertTrue(true);
+        Assertions.assertThat(true).isEqualTo(false);
     }
+
 }

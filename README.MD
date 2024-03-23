@@ -14,7 +14,6 @@ $ run-rebuild-multimodule.sh  && java -jar $PROJECT_DIR/_knowledge-base-multimod
 # Or
 $ run-rebuild-multimodule.sh  && run-exec-embedded-server.sh
 
-
 # Init project for eclipse
 $ mvnw clean eclipse:clean eclipse:eclipse
 
@@ -24,12 +23,16 @@ $ mvnw  dependency:tree -Ddetail=true
 # Create a module
 $ mvnw archetype:generate -DgroupId=package.name -DartifactId=snake-case-name
 
-# Increment versions
+# Increment project versions
 $ mvnw versions:set -DnewVersion=1.0.4
 
 # Generate report
 # Result path: /home/ivan/Projects/KnowledgeBase/_knowledge-base-multimodule/target/staging/
-$ mvnw -f $PROJECT_DIR/_knowledge-base-multimodule/pom.xml clean site:site site:stage3
+$ mvnw -f $PROJECT_DIR/_knowledge-base-multimodule/pom.xml clean site:site site:stage
+
+# Run user acceptance tests
+# Result path: /home/ivan/Projects/KnowledgeBase/_knowledge-base-multimodule/knowledge-base-user-acceptance-test/target/surefire-reports/
+$ mvnw -f $PROJECT_DIR/_knowledge-base-multimodule/knowledge-base-user-acceptance-test/pom.xml clean test -Puser-acceptance-tests
 ```
 
 ## How to supress checkstyle rules
