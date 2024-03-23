@@ -12,13 +12,10 @@
     <name>${project.artifactId}</name>
     <url>https://github.com/IvanPostu/KnowledgeBase</url>
 
-
     <properties>
         <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
         <maven.compiler.source>1.8</maven.compiler.source>
         <maven.compiler.target>1.8</maven.compiler.target>
-
-        <checkstyle-suppresion-path>checkstyle-suppressions.xml</checkstyle-suppresion-path>
 
         <junit.version>5.10.2</junit.version>
         <jetty.version>9.4.54.v20240208</jetty.version>
@@ -28,6 +25,9 @@
         <maven-resources-plugin.version>3.2.0</maven-resources-plugin.version>
         <jackson.version>2.16.1</jackson.version>
         <maven.site.plugin.version>3.9.1</maven.site.plugin.version>
+        <maven.project.info.reports.plugin.version>3.0.0</maven.project.info.reports.plugin.version>
+
+        <maven-release-plugin.version>3.0.0-M5</maven-release-plugin.version>
     </properties>
 
     <modules>
@@ -50,6 +50,23 @@
             <url>${project.baseUri}</url>
         </site>
     </distributionManagement>
+
+    <dependencyManagement>
+        <dependencies>
+            <dependency>
+                <groupId>org.assertj</groupId>
+                <artifactId>assertj-core</artifactId>
+                <version>3.25.3</version>
+                <scope>test</scope>
+            </dependency>
+            <dependency>
+                <groupId>org.testng</groupId>
+                <artifactId>testng</artifactId>
+                <version>7.9.0</version>
+                <scope>test</scope>
+            </dependency>            
+        </dependencies>
+    </dependencyManagement>
 
     <reporting>
         <plugins>
@@ -78,35 +95,14 @@
             <plugin>
                 <groupId>org.apache.maven.plugins</groupId>
                 <artifactId>maven-project-info-reports-plugin</artifactId>
-                <version>3.0.0</version>
+                <version>${maven.project.info.reports.plugin.version}</version>
             </plugin>
             <plugin>
                 <groupId>org.apache.maven.plugins</groupId>
                 <artifactId>maven-release-plugin</artifactId>
-                <version>3.0.0-M5</version>
+                <version>${maven-release-plugin.version}</version>
             </plugin>
 
-            <plugin>
-                <artifactId>maven-resources-plugin</artifactId>
-                <version>${maven-resources-plugin.version}</version>
-                <executions>
-                    <execution>
-                        <id>copy-checkstyle-configuration-files</id>
-                        <configuration>
-                            <outputDirectory>${project.build.directory}</outputDirectory>
-                            <resources>
-                                <resource>
-                                    <directory>${project.basedir}</directory>
-                                    <includes>
-                                        <include>checkstyle-common.xml</include>
-                                        <include>checkstyle.xml</include>
-                                    </includes>
-                                </resource>
-                            </resources>
-                        </configuration>
-                    </execution>
-                </executions>
-            </plugin>
             <plugin>
                 <groupId>org.apache.maven.plugins</groupId>
                 <artifactId>maven-checkstyle-plugin</artifactId>
