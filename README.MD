@@ -21,7 +21,7 @@ $ mvnw clean eclipse:clean eclipse:eclipse
 $ mvnw  dependency:tree -Ddetail=true
 
 # Create a module
-$ mvnw archetype:generate -DgroupId=package.name -DartifactId=snake-case-name
+$ mvnw archetype:generate -DarchetypeGroupId=org.apache.maven.archetypes -DarchetypeArtifactId=maven-archetype-quickstart -DarchetypeVersion=1.4 -DgroupId={package.name} -DartifactId={snake-case-name}
 
 # Increment project versions
 $ mvnw versions:set -DnewVersion=1.0.4
@@ -60,3 +60,17 @@ $ mvnw -f $PROJECT_DIR/_knowledge-base-multimodule/knowledge-base-user-acceptanc
 
     private int number3 = 32;
 ```
+
+## How to run testng in eclipse
+```sh
+# 1. Install extension
+# 2. Change module's java version to the value which is greater than 8, e.g. 17
+```
+
+
+## References
+
+#### Markdown demo
+- [Marked Demo](https://marked.js.org/demo/)
+- [CommonMark Demo](https://spec.commonmark.org/dingus/)
+- [Daring Fireball (pedantic) Demo](https://daringfireball.net/projects/markdown/dingus)
