@@ -91,3 +91,4 @@ nb-configuration.xml
 temp.*
 .checkstyle
 api.http
+test-output
