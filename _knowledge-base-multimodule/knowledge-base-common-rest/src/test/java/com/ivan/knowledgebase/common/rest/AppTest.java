@@ -6,6 +6,6 @@ import org.testng.annotations.Test;
 public class AppTest {
     @Test
     void testTrue() {
-            Assertions.assertThat(false).isTrue();
+        Assertions.assertThat(true).isTrue();
     }
 }
