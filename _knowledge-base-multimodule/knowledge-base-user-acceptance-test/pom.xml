@@ -18,9 +18,6 @@
         <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
         <maven.compiler.source>1.8</maven.compiler.source>
         <maven.compiler.target>1.8</maven.compiler.target>
-
-        <maven.surefire.plugin.version>3.2.5</maven.surefire.plugin.version>
-        <maven.site.plugin.version>3.9.1</maven.site.plugin.version>
     </properties>
 
     <dependencies>
@@ -33,6 +30,12 @@
             <groupId>com.ivan.knowledgebase.server.rest</groupId>
             <artifactId>knowledge-base-server-rest</artifactId>
             <version>1.0.4</version>
+        </dependency>
+        <dependency>
+            <groupId>com.ivan.knowledgebase.test.common</groupId>
+            <artifactId>knowledgebase-test-common</artifactId>
+            <version>1.0.4</version>
+            <scope>test</scope>
         </dependency>
 
         <dependency>
@@ -49,16 +52,7 @@
             <groupId>org.apache.commons</groupId>
             <artifactId>commons-lang3</artifactId>
         </dependency>
-        <dependency>
-            <groupId>org.assertj</groupId>
-            <artifactId>assertj-core</artifactId>
-            <scope>test</scope>
-        </dependency>
-        <dependency>
-            <groupId>org.testng</groupId>
-            <artifactId>testng</artifactId>
-            <scope>test</scope>
-        </dependency>
+
 
         <dependency>
             <groupId>com.relevantcodes</groupId>
@@ -72,7 +66,7 @@
             <plugin>
                 <groupId>org.apache.maven.plugins</groupId>
                 <artifactId>maven-surefire-plugin</artifactId>
-                <version>${maven.surefire.plugin.version}</version>
+                <version>${maven-surefire-plugin.version}</version>
                 <configuration>
                     <excludes>
                         <exclude>**/user.acceptance.test/**/*.java</exclude>
@@ -90,7 +84,7 @@
                     <plugin>
                         <groupId>org.apache.maven.plugins</groupId>
                         <artifactId>maven-surefire-plugin</artifactId>
-                        <version>${maven.surefire.plugin.version}</version>
+                        <version>${maven-surefire-plugin.version}</version>
                         <configuration>
                             <suiteXmlFiles>
                                 <suiteXmlFile>src/test/resources/testng.xml</suiteXmlFile>

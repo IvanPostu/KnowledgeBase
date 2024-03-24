@@ -26,7 +26,10 @@ $ mvnw archetype:generate -DgroupId=package.name -DartifactId=snake-case-name
 # Increment project versions
 $ mvnw versions:set -DnewVersion=1.0.4
 
-# Generate report
+# Build project 
+$ mvnw -f $PROJECT_DIR/_knowledge-base-multimodule/ clean install
+
+# Generate report for tests + checkstyle
 # Result path: /home/ivan/Projects/KnowledgeBase/_knowledge-base-multimodule/target/staging/
 $ mvnw -f $PROJECT_DIR/_knowledge-base-multimodule/pom.xml clean site:site site:stage
 

@@ -29,6 +29,7 @@
         <maven-release-plugin.version>3.0.0-M5</maven-release-plugin.version>
         <maven-jxr-plugin.version>3.3.2</maven-jxr-plugin.version>
         <maven-project-info-reports-plugin.version>3.0.0</maven-project-info-reports-plugin.version>
+        <maven-surefire-plugin.version>3.2.5</maven-surefire-plugin.version>
     </properties>
 
     <modules>
@@ -43,6 +44,7 @@
         <module>knowledge-base-user-acceptance-test</module>
         <module>knowledge-base-common-rest</module>
         <module>knowledgebase-checkstyle</module>
+        <module>knowledgebase-test-common</module>
     </modules>
 
     <distributionManagement>
@@ -97,6 +99,7 @@
             </plugin>
         </plugins>
     </reporting>
+
     <build>
         <plugins>
             <plugin>

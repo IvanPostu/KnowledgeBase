@@ -63,7 +63,7 @@ class HealthCheckEndpointsTest {
     void testHealthCheckEndpointShouldResponseWithSuccess3(ITestContext context) throws Exception {
         String outputDirectory = context.getOutputDirectory();
 
-        ExtentReports extent = new ExtentReports(outputDirectory + "/extentReport.html", false);
+        ExtentReports extent = new ExtentReports(outputDirectory.replace(' ', '_') + "/extentReport.html", false);
         ExtentTest test1 = extent.startTest(currentTestName);
 
         test1.log(LogStatus.INFO, "Starting test case");

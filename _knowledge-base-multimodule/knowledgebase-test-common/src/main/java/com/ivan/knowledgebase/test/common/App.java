@@ -1,4 +1,4 @@
-package com.ivan.knowledgebase.checkstyle;
+package com.ivan.knowledgebase.test.common;
 
 public class App {
     public static void main(String[] args) {

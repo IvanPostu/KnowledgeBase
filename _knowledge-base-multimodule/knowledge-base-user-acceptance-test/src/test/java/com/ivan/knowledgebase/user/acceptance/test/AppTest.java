@@ -7,7 +7,7 @@ public class AppTest {
 
     @org.testng.annotations.Test
     public void shouldAnswerWithTrue() throws Exception {
-        Thread.sleep(10000);
+        Thread.sleep(3000);
         Assertions.assertThat(true).isEqualTo(false);
     }
 
