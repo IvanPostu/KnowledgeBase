@@ -1,6 +1,11 @@
 package com.ivan.knowledgebase.common.rest;
 
-public class AppTest 
-{
+import org.assertj.core.api.Assertions;
+import org.testng.annotations.Test;
 
+public class AppTest {
+    @Test
+    void testTrue() {
+            Assertions.assertThat(false).isTrue();
+    }
 }

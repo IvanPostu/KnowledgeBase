@@ -26,10 +26,21 @@ $ mvnw archetype:generate -DgroupId=package.name -DartifactId=snake-case-name
 # Increment project versions
 $ mvnw versions:set -DnewVersion=1.0.4
 
-# Build project 
+# Build project (tests + checkstyle)
+# -DskipTests -> skip tests execution
+# -Dmaven.test.skip=true -> skip tests compilation
+# -Dcheckstyle.skip=true -> skip checkstyle
 $ mvnw -f $PROJECT_DIR/_knowledge-base-multimodule/ clean install
 
-# Generate report for tests + checkstyle
+# Install without tests & checkstyle
+$ mvnw -f $PROJECT_DIR/_knowledge-base-multimodule/pom.xml clean install -DskipTests -Dcheckstyle.skip=true
+
+# Run tests (acceptance tests are ignored)
+$ mvnw -f $PROJECT_DIR/_knowledge-base-multimodule/pom.xml clean test
+# Run checkstyle for all modules
+$ mvnw -f $PROJECT_DIR/_knowledge-base-multimodule/pom.xml clean checkstyle:checkstyle-aggregate
+
+# Generate report for tests + checkstyle (acceptance tests are ignored)
 # Result path: /home/ivan/Projects/KnowledgeBase/_knowledge-base-multimodule/target/staging/
 $ mvnw -f $PROJECT_DIR/_knowledge-base-multimodule/pom.xml clean site:site site:stage
 

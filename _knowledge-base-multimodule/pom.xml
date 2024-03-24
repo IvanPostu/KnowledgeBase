@@ -129,14 +129,22 @@
                         <version>1.0.4</version>
                     </dependency>
                 </dependencies>
-                <configuration>
-                    <configLocation>project_checkstyle/checkstyle.xml</configLocation>
-                    <!-- linkXRef=false to avoid WARNING 'Unable to locate
-                    Source XRef to link to' -->
-                    <linkXRef>false</linkXRef>
-                    <consoleOutput>true</consoleOutput>
-                    <failsOnError>true</failsOnError>
-                </configuration>
+                <executions>
+                    <execution>
+                        <id>checkstyle-validation</id>
+                        <phase>verify</phase>
+                        <goals>
+                            <goal>check</goal>
+                        </goals>
+                        <configuration>
+                            <configLocation>project_checkstyle/checkstyle.xml</configLocation>
+                            <consoleOutput>true</consoleOutput>
+                            <failsOnError>true</failsOnError>
+                            <violationSeverity>warning</violationSeverity> <!--
+                            Consider warning and higher as violations -->
+                        </configuration>
+                    </execution>
+                </executions>
             </plugin>
 
         </plugins>
