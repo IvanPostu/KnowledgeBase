@@ -44,6 +44,7 @@
         <module>knowledge-base-user-acceptance-test</module>
         <module>knowledge-base-common-rest</module>
         <module>knowledgebase-checkstyle</module>
+        <module>knowledgebase-markdown</module>
         <module>knowledgebase-test-common</module>
     </modules>
 
@@ -129,6 +130,20 @@
                         <version>1.0.4</version>
                     </dependency>
                 </dependencies>
+                <configuration>
+                    <configLocation>project_checkstyle/checkstyle.xml</configLocation>
+                    <consoleOutput>true</consoleOutput>
+                    <failsOnError>true</failsOnError>
+                    <includeTestSourceDirectory>true</includeTestSourceDirectory>
+
+                    <!-- Consider warning and higher as violations -->
+                    <violationSeverity>warning</violationSeverity>
+
+                    <!--   <suppressionsLocation>project_checkstyle/checkstyle-suppressions.xml</suppressionsLocation>
+                            <suppressionsFileExpression>
+                                checkstyle.suppressions.file</suppressionsFileExpression>-->
+                            
+                </configuration>
                 <executions>
                     <execution>
                         <id>checkstyle-validation</id>
@@ -136,13 +151,6 @@
                         <goals>
                             <goal>check</goal>
                         </goals>
-                        <configuration>
-                            <configLocation>project_checkstyle/checkstyle.xml</configLocation>
-                            <consoleOutput>true</consoleOutput>
-                            <failsOnError>true</failsOnError>
-                            <violationSeverity>warning</violationSeverity> <!--
-                            Consider warning and higher as violations -->
-                        </configuration>
                     </execution>
                 </executions>
             </plugin>

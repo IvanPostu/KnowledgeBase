@@ -37,8 +37,11 @@ $ mvnw -f $PROJECT_DIR/_knowledge-base-multimodule/pom.xml clean install -DskipT
 
 # Run tests (acceptance tests are ignored)
 $ mvnw -f $PROJECT_DIR/_knowledge-base-multimodule/pom.xml clean test
-# Run checkstyle for all modules
+# Run only checkstyle for all modules
 $ mvnw -f $PROJECT_DIR/_knowledge-base-multimodule/pom.xml clean checkstyle:checkstyle-aggregate
+
+# Run checkstyle + unit tests
+$ mvnw -f $PROJECT_DIR/_knowledge-base-multimodule/pom.xml clean verify
 
 # Generate report for tests + checkstyle (acceptance tests are ignored)
 # Result path: /home/ivan/Projects/KnowledgeBase/_knowledge-base-multimodule/target/staging/

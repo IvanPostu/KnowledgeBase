@@ -7,6 +7,10 @@
     <property name="charset" value="UTF-8" />
     <property name="severity" value="error" />
 
+      <!--  <module name="SuppressionFilter">
+        <property name="file" value="${suppressionsLocation}" />
+    </module>-->
+
     <module name="LineLength">
         <property name="fileExtensions" value="java" />
         <property name="max" value="120" />
