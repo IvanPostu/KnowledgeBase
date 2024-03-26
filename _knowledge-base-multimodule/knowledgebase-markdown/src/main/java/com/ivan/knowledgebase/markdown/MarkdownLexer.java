@@ -11,11 +11,9 @@ import com.ivan.knowledgebase.markdown.normalizer.PlainMarkdownNormalizer;
 import com.ivan.knowledgebase.markdown.token.MarkdownToken;
 
 public final class MarkdownLexer {
-    private final boolean pedantic;
     private final PlainMarkdownNormalizer plainMarkdownNormalizer;
 
     private MarkdownLexer(boolean pedantic) {
-        this.pedantic = pedantic;
         this.plainMarkdownNormalizer = Normalizers.INSTANCE.create(NormalizerType.PEDANTIC);
     }
 

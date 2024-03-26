@@ -4,6 +4,6 @@ public interface MarkdownToken {
 
     MarkdownTokenType getType();
 
-    String rawValue();
+    String getRawValue();
 
 }

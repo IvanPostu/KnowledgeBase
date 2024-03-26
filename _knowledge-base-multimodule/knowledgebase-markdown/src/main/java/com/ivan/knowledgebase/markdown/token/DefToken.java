@@ -4,12 +4,12 @@ import java.util.Optional;
 
 public final class DefToken implements MarkdownToken {
     private final String rawValue;
-    private final String id;
+    private final String reference;
     private final String link;
     private final Optional<String> title;
 
-    public DefToken(String rawValue, String id, String link, Optional<String> title) {
-        this.id = id;
+    public DefToken(String rawValue, String reference, String link, Optional<String> title) {
+        this.reference = reference;
         this.link = link;
         this.title = title;
         this.rawValue = rawValue;
@@ -21,12 +21,12 @@ public final class DefToken implements MarkdownToken {
     }
 
     @Override
-    public String rawValue() {
+    public String getRawValue() {
         return rawValue;
     }
 
-    public String getId() {
-        return id;
+    public String getReference() {
+        return reference;
     }
 
     public String getLink() {
