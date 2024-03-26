@@ -40,6 +40,9 @@ $ mvnw -f $PROJECT_DIR/_knowledge-base-multimodule/pom.xml clean test
 # Run only checkstyle for all modules
 $ mvnw -f $PROJECT_DIR/_knowledge-base-multimodule/pom.xml clean checkstyle:checkstyle-aggregate
 
+# Checkstyle apply changes globally
+$ mvnw -f $PROJECT_DIR/_knowledge-base-multimodule/knowledgebase-checkstyle/pom.xml clean  install
+
 # Run checkstyle + unit tests
 $ mvnw -f $PROJECT_DIR/_knowledge-base-multimodule/pom.xml clean verify
 

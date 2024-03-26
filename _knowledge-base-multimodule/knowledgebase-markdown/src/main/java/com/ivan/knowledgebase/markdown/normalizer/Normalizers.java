@@ -3,11 +3,14 @@ package com.ivan.knowledgebase.markdown.normalizer;
 public enum Normalizers {
     INSTANCE;
 
-    public PlainMarkdownNormalizer create(boolean pedantic) {
-        if (pedantic) {
+    public PlainMarkdownNormalizer create(NormalizerType type) {
+        if (type == NormalizerType.PEDANTIC) {
             return new PedanticPlainMarkdownNormalizer();
-        } else {
+        }
+        if (type == NormalizerType.DEFAULT) {
             return new DefaultPlainMarkdownNormalizer();
         }
+        throw new IllegalStateException("Could not find normalizer for the type " + type);
     }
+
 }

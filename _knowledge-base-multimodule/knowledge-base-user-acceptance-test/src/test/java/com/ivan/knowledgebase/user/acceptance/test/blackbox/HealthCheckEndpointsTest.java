@@ -20,6 +20,8 @@ import com.relevantcodes.extentreports.ExtentTest;
 import com.relevantcodes.extentreports.LogStatus;
 
 class HealthCheckEndpointsTest {
+    private static final int DEFAULT_TIMEOUT = 3000;
+
     private static final Logger LOG = LoggerFactory.getLogger(HealthCheckEndpointsTest.class);
 
     private final HealthCheckEndpoints healthCheckEndpoints = Blackbox.createEndpoint(HealthCheckEndpoints.class)
@@ -30,7 +32,7 @@ class HealthCheckEndpointsTest {
     @Test
     void testHealthCheckEndpointShouldResponseWithSuccess() throws Exception {
         LOG.info("1");
-        Thread.sleep(10000);
+        Thread.sleep(DEFAULT_TIMEOUT);
         Assertions.assertThat(true).isEqualTo(false);
         HealthCheckResponse result = healthCheckEndpoints.getHealthCheckStatus();
         assertThat(result.getStatus()).isEqualTo("SUCCESS");
@@ -39,7 +41,7 @@ class HealthCheckEndpointsTest {
     @Test
     void testHealthCheckEndpointShouldResponseWithSuccess1() throws Exception {
         LOG.info("2");
-        Thread.sleep(10000);
+        Thread.sleep(DEFAULT_TIMEOUT);
         Assertions.assertThat(true).isEqualTo(false);
         HealthCheckResponse result = healthCheckEndpoints.getHealthCheckStatus();
         assertThat(result.getStatus()).isEqualTo("SUCCESS");
@@ -48,7 +50,7 @@ class HealthCheckEndpointsTest {
     @Test
     void testHealthCheckEndpointShouldResponseWithSuccess2() throws Exception {
         LOG.info("3");
-        Thread.sleep(10000);
+        Thread.sleep(DEFAULT_TIMEOUT);
         Assertions.assertThat(true).isEqualTo(false);
         HealthCheckResponse result = healthCheckEndpoints.getHealthCheckStatus();
         assertThat(result.getStatus()).isEqualTo("SUCCESS");
@@ -63,13 +65,14 @@ class HealthCheckEndpointsTest {
     void testHealthCheckEndpointShouldResponseWithSuccess3(ITestContext context) throws Exception {
         String outputDirectory = context.getOutputDirectory();
 
-        ExtentReports extent = new ExtentReports(outputDirectory.replace(' ', '_') + "/extentReport.html", false);
+        ExtentReports extent = new ExtentReports(
+                outputDirectory.replace(' ', '_') + "/extentReport" + Instant.now().toEpochMilli() + ".html", false);
         ExtentTest test1 = extent.startTest(currentTestName);
 
         test1.log(LogStatus.INFO, "Starting test case");
 
         LOG.info(currentTestName);
-        Thread.sleep(3000);
+        Thread.sleep(DEFAULT_TIMEOUT);
 
         test1.log(LogStatus.PASS, "maximize has done");
         Assertions.assertThat(true).isEqualTo(true);
