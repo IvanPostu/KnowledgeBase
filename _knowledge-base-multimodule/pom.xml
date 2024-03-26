@@ -135,14 +135,11 @@
                     <consoleOutput>true</consoleOutput>
                     <failsOnError>true</failsOnError>
                     <includeTestSourceDirectory>true</includeTestSourceDirectory>
-
+                     <suppressionsLocation>project_checkstyle/checkstyle-suppressions.xml</suppressionsLocation>
+                    
                     <!-- Consider warning and higher as violations -->
                     <violationSeverity>warning</violationSeverity>
 
-                    <!--   <suppressionsLocation>project_checkstyle/checkstyle-suppressions.xml</suppressionsLocation>
-                            <suppressionsFileExpression>
-                                checkstyle.suppressions.file</suppressionsFileExpression>-->
-                            
                 </configuration>
                 <executions>
                     <execution>

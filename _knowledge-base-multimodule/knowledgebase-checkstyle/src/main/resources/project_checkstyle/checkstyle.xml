@@ -7,7 +7,7 @@
     <property name="charset" value="UTF-8" />
     <property name="severity" value="error" />
 
-      <!--  <module name="SuppressionFilter">
+    <!--  <module name="SuppressionFilter">
         <property name="file" value="${suppressionsLocation}" />
     </module>-->
 
