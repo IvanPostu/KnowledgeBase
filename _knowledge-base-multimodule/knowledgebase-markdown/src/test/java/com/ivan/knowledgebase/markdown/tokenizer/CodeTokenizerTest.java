@@ -11,16 +11,54 @@ import com.ivan.knowledgebase.markdown.token.CodeToken.CodeType;
 
 class CodeTokenizerTest {
     @Test
+    void testResolveFencedLangCode() {
+        String inputCode = "```text\ncode\n```";
+        CodeTokenizer codeTokenizer = new CodeTokenizer(false);
+        Optional<CodeToken> codeToken = codeTokenizer.resolveToken(inputCode);
+
+        assertCodeToken(codeToken,
+                CodeType.FENCED,
+                inputCode,
+                "code",
+                Optional.of("text"));
+    }
+
+    @Test
+    void testResolveFencedCode() {
+        CodeTokenizer codeTokenizer = new CodeTokenizer(false);
+        Optional<CodeToken> codeToken = codeTokenizer.resolveToken(
+                " ```\ncode\n```");
+
+        assertCodeToken(codeToken,
+                CodeType.FENCED,
+                " ```\ncode\n```",
+                "code",
+                Optional.empty());
+    }
+
+    @Test
+    void testResolveFencedMultilineWithIndentedCodeCompensationCode() {
+        CodeTokenizer codeTokenizer = new CodeTokenizer(false);
+        Optional<CodeToken> codeToken = codeTokenizer.resolveToken(
+                "   ```js\n       console.log(123)\n  alert(1);\n```");
+
+        assertCodeToken(codeToken,
+                CodeType.FENCED,
+                "   ```js\n       console.log(123)\n  alert(1);\n```",
+                "    console.log(123)\n  alert(1);",
+                Optional.of("js"));
+    }
+
+    @Test
     void testResolveIndentedOnelineCode() {
         CodeTokenizer codeTokenizer = new CodeTokenizer(false);
         Optional<CodeToken> codeToken = codeTokenizer.resolveToken("    code");
 
-        assertThat(codeToken).get().satisfies(token -> {
-            assertThat(token.getCodeType()).isEqualTo(CodeType.INDENTED);
-            assertThat(token.getRawValue()).isEqualTo("    code");
-            assertThat(token.getSourceCode()).isEqualTo("code");
-            assertThat(token.getLanguage()).isEmpty();
-        });
+        assertCodeToken(codeToken,
+                CodeType.INDENTED,
+                "    code",
+                "code",
+                Optional.empty());
     }
 
     @Test
@@ -28,11 +66,21 @@ class CodeTokenizerTest {
         CodeTokenizer codeTokenizer = new CodeTokenizer(false);
         Optional<CodeToken> codeToken = codeTokenizer.resolveToken("    Hello world\n    123123\n    End Block\n");
 
+        assertCodeToken(codeToken,
+                CodeType.INDENTED,
+                "    Hello world\n    123123\n    End Block\n",
+                "Hello world\n123123\nEnd Block",
+                Optional.empty());
+    }
+
+    private void assertCodeToken(Optional<CodeToken> codeToken, CodeType expectedCodeType, String expectedRawValue,
+            String expectedSourceCode, Optional<String> expectedLanguage) {
+
         assertThat(codeToken).get().satisfies(token -> {
-            assertThat(token.getCodeType()).isEqualTo(CodeType.INDENTED);
-            assertThat(token.getRawValue()).isEqualTo("    Hello world\n    123123\n    End Block\n");
-            assertThat(token.getSourceCode()).isEqualTo("Hello world\n123123\nEnd Block");
-            assertThat(token.getLanguage()).isEmpty();
+            assertThat(token.getCodeType()).isEqualTo(expectedCodeType);
+            assertThat(token.getRawValue()).isEqualTo(expectedRawValue);
+            assertThat(token.getSourceCode()).isEqualTo(expectedSourceCode);
+            assertThat(token.getLanguage()).isEqualTo(expectedLanguage);
         });
     }
 }
