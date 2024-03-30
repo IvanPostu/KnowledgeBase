@@ -34,8 +34,4 @@ public final class DefTokenizer implements Tokenizer<DefToken> {
         }
         return Optional.empty();
     }
-
-    public static void main(String[] args) {
-        new DefTokenizer().resolveToken("[link]: https://example.com \"title\"\n\nhello\nworld\n");
-    }
 }
