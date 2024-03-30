@@ -1,8 +1,8 @@
 #!/usr/bin/env bash
 
-pathToTheReport="$PROJECT_DIR/_knowledge-base-multimodule/knowledge-base-user-acceptance-test/target/site/index.html"
+pathToTheReport="$PROJECT_DIR/_knowledgebase-multimodule/knowledgebase-user-acceptance-test/target/site/index.html"
 
-mvnw -f $PROJECT_DIR/_knowledge-base-multimodule/knowledge-base-user-acceptance-test/pom.xml \
+mvnw -f $PROJECT_DIR/_knowledgebase-multimodule/knowledgebase-user-acceptance-test/pom.xml \
     clean site \
     -Puser-acceptance-tests
 

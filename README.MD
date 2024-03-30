@@ -10,7 +10,7 @@ $ nix-shell --run bash
 $ run-rebuild-multimodule.sh
 
 # Run 
-$ run-rebuild-multimodule.sh  && java -jar $PROJECT_DIR/_knowledge-base-multimodule/knowledge-base-server-embedded/target/knowledge-base-server-embedded.jar
+$ run-rebuild-multimodule.sh  && java -jar $PROJECT_DIR/_knowledgebase-multimodule/knowledgebase-server-embedded/target/knowledgebase-server-embedded.jar
 # Or
 $ run-rebuild-multimodule.sh  && run-exec-embedded-server.sh
 
@@ -30,29 +30,29 @@ $ mvnw versions:set -DnewVersion=1.0.4
 # -DskipTests -> skip tests execution
 # -Dmaven.test.skip=true -> skip tests compilation
 # -Dcheckstyle.skip=true -> skip checkstyle
-$ mvnw -f $PROJECT_DIR/_knowledge-base-multimodule/ clean install
+$ mvnw -f $PROJECT_DIR/_knowledgebase-multimodule/ clean install
 
 # Install without tests & checkstyle
-$ mvnw -f $PROJECT_DIR/_knowledge-base-multimodule/pom.xml clean install -DskipTests -Dcheckstyle.skip=true
+$ mvnw -f $PROJECT_DIR/_knowledgebase-multimodule/pom.xml clean install -DskipTests -Dcheckstyle.skip=true
 
 # Run tests (acceptance tests are ignored)
-$ mvnw -f $PROJECT_DIR/_knowledge-base-multimodule/pom.xml clean test
+$ mvnw -f $PROJECT_DIR/_knowledgebase-multimodule/pom.xml clean test
 # Run only checkstyle for all modules
-$ mvnw -f $PROJECT_DIR/_knowledge-base-multimodule/pom.xml clean checkstyle:checkstyle-aggregate
+$ mvnw -f $PROJECT_DIR/_knowledgebase-multimodule/pom.xml clean checkstyle:checkstyle-aggregate
 
 # Checkstyle apply changes globally
-$ mvnw -f $PROJECT_DIR/_knowledge-base-multimodule/knowledgebase-checkstyle/pom.xml clean  install
+$ mvnw -f $PROJECT_DIR/_knowledgebase-multimodule/knowledgebase-checkstyle/pom.xml clean  install
 
 # Run checkstyle + unit tests
-$ mvnw -f $PROJECT_DIR/_knowledge-base-multimodule/pom.xml clean verify
+$ mvnw -f $PROJECT_DIR/_knowledgebase-multimodule/pom.xml clean verify
 
 # Generate report for tests + checkstyle (acceptance tests are ignored)
-# Result path: /home/ivan/Projects/KnowledgeBase/_knowledge-base-multimodule/target/staging/
-$ mvnw -f $PROJECT_DIR/_knowledge-base-multimodule/pom.xml clean site:site site:stage
+# Result path: /home/ivan/Projects/KnowledgeBase/_knowledgebase-multimodule/target/staging/
+$ mvnw -f $PROJECT_DIR/_knowledgebase-multimodule/pom.xml clean site:site site:stage
 
 # Run user acceptance tests
-# Result path: /home/ivan/Projects/KnowledgeBase/_knowledge-base-multimodule/knowledge-base-user-acceptance-test/target/surefire-reports/
-$ mvnw -f $PROJECT_DIR/_knowledge-base-multimodule/knowledge-base-user-acceptance-test/pom.xml clean test -Puser-acceptance-tests
+# Result path: /home/ivan/Projects/KnowledgeBase/_knowledgebase-multimodule/knowledgebase-user-acceptance-test/target/surefire-reports/
+$ mvnw -f $PROJECT_DIR/_knowledgebase-multimodule/knowledgebase-user-acceptance-test/pom.xml clean test -Puser-acceptance-tests
 ```
 
 ## How to supress checkstyle rules

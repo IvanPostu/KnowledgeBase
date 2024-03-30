@@ -1,8 +1,8 @@
 #!/usr/bin/env bash
 
-pathToTheCheckstyleReport="$PROJECT_DIR/_knowledge-base-multimodule/target/checkstyle-result.xml"
+pathToTheCheckstyleReport="$PROJECT_DIR/_knowledgebase-multimodule/target/checkstyle-result.xml"
 
-mvnw -f $PROJECT_DIR/_knowledge-base-multimodule/pom.xml \
+mvnw -f $PROJECT_DIR/_knowledgebase-multimodule/pom.xml \
     resources:resources@copy-checkstyle-configuration-files \
     checkstyle:checkstyle-aggregate \
     -Dcheckstyle.enableExternalDtdLoad=true
