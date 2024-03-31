@@ -3,11 +3,13 @@ package com.ivan.knowledgebase.markdown;
 import org.assertj.core.api.Assertions;
 import org.testng.annotations.Test;
 
-public class RegexBuilderTest {
+class RegexBuilderTest {
+
     @Test
-    public void testRegexBuilder() {
+    void testRegexBuilder() {
         RegexBuilder regexBuilder = RegexBuilder.createFromTemplate("^ {0,3}\\[(label)\\]: *(?:\\n *)?([^<\\s]"
-                + "[^\\s]*|<.*?>)(?:(?: +(?:\\n *)?| *\\n *)" + "(title))? *(?:\\n+|$)");
+                + "[^\\s]*|<.*?>)(?:(?: +(?:\\n *)?| *\\n *)"
+                + "(title))? *(?:\\n+|$)");
         regexBuilder.replacePlaceholder("label", "(?!\\s*\\])(?:\\\\.|[^\\[\\]\\\\])+");
         regexBuilder.replacePlaceholder("title",
                 "(?:\"(?:\\\\\"?|[^\"\\\\])*\"|'[^'\\n]" + "*(?:\\n[^'\\n]+)*\\n?'|\\([^()]*\\))");
@@ -19,12 +21,13 @@ public class RegexBuilderTest {
     }
 
     @Test
-    public void testRegexBuilderHandlesCarretProperly() {
+    void testRegexBuilderHandlesCarretProperly() {
         RegexBuilder regexBuilder = RegexBuilder.createFromTemplate("^([^\\n]+(?:\\n(?!hr| +\\n)[^\\n]+)*)");
         regexBuilder.replacePlaceholder("hr",
                 "^ {0,3}((?:-[\\t ]*){3,}|(?:_[ \\t]*){3,}" + "|(?:\\*[ \\t]*){3,})(?:\\n+|$)");
 
         Assertions.assertThat(regexBuilder.buildAsString()).isEqualTo("^([^\\n]+(?:\\n(?! {0,3}((?:-[\\t ]*){3,}"
-                + "|(?:_[ \\t]*){3,}|(?:\\*[ \\t]*){3,})" + "(?:\\n+|$)| +\\n)[^\\n]+)*)");
+                + "|(?:_[ \\t]*){3,}|(?:\\*[ \\t]*){3,})"
+                + "(?:\\n+|$)| +\\n)[^\\n]+)*)");
     }
 }

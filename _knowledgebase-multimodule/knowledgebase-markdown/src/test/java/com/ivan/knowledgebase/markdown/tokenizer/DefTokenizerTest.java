@@ -37,7 +37,7 @@ class DefTokenizerTest {
     }
 
     @DataProvider(name = "invalidDefTokensParameters")
-    public Object[][] invalidDefTokensParameters() {
+    Object[][] invalidDefTokensParameters() {
         return new Object[][] {
             { "[link] https://example.com " },
             { "[link]: https://example.com \"title1" },

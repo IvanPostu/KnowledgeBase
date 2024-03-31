@@ -5,8 +5,8 @@ import com.puppycrawl.tools.checkstyle.api.DetailAST;
 import com.puppycrawl.tools.checkstyle.api.TokenTypes;
 
 /**
- * Check which verifies if the class contains at least one method with @Test
- * annotation then the class name should be `[className]Test`
+ * Verifies if the class contains at least one method with @Test
+ * annotation then the class name should be suffixed with Test
  */
 public class TestClassWithRequiredSuffixCheck extends AbstractCheck {
     private static final String TEST_ANNOTATION = "Test";
@@ -14,12 +14,11 @@ public class TestClassWithRequiredSuffixCheck extends AbstractCheck {
     private String requiredSuffix;
 
     @Override
-    // CHECKSTYLE.SUPPRESS: AbbreviationAsWordInName
-    public void beginTree(DetailAST rootAST) {
+    public void beginTree(DetailAST rootAst) {
         if (requiredSuffix == null || requiredSuffix.trim().isEmpty()) {
             throw new IllegalStateException("The 'requiredSuffix' property must be provided.");
         }
-        super.beginTree(rootAST);
+        super.beginTree(rootAst);
     }
 
     @Override

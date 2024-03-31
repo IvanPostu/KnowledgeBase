@@ -57,7 +57,7 @@ class HealthCheckEndpointsTest {
     }
 
     @BeforeMethod
-    public void handleTestMethodName(Method method) {
+    void handleTestMethodName(Method method) {
         this.currentTestName = method.getName();
     }
 

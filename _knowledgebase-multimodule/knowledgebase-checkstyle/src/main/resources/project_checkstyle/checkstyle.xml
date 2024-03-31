@@ -34,9 +34,13 @@
 	</module>
 
 	<module name="TreeWalker">
-		<!--Custom Checker-->
-		<module name="com.ivan.knowledgebase.checkstyle.TestClassWithRequiredSuffixCheck">
+		<module
+			name="com.ivan.knowledgebase.checkstyle.TestClassWithRequiredSuffixCheck">
 			<property name="requiredSuffix" value="Test" />
+		</module>
+		<module
+			name="com.ivan.knowledgebase.checkstyle.TestClassWithForbiddenAccessModifiersCheck">
+			<property name="forbiddenAccessModifiers" value="public,protected" />
 		</module>
 
 		<module name="OuterTypeFilename" />
