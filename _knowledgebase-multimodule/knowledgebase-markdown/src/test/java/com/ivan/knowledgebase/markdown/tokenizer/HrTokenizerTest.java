@@ -7,8 +7,7 @@ import java.util.Optional;
 import org.testng.annotations.Test;
 
 import com.ivan.knowledgebase.markdown.token.HrToken;
-import com.ivan.knowledgebase.markdown.token.MarkdownTokenType;
-import com.ivan.knowledgebase.markdown.token.SpaceToken;
+import com.ivan.knowledgebase.markdown.token.TokenType;
 
 class HrTokenizerTest {
     private final HrTokenizer tokenizer = new HrTokenizer();
@@ -19,7 +18,7 @@ class HrTokenizerTest {
 
         assertThat(resultToken).get().satisfies(token -> {
             assertThat(token.getRawValue()).isEqualTo("---");
-            assertThat(token.getType()).isEqualTo(MarkdownTokenType.HR);
+            assertThat(token.getType()).isEqualTo(TokenType.HR);
         });
     }
 }

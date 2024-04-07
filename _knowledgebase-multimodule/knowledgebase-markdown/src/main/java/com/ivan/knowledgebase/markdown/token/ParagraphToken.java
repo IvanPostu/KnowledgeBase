@@ -1,8 +1,8 @@
 package com.ivan.knowledgebase.markdown.token;
 
-public final class ParagraphToken extends MarkdownAbstractToken {
+public final class ParagraphToken extends AbstractToken {
 
     public ParagraphToken(String rawValue) {
-        super(rawValue, MarkdownTokenType.PARAGRAPH);
+        super(rawValue, TokenType.PARAGRAPH);
     }
 }

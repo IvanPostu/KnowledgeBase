@@ -1,8 +1,8 @@
 package com.ivan.knowledgebase.markdown.token;
 
-public interface MarkdownToken {
+public interface Token {
 
-    MarkdownTokenType getType();
+    TokenType getType();
 
     String getRawValue();
 

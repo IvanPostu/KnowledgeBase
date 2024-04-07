@@ -6,7 +6,6 @@ import java.util.regex.Pattern;
 
 import com.ivan.knowledgebase.markdown.RegexBuilder;
 import com.ivan.knowledgebase.markdown.token.DefToken;
-import com.ivan.knowledgebase.markdown.token.MarkdownToken;
 
 public final class DefTokenizer implements Tokenizer<DefToken> {
     private static final int REFERENCE_INDEX = 1;

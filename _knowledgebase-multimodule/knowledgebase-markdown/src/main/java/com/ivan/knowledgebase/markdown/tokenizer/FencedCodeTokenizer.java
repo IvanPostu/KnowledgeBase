@@ -9,9 +9,6 @@ import java.util.stream.Stream;
 import com.ivan.knowledgebase.markdown.RegexBuilder;
 import com.ivan.knowledgebase.markdown.token.CodeToken;
 import com.ivan.knowledgebase.markdown.token.CodeToken.CodeType;
-import com.ivan.knowledgebase.markdown.token.DefToken;
-import com.ivan.knowledgebase.markdown.token.MarkdownToken;
-import com.ivan.knowledgebase.markdown.token.SpaceToken;
 
 public final class FencedCodeTokenizer implements Tokenizer<CodeToken> {
     private static final String FENCED_CODE_REGEX = RegexBuilder

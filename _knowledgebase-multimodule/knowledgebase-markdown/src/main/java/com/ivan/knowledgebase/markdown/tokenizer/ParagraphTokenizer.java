@@ -5,10 +5,7 @@ import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
 import com.ivan.knowledgebase.markdown.RegexBuilder;
-import com.ivan.knowledgebase.markdown.token.DefToken;
-import com.ivan.knowledgebase.markdown.token.MarkdownToken;
 import com.ivan.knowledgebase.markdown.token.ParagraphToken;
-import com.ivan.knowledgebase.markdown.token.SpaceToken;
 
 //TODO, requires Lexer logic
 public final class ParagraphTokenizer implements Tokenizer<ParagraphToken> {

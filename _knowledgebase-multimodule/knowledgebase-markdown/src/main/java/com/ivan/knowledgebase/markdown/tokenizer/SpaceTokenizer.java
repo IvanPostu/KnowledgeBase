@@ -5,8 +5,6 @@ import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
 import com.ivan.knowledgebase.markdown.RegexBuilder;
-import com.ivan.knowledgebase.markdown.token.DefToken;
-import com.ivan.knowledgebase.markdown.token.MarkdownToken;
 import com.ivan.knowledgebase.markdown.token.SpaceToken;
 
 public final class SpaceTokenizer implements Tokenizer<SpaceToken> {

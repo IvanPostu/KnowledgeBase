@@ -2,18 +2,18 @@ package com.ivan.knowledgebase.markdown.token;
 
 import com.ivan.knowledgebase.shared.ToString;
 
-abstract class MarkdownAbstractToken implements MarkdownToken {
+abstract class AbstractToken implements Token {
     private final String rawValue;
-    private final MarkdownTokenType markdownTokenType;
+    private final TokenType type;
 
-    MarkdownAbstractToken(String rawValue, MarkdownTokenType markdownTokenType) {
+    AbstractToken(String rawValue, TokenType type) {
         this.rawValue = rawValue;
-        this.markdownTokenType = markdownTokenType;
+        this.type = type;
     }
 
     @Override
-    public MarkdownTokenType getType() {
-        return markdownTokenType;
+    public TokenType getType() {
+        return type;
     }
 
     @Override

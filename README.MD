@@ -77,6 +77,11 @@ $ mvnw -f $PROJECT_DIR/_knowledgebase-multimodule/knowledgebase-user-acceptance-
 ## References
 
 #### Markdown demo
+- https://www.npmjs.com/package/markdown-it
 - [Marked Demo](https://marked.js.org/demo/)
 - [CommonMark Demo](https://spec.commonmark.org/dingus/)
 - [Daring Fireball (pedantic) Demo](https://daringfireball.net/projects/markdown/dingus)
+
+## TODO
+### To cover with tests
+- https://spec.commonmark.org/ 
