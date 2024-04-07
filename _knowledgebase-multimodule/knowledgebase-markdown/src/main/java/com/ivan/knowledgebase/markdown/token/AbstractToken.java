@@ -17,7 +17,7 @@ abstract class AbstractToken implements Token {
     }
 
     @Override
-    public String getRawValue() {
+    public String getRaw() {
         return rawValue;
     }
 

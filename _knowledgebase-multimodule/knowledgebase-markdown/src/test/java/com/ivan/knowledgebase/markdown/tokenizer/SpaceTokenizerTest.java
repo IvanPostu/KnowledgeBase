@@ -12,7 +12,7 @@ class SpaceTokenizerTest {
     @Test
     void testNewlineSpaceToken() {
         assertThat(tokenizer.resolveToken("\n\n")).get().satisfies(token -> {
-            assertThat(token.getRawValue()).isEqualTo("\n\n");
+            assertThat(token.getRaw()).isEqualTo("\n\n");
             assertThat(token.getType()).isEqualTo(TokenType.SPACE);
         });
     }

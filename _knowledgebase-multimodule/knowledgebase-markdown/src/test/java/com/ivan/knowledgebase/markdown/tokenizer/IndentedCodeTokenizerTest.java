@@ -35,7 +35,7 @@ class IndentedCodeTokenizerTest {
             String expectedSourceCode) {
 
         assertThat(codeToken).get().satisfies(token -> {
-            assertThat(token.getRawValue()).isEqualTo(expectedRawValue);
+            assertThat(token.getRaw()).isEqualTo(expectedRawValue);
             assertThat(token.getSourceCode()).isEqualTo(expectedSourceCode);
         });
     }

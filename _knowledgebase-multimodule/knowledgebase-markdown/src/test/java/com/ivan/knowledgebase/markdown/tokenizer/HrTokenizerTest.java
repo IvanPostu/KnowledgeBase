@@ -17,7 +17,7 @@ class HrTokenizerTest {
         Optional<HrToken> resultToken = tokenizer.resolveToken("---");
 
         assertThat(resultToken).get().satisfies(token -> {
-            assertThat(token.getRawValue()).isEqualTo("---");
+            assertThat(token.getRaw()).isEqualTo("---");
             assertThat(token.getType()).isEqualTo(TokenType.HR);
         });
     }

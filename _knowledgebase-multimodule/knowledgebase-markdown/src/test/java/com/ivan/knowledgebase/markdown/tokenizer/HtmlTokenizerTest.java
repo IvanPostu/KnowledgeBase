@@ -36,7 +36,7 @@ class HtmlTokenizerTest {
 
     private void assertHtmlToken(String htmlInput, boolean expectedIsPre) {
         assertThat(tokenizer.resolveToken(htmlInput)).get().satisfies(token -> {
-            assertThat(token.getRawValue()).isEqualTo(htmlInput);
+            assertThat(token.getRaw()).isEqualTo(htmlInput);
             assertThat(token.getType()).isEqualTo(TokenType.HTML);
             assertThat(token.isBlock()).isTrue();
             assertThat(token.isPre()).isEqualTo(expectedIsPre);

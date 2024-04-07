@@ -57,7 +57,7 @@ class DefTokenizerTest {
         DefTokenizer defTokenizer = new DefTokenizer();
         DefToken token = defTokenizer.resolveToken(source).orElseThrow(() -> new IllegalStateException());
 
-        assertThat(token.getRawValue()).isEqualTo(expectedRaw);
+        assertThat(token.getRaw()).isEqualTo(expectedRaw);
         assertThat(token.getReference()).isEqualTo(expectedReference);
         assertThat(token.getLink()).isEqualTo(expectedLink);
         assertThat(token.getTitle()).isEqualTo(expectedTitle);

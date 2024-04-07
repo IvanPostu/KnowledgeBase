@@ -42,7 +42,7 @@ public final class HtmlTokenizer implements Tokenizer<HtmlToken> {
         Matcher matcher = HTML_PATTERN.matcher(source);
         if (matcher.find()) {
             String rawValue = matcher.group(0);
-            String preText = Objects.requireNonNullElse(matcher.group(GROUP_INDEX_1), "");
+            String preText = matcher.group(GROUP_INDEX_1) == null ? "" : matcher.group(GROUP_INDEX_1);
 
             boolean isPre = preText.equals("pre") || preText.equals("script") || preText.equals("style");
             return Optional.of(new HtmlToken(rawValue, true, isPre, rawValue));

@@ -4,6 +4,6 @@ public interface Token {
 
     TokenType getType();
 
-    String getRawValue();
+    String getRaw();
 
 }

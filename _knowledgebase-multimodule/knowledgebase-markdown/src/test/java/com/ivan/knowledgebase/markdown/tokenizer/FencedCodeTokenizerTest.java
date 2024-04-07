@@ -48,7 +48,7 @@ class FencedCodeTokenizerTest {
             String expectedSourceCode, Optional<String> expectedLanguage) {
 
         assertThat(codeToken).get().satisfies(token -> {
-            assertThat(token.getRawValue()).isEqualTo(expectedRawValue);
+            assertThat(token.getRaw()).isEqualTo(expectedRawValue);
             assertThat(token.getSourceCode()).isEqualTo(expectedSourceCode);
             assertThat(token.getLanguage()).isEqualTo(expectedLanguage);
         });
