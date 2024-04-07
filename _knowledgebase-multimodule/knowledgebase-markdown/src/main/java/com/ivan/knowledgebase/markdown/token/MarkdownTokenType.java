@@ -1,5 +1,5 @@
 package com.ivan.knowledgebase.markdown.token;
 
 public enum MarkdownTokenType {
-    DEF, SPACE, CODE;
+    DEF, SPACE, CODE, PARAGRAPH, HR;
 }

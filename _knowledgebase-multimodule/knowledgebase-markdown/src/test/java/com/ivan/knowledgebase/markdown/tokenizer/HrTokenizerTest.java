@@ -10,14 +10,16 @@ import com.ivan.knowledgebase.markdown.token.HrToken;
 import com.ivan.knowledgebase.markdown.token.MarkdownTokenType;
 import com.ivan.knowledgebase.markdown.token.SpaceToken;
 
-class SpaceTokenizerTest {
-    private final SpaceTokenizer tokenizer = new SpaceTokenizer();
+class HrTokenizerTest {
+    private final HrTokenizer tokenizer = new HrTokenizer();
 
     @Test
-    void testNewlineSpaceToken() {
-        assertThat(tokenizer.resolveToken("\n\n")).get().satisfies(token -> {
-            assertThat(token.getRawValue()).isEqualTo("\n\n");
-            assertThat(token.getType()).isEqualTo(MarkdownTokenType.SPACE);
+    void testHrToken() {
+        Optional<HrToken> resultToken = tokenizer.resolveToken("---");
+
+        assertThat(resultToken).get().satisfies(token -> {
+            assertThat(token.getRawValue()).isEqualTo("---");
+            assertThat(token.getType()).isEqualTo(MarkdownTokenType.HR);
         });
     }
 }
