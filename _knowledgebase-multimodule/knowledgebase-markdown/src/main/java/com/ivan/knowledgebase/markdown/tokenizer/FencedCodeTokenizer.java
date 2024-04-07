@@ -13,11 +13,7 @@ import com.ivan.knowledgebase.markdown.token.DefToken;
 import com.ivan.knowledgebase.markdown.token.MarkdownToken;
 import com.ivan.knowledgebase.markdown.token.SpaceToken;
 
-public final class CodeTokenizer implements Tokenizer<CodeToken> {
-    private static final String INDENTED_CODE_REGEX = RegexBuilder
-            .createFromTemplate("^( {4}[^\\n]+(?:\\n(?: *(?:\\n|$))*)?)+")
-            .buildAsString();
-    private static final Pattern INDENTED_CODE_PATTERN = Pattern.compile(INDENTED_CODE_REGEX);
+public final class FencedCodeTokenizer implements Tokenizer<CodeToken> {
     private static final String FENCED_CODE_REGEX = RegexBuilder
             .createFromTemplate("^ {0,3}(`{3,}(?=[^`\\n]*(?:\\n|$))|~{3,})"
                     + "([^\\n]*)(?:\\n|$)(?:|([\\s\\S]*?)(?:\\n|$))(?: {0,3}\\1[~`]* *(?=\\n|$)|$)")
@@ -31,25 +27,12 @@ public final class CodeTokenizer implements Tokenizer<CodeToken> {
     private static final int GROUP_INDEX_2 = 2;
     private static final int GROUP_INDEX_3 = 3;
 
-    private final boolean pedantic;
-
-    public CodeTokenizer(boolean pedantic) {
-        this.pedantic = pedantic;
+    public FencedCodeTokenizer() {
     }
 
     @Override
     public Optional<CodeToken> resolveToken(String source) {
-        Optional<CodeToken> token;
-        token = resolveIndentedCodeToken(source);
-        if (token.isPresent()) {
-            return token;
-        }
-        token = resolveFencedCodeToken(source);
-        if (token.isPresent()) {
-            return token;
-        }
-
-        return Optional.empty();
+        return resolveFencedCodeToken(source);
     }
 
     private Optional<CodeToken> resolveFencedCodeToken(String source) {
@@ -66,22 +49,6 @@ public final class CodeTokenizer implements Tokenizer<CodeToken> {
                 return Optional.of(new CodeToken(rawValue, code, CodeType.FENCED));
             }
 
-        }
-        return Optional.empty();
-    }
-
-    private Optional<CodeToken> resolveIndentedCodeToken(String source) {
-        Matcher matcher = INDENTED_CODE_PATTERN.matcher(source);
-        if (matcher.find()) {
-            String rawValue = matcher.group(0);
-            String sourceCode = rawValue.replaceAll("(?m)^ {1,4}", "");
-
-            sourceCode = pedantic
-                    ? sourceCode
-                    : RTrimUtils.INSTANCE.rtrim(sourceCode, "\n");
-
-            CodeToken codeToken = new CodeToken(rawValue, sourceCode, CodeType.INDENTED);
-            return Optional.of(codeToken);
         }
         return Optional.empty();
     }

@@ -9,11 +9,12 @@ import org.testng.annotations.Test;
 import com.ivan.knowledgebase.markdown.token.CodeToken;
 import com.ivan.knowledgebase.markdown.token.CodeToken.CodeType;
 
-class CodeTokenizerTest {
+class FencedCodeTokenizerTest {
+    private final FencedCodeTokenizer codeTokenizer = new FencedCodeTokenizer();
+
     @Test
     void testResolveFencedLangCode() {
         String inputCode = "```text\ncode\n```";
-        CodeTokenizer codeTokenizer = new CodeTokenizer(false);
         Optional<CodeToken> codeToken = codeTokenizer.resolveToken(inputCode);
 
         assertCodeToken(codeToken,
@@ -25,7 +26,6 @@ class CodeTokenizerTest {
 
     @Test
     void testResolveFencedCode() {
-        CodeTokenizer codeTokenizer = new CodeTokenizer(false);
         Optional<CodeToken> codeToken = codeTokenizer.resolveToken(
                 " ```\ncode\n```");
 
@@ -38,7 +38,6 @@ class CodeTokenizerTest {
 
     @Test
     void testResolveFencedMultilineWithIndentedCodeCompensationCode() {
-        CodeTokenizer codeTokenizer = new CodeTokenizer(false);
         Optional<CodeToken> codeToken = codeTokenizer.resolveToken(
                 "   ```js\n       console.log(123)\n  alert(1);\n```");
 
@@ -47,30 +46,6 @@ class CodeTokenizerTest {
                 "   ```js\n       console.log(123)\n  alert(1);\n```",
                 "    console.log(123)\n  alert(1);",
                 Optional.of("js"));
-    }
-
-    @Test
-    void testResolveIndentedOnelineCode() {
-        CodeTokenizer codeTokenizer = new CodeTokenizer(false);
-        Optional<CodeToken> codeToken = codeTokenizer.resolveToken("    code");
-
-        assertCodeToken(codeToken,
-                CodeType.INDENTED,
-                "    code",
-                "code",
-                Optional.empty());
-    }
-
-    @Test
-    void testResolveIndentedMultilineCode() {
-        CodeTokenizer codeTokenizer = new CodeTokenizer(false);
-        Optional<CodeToken> codeToken = codeTokenizer.resolveToken("    Hello world\n    123123\n    End Block\n");
-
-        assertCodeToken(codeToken,
-                CodeType.INDENTED,
-                "    Hello world\n    123123\n    End Block\n",
-                "Hello world\n123123\nEnd Block",
-                Optional.empty());
     }
 
     private void assertCodeToken(Optional<CodeToken> codeToken, CodeType expectedCodeType, String expectedRawValue,
