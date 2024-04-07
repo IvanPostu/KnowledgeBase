@@ -30,7 +30,7 @@ $ mvnw versions:set -DnewVersion=1.0.4
 # -DskipTests -> skip tests execution
 # -Dmaven.test.skip=true -> skip tests compilation
 # -Dcheckstyle.skip=true -> skip checkstyle
-$ mvnw -f $PROJECT_DIR/_knowledgebase-multimodule/ clean install
+$ mvnw -f $PROJECT_DIR/_knowledgebase-multimodule/pom.xml clean install
 
 # Install without tests & checkstyle
 $ mvnw -f $PROJECT_DIR/_knowledgebase-multimodule/pom.xml clean install -DskipTests -Dcheckstyle.skip=true
