@@ -1,18 +1,18 @@
 package com.ivan.knowledgebase.user.acceptance.test.blackbox;
 
-import org.testng.Assert;
+import org.assertj.core.api.Assertions;
 import org.testng.annotations.Test;
 
 class BlackboxTest {
 
     @Test
     void shouldAnswerWithTrue() {
-        Assert.assertTrue(true);
+        Assertions.assertThat(true).isTrue();
     }
 
     @Test
     void shouldAnswerWithTrue1() {
-        Assert.assertTrue(1 == 2);
+        Assertions.assertThat(1 == 2).isTrue();
     }
 
 }

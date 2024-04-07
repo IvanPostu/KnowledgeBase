@@ -3,11 +3,11 @@ package com.ivan.knowledgebase.markdown.token;
 import com.ivan.knowledgebase.shared.ToString;
 
 abstract class AbstractToken implements Token {
-    private final String rawValue;
+    private final String raw;
     private final TokenType type;
 
     AbstractToken(String rawValue, TokenType type) {
-        this.rawValue = rawValue;
+        this.raw = rawValue;
         this.type = type;
     }
 
@@ -18,7 +18,7 @@ abstract class AbstractToken implements Token {
 
     @Override
     public String getRaw() {
-        return rawValue;
+        return raw;
     }
 
     @Override

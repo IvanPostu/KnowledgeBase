@@ -17,7 +17,7 @@ pkgs.stdenv.mkDerivation rec {
   ];
 
   # Set the JAVA_HOME environment variable
-  JAVA_HOME = "${jdk17}";
+  JAVA_HOME = "${jdk8}";
 
   # Define a shell script to activate the environment
   shellHook = ''
