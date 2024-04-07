@@ -7,10 +7,9 @@ import java.util.stream.Collectors;
 import java.util.stream.Stream;
 
 import com.ivan.knowledgebase.markdown.RegexBuilder;
-import com.ivan.knowledgebase.markdown.token.CodeToken;
-import com.ivan.knowledgebase.markdown.token.CodeToken.CodeType;
+import com.ivan.knowledgebase.markdown.token.FencedCodeToken;
 
-public final class FencedCodeTokenizer implements Tokenizer<CodeToken> {
+public final class FencedCodeTokenizer implements Tokenizer<FencedCodeToken> {
     private static final String FENCED_CODE_REGEX = RegexBuilder
             .createFromTemplate("^ {0,3}(`{3,}(?=[^`\\n]*(?:\\n|$))|~{3,})"
                     + "([^\\n]*)(?:\\n|$)(?:|([\\s\\S]*?)(?:\\n|$))(?: {0,3}\\1[~`]* *(?=\\n|$)|$)")
@@ -28,11 +27,11 @@ public final class FencedCodeTokenizer implements Tokenizer<CodeToken> {
     }
 
     @Override
-    public Optional<CodeToken> resolveToken(String source) {
+    public Optional<FencedCodeToken> resolveToken(String source) {
         return resolveFencedCodeToken(source);
     }
 
-    private Optional<CodeToken> resolveFencedCodeToken(String source) {
+    private Optional<FencedCodeToken> resolveFencedCodeToken(String source) {
         Matcher matcher = FENCED_CODE_PATTERN.matcher(source);
         if (matcher.find()) {
             String rawValue = matcher.group(0);
@@ -41,9 +40,9 @@ public final class FencedCodeTokenizer implements Tokenizer<CodeToken> {
                     .map(this::replaceAnyPunctuationIfNeeded);
 
             if (language.isPresent()) {
-                return Optional.of(new CodeToken(rawValue, code, CodeType.FENCED, language.get()));
+                return Optional.of(new FencedCodeToken(rawValue, code, language.get()));
             } else {
-                return Optional.of(new CodeToken(rawValue, code, CodeType.FENCED));
+                return Optional.of(new FencedCodeToken(rawValue, code));
             }
 
         }
