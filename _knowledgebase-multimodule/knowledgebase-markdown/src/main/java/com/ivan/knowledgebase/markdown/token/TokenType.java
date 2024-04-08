@@ -10,5 +10,6 @@ public enum TokenType {
     HTML,
     HEADING,
     L_HEADING,
-    TEXT;
+    TEXT,
+    ESCAPE;
 }
