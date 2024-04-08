@@ -9,5 +9,6 @@ public enum TokenType {
     HR,
     HTML,
     HEADING,
-    L_HEADING;
+    L_HEADING,
+    TEXT;
 }
