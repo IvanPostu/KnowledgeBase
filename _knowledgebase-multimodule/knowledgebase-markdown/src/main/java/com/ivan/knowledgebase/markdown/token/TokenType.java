@@ -11,5 +11,6 @@ public enum TokenType {
     HEADING,
     L_HEADING,
     TEXT,
-    ESCAPE;
+    ESCAPE,
+    AUTOLINK,;
 }
