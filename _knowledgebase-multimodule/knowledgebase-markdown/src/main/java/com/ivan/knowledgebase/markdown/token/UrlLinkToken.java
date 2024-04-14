@@ -3,13 +3,13 @@ package com.ivan.knowledgebase.markdown.token;
 import java.util.Collections;
 import java.util.List;
 
-public final class AutolinkToken extends AbstractToken implements ParentToken {
+public final class UrlLinkToken extends AbstractToken implements ParentToken {
     private final String text;
     private final String href;
     private final List<Token> childTokens;
 
-    public AutolinkToken(String rawValue, String text, String href, List<Token> childTokens) {
-        super(rawValue, TokenType.AUTO_LINK);
+    public UrlLinkToken(String rawValue, String text, String href, List<Token> childTokens) {
+        super(rawValue, TokenType.URL_LINK);
         this.text = text;
         this.href = href;
         this.childTokens = childTokens == null

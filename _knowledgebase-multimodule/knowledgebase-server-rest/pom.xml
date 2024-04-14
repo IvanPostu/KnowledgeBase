@@ -11,7 +11,6 @@
 
     <groupId>com.ivan.knowledgebase.server.rest</groupId>
     <artifactId>knowledgebase-server-rest</artifactId>
-    <packaging>jar</packaging>
 
     <name>${project.artifactId}</name>
 

@@ -12,5 +12,6 @@ public enum TokenType {
     L_HEADING,
     TEXT,
     ESCAPE,
-    AUTOLINK,;
+    AUTO_LINK,
+    URL_LINK,;
 }

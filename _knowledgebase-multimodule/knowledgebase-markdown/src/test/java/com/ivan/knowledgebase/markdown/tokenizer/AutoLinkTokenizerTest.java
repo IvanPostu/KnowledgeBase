@@ -16,20 +16,20 @@ class AutoLinkTokenizerTest {
     void testAutolink() {
         String rawValue = "<https://example.com>";
         AutolinkToken token = autolinkTokenizer.resolveToken(rawValue).get();
-        assertAutolinkToken(token, rawValue, "https://example.com", "https://example.com");
+        assertAutoLinkToken(token, rawValue, "https://example.com", "https://example.com");
     }
 
     @Test
     void testEmailAutolink() {
         String rawValue = "<test@example.com>";
         AutolinkToken token = autolinkTokenizer.resolveToken(rawValue).get();
-        assertAutolinkToken(token, rawValue, "test@example.com", "mailto:test@example.com");
+        assertAutoLinkToken(token, rawValue, "test@example.com", "mailto:test@example.com");
     }
 
-    private void assertAutolinkToken(AutolinkToken token, String rawValue, String expectedText, String expectedHref) {
+    private void assertAutoLinkToken(AutolinkToken token, String rawValue, String expectedText, String expectedHref) {
         Assertions.assertThat(token.getRaw()).isEqualTo(rawValue);
         Assertions.assertThat(token.getText()).isEqualTo(expectedText);
-        Assertions.assertThat(token.getType()).isEqualTo(TokenType.AUTOLINK);
+        Assertions.assertThat(token.getType()).isEqualTo(TokenType.AUTO_LINK);
         Assertions.assertThat(token.getHref()).isEqualTo(expectedHref);
 
         Assertions.assertThat(token.getChildTokens())
