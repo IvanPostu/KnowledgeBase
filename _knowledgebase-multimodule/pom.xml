@@ -147,7 +147,8 @@
 					<linkXRef>false</linkXRef>
 					<includeTestSourceDirectory>true</includeTestSourceDirectory>
 					<suppressionsLocation>
-						project_checkstyle/checkstyle-suppressions.xml</suppressionsLocation>
+						project_checkstyle/checkstyle-suppressions.xml
+					</suppressionsLocation>
 					<!-- Consider warning and higher as violations -->
 					<violationSeverity>warning</violationSeverity>
 				</configuration>

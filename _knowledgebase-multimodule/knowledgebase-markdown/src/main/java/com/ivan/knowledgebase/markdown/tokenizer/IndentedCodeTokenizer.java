@@ -6,6 +6,7 @@ import java.util.regex.Pattern;
 
 import com.ivan.knowledgebase.markdown.RegexBuilder;
 import com.ivan.knowledgebase.markdown.token.IndentedCodeToken;
+import com.ivan.knowledgebase.markdown.tokenizer.utils.RTrimUtils;
 
 public final class IndentedCodeTokenizer implements Tokenizer<IndentedCodeToken> {
     private static final String INDENTED_CODE_REGEX = RegexBuilder

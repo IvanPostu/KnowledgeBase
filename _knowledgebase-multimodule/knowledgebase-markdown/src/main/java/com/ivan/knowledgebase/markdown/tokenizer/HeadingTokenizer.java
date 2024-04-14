@@ -8,6 +8,7 @@ import java.util.regex.Pattern;
 
 import com.ivan.knowledgebase.markdown.RegexBuilder;
 import com.ivan.knowledgebase.markdown.token.HeadingToken;
+import com.ivan.knowledgebase.markdown.tokenizer.utils.RTrimUtils;
 
 public final class HeadingTokenizer implements Tokenizer<HeadingToken> {
     private static final String HEADING_REGEX = RegexBuilder

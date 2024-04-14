@@ -1,7 +1,7 @@
-package com.ivan.knowledgebase.markdown.tokenizer;
+package com.ivan.knowledgebase.markdown.tokenizer.utils;
 
 //CHECKSTYLE.SUPPRESS: AbbreviationAsWordInName
-enum RTrimUtils {
+public enum RTrimUtils {
     INSTANCE;
 
     public String rtrim(String str, String c) {

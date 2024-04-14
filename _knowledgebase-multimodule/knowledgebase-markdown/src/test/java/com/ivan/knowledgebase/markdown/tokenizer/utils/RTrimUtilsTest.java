@@ -1,8 +1,10 @@
-package com.ivan.knowledgebase.markdown.tokenizer;
+package com.ivan.knowledgebase.markdown.tokenizer.utils;
 
 import static org.assertj.core.api.Assertions.assertThat;
 
 import org.testng.annotations.Test;
+
+import com.ivan.knowledgebase.markdown.tokenizer.utils.RTrimUtils;
 
 //CHECKSTYLE.SUPPRESS: AbbreviationAsWordInName
 class RTrimUtilsTest {
