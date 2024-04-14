@@ -11,7 +11,7 @@ import com.ivan.knowledgebase.markdown.token.AutolinkToken;
 import com.ivan.knowledgebase.markdown.token.TextToken;
 import com.ivan.knowledgebase.markdown.token.Token;
 
-public final class AutolinkTokenizer implements Tokenizer<AutolinkToken> {
+public final class AutoLinkTokenizer implements Tokenizer<AutolinkToken> {
     private static final String AUTOLINK_REGEX = RegexBuilder
             .createFromTemplate(
                     "^<(scheme:[^\\s\\x00-\\x1f<>]*|email)>")

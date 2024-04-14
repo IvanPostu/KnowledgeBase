@@ -9,8 +9,8 @@ import com.ivan.knowledgebase.markdown.token.AutolinkToken;
 import com.ivan.knowledgebase.markdown.token.TextToken;
 import com.ivan.knowledgebase.markdown.token.TokenType;
 
-class AutolinkTokenizerTest {
-    private final AutolinkTokenizer autolinkTokenizer = new AutolinkTokenizer();
+class AutoLinkTokenizerTest {
+    private final AutoLinkTokenizer autolinkTokenizer = new AutoLinkTokenizer();
 
     @Test
     void testAutolink() {
