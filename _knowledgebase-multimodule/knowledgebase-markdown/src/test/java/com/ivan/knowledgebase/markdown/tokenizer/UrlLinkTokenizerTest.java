@@ -1,8 +1,9 @@
 package com.ivan.knowledgebase.markdown.tokenizer;
 
+import static org.assertj.core.api.Assertions.assertThat;
+
 import java.util.Collections;
 
-import static org.assertj.core.api.Assertions.assertThat;
 import org.testng.annotations.DataProvider;
 import org.testng.annotations.Test;
 
