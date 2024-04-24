@@ -14,6 +14,8 @@
 		<maven.compiler.source>1.8</maven.compiler.source>
 		<maven.compiler.target>1.8</maven.compiler.target>
 
+		<isParentModule>false</isParentModule>
+
 		<slf4j.version>2.0.13</slf4j.version>
 		<junit.version>5.10.2</junit.version>
 		<jetty.version>9.4.54.v20240208</jetty.version>
@@ -28,6 +30,21 @@
 		<maven-project-info-reports-plugin.version>3.0.0</maven-project-info-reports-plugin.version>
 		<maven-surefire-plugin.version>3.2.5</maven-surefire-plugin.version>
 	</properties>
+
+	<profiles>
+		<profile>
+			<id>activate-only-in-parent</id>
+			<activation>
+				<file>
+					<exists>${basedir}/../_knowledgebase-multimodule</exists>
+				</file>
+			</activation>
+			<properties>
+				<isParentModule>true</isParentModule>
+			</properties>
+		</profile>
+	</profiles>
+
 	<modules>
 		<module>knowledgebase-server-embedded</module>
 		<module>knowledgebase-server-rest</module>
@@ -121,17 +138,19 @@
 	</dependencyManagement>
 	<reporting>
 		<plugins>
-		<!--	<plugin>
+			<plugin>
 				<groupId>org.apache.maven.plugins</groupId>
 				<artifactId>maven-checkstyle-plugin</artifactId>
 				<version>${checkstyle-maven-plugin.version}</version>
 				<configuration>
-					<configLocation>project_checkstyle/checkstyle.xml</configLocation>
+					<configLocation>
+						project_checkstyle/checkstyle.xml
+					</configLocation>
 					<suppressionsLocation>
 						project_checkstyle/checkstyle-suppressions.xml
 					</suppressionsLocation>
 				</configuration>
-			</plugin>-->
+			</plugin>
 			<plugin>
 				<groupId>org.apache.maven.plugins</groupId>
 				<artifactId>maven-project-info-reports-plugin</artifactId>
@@ -168,24 +187,51 @@
 					</dependency>
 				</dependencies>
 				<configuration>
-					<configLocation>project_checkstyle/checkstyle.xml</configLocation>
+					<configLocation>
+						project_checkstyle/checkstyle.xml
+					</configLocation>
 					<suppressionsLocation>
-						checkstyle-suppressions.xml
+						project_checkstyle/checkstyle-suppressions.xml
 					</suppressionsLocation>
 					<consoleOutput>true</consoleOutput>
 					<failsOnError>true</failsOnError>
 					<linkXRef>false</linkXRef>
 					<includeTestSourceDirectory>true</includeTestSourceDirectory>
-					<!-- Consider warning and higher as violations -->
 					<violationSeverity>warning</violationSeverity>
 				</configuration>
 				<executions>
 					<execution>
 						<id>checkstyle-validation</id>
-						<phase>install</phase>
+						<phase>verify</phase>
 						<goals>
-							<goal>check</goal>
+							<goal>checkstyle-aggregate</goal>
 						</goals>
+					</execution>
+				</executions>
+			</plugin>
+			<plugin>
+				<artifactId>maven-antrun-plugin</artifactId>
+				<version>3.1.0</version>
+				<executions>
+					<execution>
+						<id>run-checkstyle</id>
+						<goals>
+							<goal>run</goal>
+						</goals>
+						<phase>validate</phase>
+						<inherited>false</inherited>
+						<configuration>
+							<target>
+								<echo>Build and Install local JAR checkstyle module</echo>
+								<exec executable="mvnw" failonerror="true"
+									resultproperty="execResult">
+									<arg value="-f" />
+									<arg value="${basedir}/knowledgebase-checkstyle/pom.xml" />
+									<arg value="install" />
+									<arg value="-q" />
+								</exec>
+							</target>
+						</configuration>
 					</execution>
 				</executions>
 			</plugin>
