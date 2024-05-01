@@ -57,6 +57,9 @@ $ mvnw -f $PROJECT_DIR/_knowledgebase-multimodule/pom.xml clean site:site site:s
 # Run user acceptance tests
 # Result path: /home/ivan/Projects/KnowledgeBase/_knowledgebase-multimodule/knowledgebase-user-acceptance-test/target/surefire-reports/
 $ mvnw -f $PROJECT_DIR/_knowledgebase-multimodule/knowledgebase-user-acceptance-test/pom.xml clean test -Puser-acceptance-tests
+
+# Run code formatter check
+$ mvnw -f $PROJECT_DIR/_knowledgebase-multimodule/knowledgebase-code-formatter/pom.xml clean install && java -jar _knowledgebase-multimodule/knowledgebase-code-formatter/target/knowledgebase-code-formatter.jar --threadsCount 10 --applyFormatting true --baseDirectoryPath=$PROJECT_DIR/_knowledgebase-multimodule 
 ```
 
 ## How to supress checkstyle rules
