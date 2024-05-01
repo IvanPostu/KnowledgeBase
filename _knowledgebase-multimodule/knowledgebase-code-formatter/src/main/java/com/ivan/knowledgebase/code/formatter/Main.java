@@ -1,88 +1,161 @@
 package com.ivan.knowledgebase.code.formatter;
 
+import java.io.ByteArrayOutputStream;
 import java.io.File;
 import java.io.FileInputStream;
 import java.io.IOException;
+import java.io.InputStream;
 import java.util.Collections;
+import java.util.LinkedHashMap;
 import java.util.LinkedList;
 import java.util.List;
 import java.util.Map;
 import java.util.function.Predicate;
+import java.util.stream.Collectors;
+
+import javax.xml.parsers.DocumentBuilder;
+import javax.xml.parsers.DocumentBuilderFactory;
+import javax.xml.parsers.ParserConfigurationException;
 
 import org.eclipse.jdt.core.JavaCore;
 import org.eclipse.jdt.core.ToolFactory;
 import org.eclipse.jdt.core.formatter.CodeFormatter;
 import org.eclipse.jface.text.Document;
 import org.eclipse.text.edits.TextEdit;
+import org.xml.sax.SAXException;
 
 public class Main {
 
-	public static void main(String[] args) throws Exception {
-		String directoryPath = "/home/ivan/Projects/KnowledgeBase/_knowledgebase-multimodule";
+    public static void main(String[] args) throws Exception {
+        String directoryPath = "/home/ivan/Projects/KnowledgeBase/_knowledgebase-multimodule";
 
-		List<File> files = findFilesRecursively(new File(directoryPath),
-				absolutePath -> absolutePath.endsWith(".java"));
+        List<File> files = findFilesRecursively(new File(directoryPath),
+            absolutePath -> absolutePath.endsWith(".java"));
 
-		// Configure the formatter options
-		Map<String, String> options = JavaCore.getOptions();
-		options.put(JavaCore.COMPILER_SOURCE, JavaCore.VERSION_1_8);
-		options.put(JavaCore.COMPILER_COMPLIANCE, JavaCore.VERSION_1_8);
-		options.put(JavaCore.COMPILER_CODEGEN_TARGET_PLATFORM, JavaCore.VERSION_1_8);
+        Map<String, String> configEntriesFromFile = readFormatsXmlConfigurationFile();
+        Map<String, String> globalConfigurationEntries = getGlobalConfiguration(configEntriesFromFile);
 
-		CodeFormatter codeFormatter = ToolFactory.createCodeFormatter(options);
+        CodeFormatter codeFormatter = ToolFactory.createCodeFormatter(globalConfigurationEntries);
 
-		for (File file : files) {
-			byte[] content = readFile(file);
-			String contentAsString = new String(content);
+        int countOfUnformattedFiles = 0;
+        for (File file : files) {
+            byte[] content = readFile(file);
+            String contentAsString = new String(content);
 
-			TextEdit edit = codeFormatter.format(CodeFormatter.K_COMPILATION_UNIT, contentAsString, 0,
-					contentAsString.length(), 0, null);
-			if (edit != null) {
-				Document document = new Document(contentAsString);
-				edit.apply(document);
-				String formattedContent = document.get();
+            TextEdit edit = codeFormatter.format(CodeFormatter.K_COMPILATION_UNIT, contentAsString, 0,
+                contentAsString.length(), 0, null);
+            if (edit != null) {
+                Document document = new Document(contentAsString);
+                edit.apply(document);
+                String formattedContent = document.get();
 
-				if (!formattedContent.equals(contentAsString)) {
-					int p = 909;
-				}
+                if (!formattedContent.equals(contentAsString)) {
+                    System.out.println(String.format("File: %s is not properly formatted", file.getAbsolutePath()));
+                    countOfUnformattedFiles++;
+                }
 
-				int i = 909;
+            }
 
-			}
+        }
+        System.out.println(String.format("Total unformatted files: %s", countOfUnformattedFiles));
 
-		}
-	}
+        if (countOfUnformattedFiles > 0) {
+            System.exit(1);
+        }
+    }
 
-	private static byte[] readFile(File file) {
-		try (FileInputStream fis = new FileInputStream(file)) {
-			byte[] data = new byte[(int) file.length()];
-			fis.read(data);
-			return data;
-		} catch (IOException e) {
-			e.printStackTrace();
-			return new byte[] {};
-		}
-	}
+    private static Map<String, String> getGlobalConfiguration(Map<String, String> configEntriesFromFile)
+        throws IOException {
+        Map<String, String> options = new LinkedHashMap<String, String>(JavaCore.getOptions());
+        options.put(JavaCore.COMPILER_SOURCE, JavaCore.VERSION_1_8);
+        options.put(JavaCore.COMPILER_COMPLIANCE, JavaCore.VERSION_1_8);
+        options.put(JavaCore.COMPILER_CODEGEN_TARGET_PLATFORM, JavaCore.VERSION_1_8);
 
-	private static List<File> findFilesRecursively(File directory, Predicate<String> absolutePathPredicate) {
-		List<File> result = new LinkedList<>();
+        List<String> unknownConfigurationKeys = new LinkedList<String>();
+        configEntriesFromFile.forEach((key, value) -> {
+            if (!options.containsKey(key)) {
+                unknownConfigurationKeys.add(key);
+            }
+            options.put(key, value);
+        });
 
-		File[] files = directory.listFiles();
+        if (!unknownConfigurationKeys.isEmpty()) {
+            throw new IllegalStateException("Formatter configuration has unknown fields: " + unknownConfigurationKeys
+                .stream().collect(Collectors.joining(",\n\t")));
+        }
 
-		if (files == null) {
-			return Collections.emptyList();
-		}
+        return Collections.unmodifiableMap(options);
+    }
 
-		for (File file : files) {
-			if (file.isDirectory()) {
-				List<File> nestedFiles = findFilesRecursively(file, absolutePathPredicate);
-				result.addAll(nestedFiles);
-			} else {
-				if (absolutePathPredicate.test(file.getAbsolutePath())) {
-					result.add(file);
-				}
-			}
-		}
-		return Collections.unmodifiableList(result);
-	}
+    private static Map<String, String> readFormatsXmlConfigurationFile() throws IOException {
+        Map<String, String> result = new LinkedHashMap<String, String>();
+        try (InputStream inputStream = Main.class.getClassLoader().getResourceAsStream("formats.xml")) {
+            DocumentBuilderFactory dbFactory = DocumentBuilderFactory.newInstance();
+            DocumentBuilder dBuilder = dbFactory.newDocumentBuilder();
+            org.w3c.dom.Document doc = dBuilder.parse(inputStream);
+            doc.getDocumentElement().normalize();
+
+            org.w3c.dom.NodeList nodeList = doc.getElementsByTagName("setting");
+            for (int i = 0; i < nodeList.getLength(); i++) {
+                org.w3c.dom.Node node = nodeList.item(i);
+                if (node.getNodeType() == org.w3c.dom.Node.ELEMENT_NODE) {
+                    org.w3c.dom.Element element = (org.w3c.dom.Element) node;
+                    String id = element.getAttribute("id");
+                    String value = element.getAttribute("value");
+                    result.put(id, value);
+                }
+            }
+
+        } catch (ParserConfigurationException | SAXException e) {
+            throw new IllegalStateException(e);
+        }
+
+        return Collections.unmodifiableMap(result);
+    }
+
+    private static byte[] readFile(File file) {
+        try (FileInputStream fis = new FileInputStream(file)) {
+            byte[] data = new byte[(int) file.length()];
+            fis.read(data);
+            return data;
+        } catch (IOException e) {
+            e.printStackTrace();
+            return new byte[] {};
+        }
+    }
+
+    private static List<File> findFilesRecursively(File directory, Predicate<String> absolutePathPredicate) {
+        List<File> result = new LinkedList<>();
+
+        File[] files = directory.listFiles();
+
+        if (files == null) {
+            return Collections.emptyList();
+        }
+
+        for (File file : files) {
+            if (file.isDirectory()) {
+                List<File> nestedFiles = findFilesRecursively(file, absolutePathPredicate);
+                result.addAll(nestedFiles);
+            } else {
+                if (absolutePathPredicate.test(file.getAbsolutePath())) {
+                    result.add(file);
+                }
+            }
+        }
+        return Collections.unmodifiableList(result);
+    }
+
+    private static byte[] readInputStreamToByteArray(InputStream inputStream) throws IOException {
+        ByteArrayOutputStream buffer = new ByteArrayOutputStream();
+        int nRead;
+        byte[] data = new byte[2048];
+
+        while ((nRead = inputStream.read(data, 0, data.length)) != -1) {
+            buffer.write(data, 0, nRead);
+        }
+
+        buffer.flush();
+        return buffer.toByteArray();
+    }
 }

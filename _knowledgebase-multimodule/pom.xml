@@ -223,11 +223,13 @@
 						<inherited>false</inherited>
 						<configuration>
 							<target>
-								<echo>Build and Install local JAR checkstyle module</echo>
+								<echo>Build and Install local JAR checkstyle
+									module</echo>
 								<exec executable="mvnw" failonerror="true"
 									resultproperty="execResult">
 									<arg value="-f" />
-									<arg value="${basedir}/knowledgebase-checkstyle/pom.xml" />
+									<arg
+										value="${basedir}/knowledgebase-checkstyle/pom.xml" />
 									<arg value="install" />
 									<arg value="-q" />
 								</exec>

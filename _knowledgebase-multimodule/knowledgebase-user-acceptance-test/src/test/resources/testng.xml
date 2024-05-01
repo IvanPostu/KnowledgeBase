@@ -1,13 +1,13 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!DOCTYPE suite SYSTEM "https://testng.org/testng-1.0.dtd">
 <suite name="AllTestsSuite" verbose="1" parallel="methods" thread-count="10">
-    <listeners>
-        <listener
-            class-name="com.ivan.knowledgebase.user.acceptance.test.AnnotationTransformer" />
-    </listeners>
-    <test name="PackageTest">
-        <packages>
-            <package name="com.ivan.knowledgebase.user.acceptance.*" />
-        </packages>
-    </test>
+	<listeners>
+		<listener
+			class-name="com.ivan.knowledgebase.user.acceptance.test.AnnotationTransformer" />
+	</listeners>
+	<test name="PackageTest">
+		<packages>
+			<package name="com.ivan.knowledgebase.user.acceptance.*" />
+		</packages>
+	</test>
 </suite>

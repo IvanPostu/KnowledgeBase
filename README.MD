@@ -4,7 +4,11 @@ A standalone web server with a set of utilities intended to keep notes and infor
 
 ## Useful commands
 ```sh
+# Run nix-shell with default jdk8
 $ nix-shell --run bash
+
+# Run nix-shell with jdk17
+$ nix-shell ./default.nix --argstr jdkVersion 17 --run bash
 
 # Package artifact
 $ run-rebuild-multimodule.sh
@@ -67,7 +71,7 @@ $ mvnw -f $PROJECT_DIR/_knowledgebase-multimodule/knowledgebase-user-acceptance-
     private int number3 = 32;
 ```
 
-## How to run testng in eclipse
+## How to run TestNG in eclipse
 ```sh
 # 1. Install extension
 # 2. Change module's java version to the value which is greater than 8, e.g. 17
@@ -76,12 +80,4 @@ $ mvnw -f $PROJECT_DIR/_knowledgebase-multimodule/knowledgebase-user-acceptance-
 
 ## References
 
-#### Markdown demo
-- https://www.npmjs.com/package/markdown-it
-- [Marked Demo](https://marked.js.org/demo/)
-- [CommonMark Demo](https://spec.commonmark.org/dingus/)
-- [Daring Fireball (pedantic) Demo](https://daringfireball.net/projects/markdown/dingus)
-
-## TODO
-### To cover with tests
-- https://spec.commonmark.org/ 
+- 

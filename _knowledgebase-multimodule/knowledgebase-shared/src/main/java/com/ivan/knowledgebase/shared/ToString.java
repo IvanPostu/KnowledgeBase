@@ -10,15 +10,15 @@ public enum ToString {
     INSTANCE;
 
     private static final ObjectMapper OBJECT_MAPPER = new ObjectMapper()
-            .registerModule(new Jdk8Module())
-            .setVisibility(VisibilityChecker.Std.defaultInstance()
-                    .withFieldVisibility(Visibility.ANY));
+        .registerModule(new Jdk8Module())
+        .setVisibility(VisibilityChecker.Std.defaultInstance()
+            .withFieldVisibility(Visibility.ANY));
 
     public String create(Object object) {
         try {
             return OBJECT_MAPPER
-                    .writerWithDefaultPrettyPrinter()
-                    .writeValueAsString(object);
+                .writerWithDefaultPrettyPrinter()
+                .writeValueAsString(object);
         } catch (JsonProcessingException e) {
             return "";
         }
