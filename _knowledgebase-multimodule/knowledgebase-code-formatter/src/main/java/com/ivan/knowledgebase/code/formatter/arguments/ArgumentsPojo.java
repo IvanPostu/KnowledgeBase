@@ -6,13 +6,15 @@ public final class ArgumentsPojo {
     private final boolean applyFormatting;
     private final String baseDirectoryPath;
     private final ch.qos.logback.classic.Level logLevel;
+    private final boolean help;
 
     public ArgumentsPojo(int threadsCount, boolean applyFormatting, String baseDirectoryPath,
-        ch.qos.logback.classic.Level logLevel) {
+        ch.qos.logback.classic.Level logLevel, boolean help) {
         this.threadsCount = threadsCount;
         this.applyFormatting = applyFormatting;
         this.baseDirectoryPath = baseDirectoryPath;
         this.logLevel = logLevel;
+        this.help = help;
     }
 
     public int getThreadsCount() {
@@ -29,5 +31,9 @@ public final class ArgumentsPojo {
 
     public ch.qos.logback.classic.Level getLogLevel() {
         return logLevel;
+    }
+
+    public boolean getHelp() {
+        return help;
     }
 }

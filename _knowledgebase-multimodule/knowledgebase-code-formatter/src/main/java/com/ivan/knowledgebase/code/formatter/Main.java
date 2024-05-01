@@ -34,7 +34,13 @@ public class Main {
     private static final FilesCollector FILES_COLLECTOR = new FilesCollector();
 
     public static void main(String[] args) throws Exception {
-        ArgumentsPojo arguments = new ProgramArgumentsProvider(args).provide();
+        ProgramArgumentsProvider programArgumentsProvider = new ProgramArgumentsProvider(args);
+        ArgumentsPojo arguments = programArgumentsProvider.provide();
+        if (arguments.getHelp()) {
+            programArgumentsProvider.printHelp();
+            return;
+        }
+
         resetLogLevel(arguments.getLogLevel());
 
         String directoryPath = arguments.getBaseDirectoryPath();

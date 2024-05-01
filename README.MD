@@ -59,7 +59,9 @@ $ mvnw -f $PROJECT_DIR/_knowledgebase-multimodule/pom.xml clean site:site site:s
 $ mvnw -f $PROJECT_DIR/_knowledgebase-multimodule/knowledgebase-user-acceptance-test/pom.xml clean test -Puser-acceptance-tests
 
 # Run code formatter check
-$ mvnw -f $PROJECT_DIR/_knowledgebase-multimodule/knowledgebase-code-formatter/pom.xml clean install && java -jar _knowledgebase-multimodule/knowledgebase-code-formatter/target/knowledgebase-code-formatter.jar --threadsCount 10 --applyFormatting true --baseDirectoryPath=$PROJECT_DIR/_knowledgebase-multimodule 
+$ mvnw -f $PROJECT_DIR/_knowledgebase-multimodule/knowledgebase-code-formatter/pom.xml clean install && java -jar _knowledgebase-multimodule/knowledgebase-code-formatter/target/knowledgebase-code-formatter.jar --threadsCount 10 --applyFormatting true --baseDirectoryPath=$PROJECT_DIR/_knowledgebase-multimodule --logLevel INFO 
+
+$ $ mvnw -f $PROJECT_DIR/_knowledgebase-multimodule/knowledgebase-code-formatter/pom.xml clean install && java -jar _knowledgebase-multimodule/knowledgebase-code-formatter/target/knowledgebase-code-formatter.jar --help
 ```
 
 ## How to supress checkstyle rules

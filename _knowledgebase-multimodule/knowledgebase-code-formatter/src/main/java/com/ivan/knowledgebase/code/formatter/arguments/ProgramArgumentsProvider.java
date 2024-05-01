@@ -22,22 +22,26 @@ public final class ProgramArgumentsProvider {
     private static final Logger LOG = LoggerFactory.getLogger(ProgramArgumentsProvider.class);
 
     private final String[] args;
+    private final Options options;
 
     public ProgramArgumentsProvider(String... args) {
         this.args = args;
+        this.options = configureOptions();
+    }
+
+    public void printHelp() {
+        HelpFormatter formatter = new HelpFormatter();
+        formatter.printHelp("Help", options);
     }
 
     public ArgumentsPojo provide() {
-        Options options = configureOptions();
         CommandLineParser parser = new DefaultParser();
         CommandLine cmd = null;
 
         try {
             cmd = parser.parse(options, args);
         } catch (ParseException e) {
-            HelpFormatter formatter = new HelpFormatter();
             LOG.error("CLI arguments parse error", e);
-            formatter.printHelp("Application", options);
             System.exit(1);
         }
 
@@ -53,7 +57,8 @@ public final class ProgramArgumentsProvider {
             threadsCount,
             "true".equalsIgnoreCase(applyFormattingValue),
             baseDirectoryPath,
-            logLevel);
+            logLevel,
+            cmd.hasOption("help"));
 
         logArguments(argumentsPojo);
 
@@ -100,6 +105,10 @@ public final class ProgramArgumentsProvider {
     }
 
     private Options configureOptions() {
+        Option helpOption = Option.builder("h")
+            .longOpt("help")
+            .desc("print help message")
+            .build();
         Option logLevelOption = Option.builder()
             .longOpt("logLevel")
             .argName("logLevel")
@@ -130,6 +139,7 @@ public final class ProgramArgumentsProvider {
             .build();
 
         return new Options()
+            .addOption(helpOption)
             .addOption(logLevelOption)
             .addOption(parallelOption)
             .addOption(applyFormattingOption)
