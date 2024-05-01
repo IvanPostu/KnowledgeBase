@@ -32,10 +32,8 @@ public class Main {
         List<File> files = findFilesRecursively(new File(directoryPath),
             absolutePath -> absolutePath.endsWith(".java"));
 
-        Map<String, String> configEntriesFromFile = readFormatsXmlConfigurationFile();
-        Map<String, String> globalConfigurationEntries = getGlobalConfiguration(configEntriesFromFile);
-
-        CodeFormatter codeFormatter = ToolFactory.createCodeFormatter(globalConfigurationEntries);
+        Map<String, String> formatterConfiguration = ConfigurationProvider.getInstance().provideConfiguration();
+        CodeFormatter codeFormatter = ToolFactory.createCodeFormatter(formatterConfiguration);
 
         int countOfUnformattedFiles = 0;
         for (File file : files) {
@@ -85,32 +83,6 @@ public class Main {
         }
 
         return Collections.unmodifiableMap(options);
-    }
-
-    private static Map<String, String> readFormatsXmlConfigurationFile() throws IOException {
-        Map<String, String> result = new LinkedHashMap<String, String>();
-        try (InputStream inputStream = Main.class.getClassLoader().getResourceAsStream("formats.xml")) {
-            DocumentBuilderFactory dbFactory = DocumentBuilderFactory.newInstance();
-            DocumentBuilder dBuilder = dbFactory.newDocumentBuilder();
-            org.w3c.dom.Document doc = dBuilder.parse(inputStream);
-            doc.getDocumentElement().normalize();
-
-            org.w3c.dom.NodeList nodeList = doc.getElementsByTagName("setting");
-            for (int i = 0; i < nodeList.getLength(); i++) {
-                org.w3c.dom.Node node = nodeList.item(i);
-                if (node.getNodeType() == org.w3c.dom.Node.ELEMENT_NODE) {
-                    org.w3c.dom.Element element = (org.w3c.dom.Element) node;
-                    String id = element.getAttribute("id");
-                    String value = element.getAttribute("value");
-                    result.put(id, value);
-                }
-            }
-
-        } catch (ParserConfigurationException | SAXException e) {
-            throw new IllegalStateException(e);
-        }
-
-        return Collections.unmodifiableMap(result);
     }
 
     private static byte[] readFile(File file) {
