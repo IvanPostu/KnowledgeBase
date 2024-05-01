@@ -11,8 +11,8 @@ public final class TextToken extends AbstractToken implements ParentToken {
         super(rawValue, TokenType.TEXT);
         this.text = text;
         this.childTokens = childTokens == null
-                ? Collections.emptyList()
-                : Collections.unmodifiableList(childTokens);
+            ? Collections.emptyList()
+            : Collections.unmodifiableList(childTokens);
     }
 
     public String getText() {

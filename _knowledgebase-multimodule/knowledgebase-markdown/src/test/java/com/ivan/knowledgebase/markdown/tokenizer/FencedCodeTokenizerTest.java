@@ -17,35 +17,35 @@ class FencedCodeTokenizerTest {
         Optional<FencedCodeToken> codeToken = codeTokenizer.resolveToken(inputCode);
 
         assertCodeToken(codeToken,
-                inputCode,
-                "code",
-                Optional.of("text"));
+            inputCode,
+            "code",
+            Optional.of("text"));
     }
 
     @Test
     void testResolveFencedCode() {
         Optional<FencedCodeToken> codeToken = codeTokenizer.resolveToken(
-                " ```\ncode\n```");
+            " ```\ncode\n```");
 
         assertCodeToken(codeToken,
-                " ```\ncode\n```",
-                "code",
-                Optional.empty());
+            " ```\ncode\n```",
+            "code",
+            Optional.empty());
     }
 
     @Test
     void testResolveFencedMultilineWithIndentedCodeCompensationCode() {
         Optional<FencedCodeToken> codeToken = codeTokenizer.resolveToken(
-                "   ```js\n       console.log(123)\n  alert(1);\n```");
+            "   ```js\n       console.log(123)\n  alert(1);\n```");
 
         assertCodeToken(codeToken,
-                "   ```js\n       console.log(123)\n  alert(1);\n```",
-                "    console.log(123)\n  alert(1);",
-                Optional.of("js"));
+            "   ```js\n       console.log(123)\n  alert(1);\n```",
+            "    console.log(123)\n  alert(1);",
+            Optional.of("js"));
     }
 
     private void assertCodeToken(Optional<FencedCodeToken> codeToken, String expectedRawValue,
-            String expectedSourceCode, Optional<String> expectedLanguage) {
+        String expectedSourceCode, Optional<String> expectedLanguage) {
 
         assertThat(codeToken).get().satisfies(token -> {
             assertThat(token.getRaw()).isEqualTo(expectedRawValue);

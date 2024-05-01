@@ -11,10 +11,10 @@ class EscapeTokenizerTest {
     void testResolveToken() {
         EscapeTokenizer tokenizer = new EscapeTokenizer();
         assertThat(tokenizer.resolveToken("\\>").get())
-                .satisfies(value -> {
-                    assertThat(value.getType()).isEqualTo(TokenType.ESCAPE);
-                    assertThat(value.getRaw()).isEqualTo("\\>");
-                    assertThat(value.getText()).isEqualTo("&gt;");
-                });
+            .satisfies(value -> {
+                assertThat(value.getType()).isEqualTo(TokenType.ESCAPE);
+                assertThat(value.getRaw()).isEqualTo("\\>");
+                assertThat(value.getText()).isEqualTo("&gt;");
+            });
     }
 }

@@ -9,8 +9,8 @@ import com.ivan.knowledgebase.markdown.token.SpaceToken;
 
 public final class SpaceTokenizer implements Tokenizer<SpaceToken> {
     private static final String SPACE_REGEX = RegexBuilder
-            .createFromTemplate("^(?: *(?:\\n|$))+")
-            .buildAsString();
+        .createFromTemplate("^(?: *(?:\\n|$))+")
+        .buildAsString();
     private static final Pattern SPACE_PATTERN = Pattern.compile(SPACE_REGEX);
 
     @Override

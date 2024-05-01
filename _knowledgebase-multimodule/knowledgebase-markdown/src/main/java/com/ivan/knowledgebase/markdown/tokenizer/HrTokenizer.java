@@ -9,8 +9,8 @@ import com.ivan.knowledgebase.markdown.token.HrToken;
 
 public final class HrTokenizer implements Tokenizer<HrToken> {
     private static final String HR_REGEX = RegexBuilder
-            .createFromTemplate("^ {0,3}((?:-[\\t ]*){3,}|(?:_[ \\t]*){3,}|(?:\\*[ \\t]*){3,})(?:\\n+|$)")
-            .buildAsString();
+        .createFromTemplate("^ {0,3}((?:-[\\t ]*){3,}|(?:_[ \\t]*){3,}|(?:\\*[ \\t]*){3,})(?:\\n+|$)")
+        .buildAsString();
     private static final Pattern HR_PATTERN = Pattern.compile(HR_REGEX);
 
     @Override

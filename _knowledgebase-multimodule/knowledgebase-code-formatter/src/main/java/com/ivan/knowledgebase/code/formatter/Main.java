@@ -41,6 +41,10 @@ public class Main {
         List<FileElement> files = FILES_COLLECTOR.collectJavaFilesFromDirectory(directoryPath);
         Map<String, String> formatterConfiguration = ConfigurationProvider.getInstance().provideConfiguration();
 
+        if (arguments.getApplyFormatting()) {
+            FormatterValidator.getInstance()
+                .applyFormatting(files, formatterConfiguration, arguments.getThreadsCount());
+        }
         FormatterValidator.getInstance()
             .validateFormatting(files, formatterConfiguration, arguments.getThreadsCount());
     }

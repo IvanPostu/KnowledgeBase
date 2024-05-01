@@ -60,7 +60,7 @@ public final class WebResourceFactory implements InvocationHandler {
     private static final MultivaluedMap<String, Object> EMPTY_HEADERS = new MultivaluedHashMap<>();
     private static final Form EMPTY_FORM = new Form();
     private static final List<Class> PARAM_ANNOTATION_CLASSES = Arrays.<Class>asList(PathParam.class, QueryParam.class,
-            HeaderParam.class, CookieParam.class, MatrixParam.class, FormParam.class);
+        HeaderParam.class, CookieParam.class, MatrixParam.class, FormParam.class);
 
     /**
      * Creates a new client-side representation of a resource described by the
@@ -79,7 +79,7 @@ public final class WebResourceFactory implements InvocationHandler {
      */
     public static <C> C newResource(final Class<C> resourceInterface, final WebTarget target) {
         return newResource(resourceInterface, target, false, EMPTY_HEADERS, Collections.<Cookie>emptyList(),
-                EMPTY_FORM);
+            EMPTY_FORM);
     }
 
     /**
@@ -104,18 +104,18 @@ public final class WebResourceFactory implements InvocationHandler {
      */
     @SuppressWarnings("unchecked")
     public static <C> C newResource(final Class<C> resourceInterface, final WebTarget target,
-            final boolean ignoreResourcePath, final MultivaluedMap<String, Object> headers, final List<Cookie> cookies,
-            final Form form) {
+        final boolean ignoreResourcePath, final MultivaluedMap<String, Object> headers, final List<Cookie> cookies,
+        final Form form) {
 
         return (C) Proxy.newProxyInstance(
-                AccessController.doPrivileged(ReflectionHelper.getClassLoaderPA(resourceInterface)),
-                new Class[] { resourceInterface },
-                new WebResourceFactory(ignoreResourcePath ? target : addPathFromAnnotation(resourceInterface, target),
-                        headers, cookies, form));
+            AccessController.doPrivileged(ReflectionHelper.getClassLoaderPA(resourceInterface)),
+            new Class[] {resourceInterface},
+            new WebResourceFactory(ignoreResourcePath ? target : addPathFromAnnotation(resourceInterface, target),
+                headers, cookies, form));
     }
 
     private WebResourceFactory(final WebTarget target, final MultivaluedMap<String, Object> headers,
-            final List<Cookie> cookies, final Form form) {
+        final List<Cookie> cookies, final Form form) {
         this.target = target;
         this.headers = headers;
         this.cookies = cookies;
@@ -224,7 +224,7 @@ public final class WebResourceFactory implements InvocationHandler {
                                 if (!name.equals(((Cookie) value).getName())) {
                                     // is this the right thing to do? or should I fail? or ignore the difference?
                                     cookies.add(
-                                            new Cookie(name, c.getValue(), c.getPath(), c.getDomain(), c.getVersion()));
+                                        new Cookie(name, c.getValue(), c.getPath(), c.getDomain(), c.getVersion()));
                                 }
                             }
                         }
@@ -277,7 +277,7 @@ public final class WebResourceFactory implements InvocationHandler {
         }
 
         Invocation.Builder builder = newTarget.request().headers(headers) // this resets all headers so do this first
-                .accept(accepts);
+            .accept(accepts);
 
         for (final Cookie c : cookies) {
             builder = builder.cookie(c);

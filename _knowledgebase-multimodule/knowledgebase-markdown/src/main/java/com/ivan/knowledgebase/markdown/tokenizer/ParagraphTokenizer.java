@@ -10,9 +10,9 @@ import com.ivan.knowledgebase.markdown.token.ParagraphToken;
 
 public final class ParagraphTokenizer implements Tokenizer<ParagraphToken> {
     private static final String PARAGRAPH_REGEX = RegexBuilder
-            .createFromTemplate(
-                    "^([^\\n]+(?:\\n(?!hr|heading|lheading|blockquote|fences|list|html|table| +\\n)[^\\n]+)*)")
-            .buildAsString();
+        .createFromTemplate(
+            "^([^\\n]+(?:\\n(?!hr|heading|lheading|blockquote|fences|list|html|table| +\\n)[^\\n]+)*)")
+        .buildAsString();
     private static final Pattern PARAGRAPH_PATTERN = Pattern.compile(PARAGRAPH_REGEX);
 
     private static final int GROUP_INDEX_0 = 0;
@@ -34,12 +34,12 @@ public final class ParagraphTokenizer implements Tokenizer<ParagraphToken> {
             String text = matchedValue;
             if (matchedValue.charAt(matchedValue.length() - 1) == '\n') {
                 text = new StringBuilder(text)
-                        .replace(matchedValue.length() - 1, matchedValue.length(), "")
-                        .toString();
+                    .replace(matchedValue.length() - 1, matchedValue.length(), "")
+                    .toString();
             }
 
             return Optional.of(new ParagraphToken(rawValue, text,
-                    inlineLazyTokenizer.inline(text, new LinkedList<>())));
+                inlineLazyTokenizer.inline(text, new LinkedList<>())));
         }
         return Optional.empty();
     }

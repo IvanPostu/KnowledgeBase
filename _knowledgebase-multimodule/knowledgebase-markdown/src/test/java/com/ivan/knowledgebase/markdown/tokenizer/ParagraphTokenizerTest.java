@@ -19,11 +19,11 @@ class ParagraphTokenizerTest {
         ParagraphTokenizer tokenizer = new ParagraphTokenizer(mockInlineLazyTokenizer);
 
         assertThat(tokenizer.resolveToken("paragraph 1\n\nparagraph 2"))
-                .get().satisfies(token -> {
-                    assertThat(token.getChildTokens()).isEqualTo(childTokens);
-                    assertThat(token.getText()).isEqualTo("paragraph 1");
-                    assertThat(token.getRaw()).isEqualTo("paragraph 1");
-                    assertThat(token.getType()).isEqualTo(TokenType.PARAGRAPH);
-                });
+            .get().satisfies(token -> {
+                assertThat(token.getChildTokens()).isEqualTo(childTokens);
+                assertThat(token.getText()).isEqualTo("paragraph 1");
+                assertThat(token.getRaw()).isEqualTo("paragraph 1");
+                assertThat(token.getType()).isEqualTo(TokenType.PARAGRAPH);
+            });
     }
 }

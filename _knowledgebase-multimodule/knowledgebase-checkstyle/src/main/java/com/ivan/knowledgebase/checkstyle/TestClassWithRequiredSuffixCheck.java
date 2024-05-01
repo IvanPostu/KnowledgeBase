@@ -23,7 +23,7 @@ public class TestClassWithRequiredSuffixCheck extends AbstractCheck {
 
     @Override
     public int[] getDefaultTokens() {
-        return new int[] { TokenTypes.CLASS_DEF };
+        return new int[] {TokenTypes.CLASS_DEF};
     }
 
     @Override
@@ -35,8 +35,8 @@ public class TestClassWithRequiredSuffixCheck extends AbstractCheck {
             if (containsAtLeastOneTestAnnotation(objBlock)) {
                 if (!className.endsWith(requiredSuffix)) {
                     log(ast.getLineNo(),
-                            String.format("Class name " + className + " with @Test methods should be suffixed '*%s'",
-                                    requiredSuffix));
+                        String.format("Class name " + className + " with @Test methods should be suffixed '*%s'",
+                            requiredSuffix));
                 }
             }
 
@@ -45,12 +45,12 @@ public class TestClassWithRequiredSuffixCheck extends AbstractCheck {
 
     @Override
     public int[] getAcceptableTokens() {
-        return new int[] { TokenTypes.CLASS_DEF };
+        return new int[] {TokenTypes.CLASS_DEF};
     }
 
     @Override
     public int[] getRequiredTokens() {
-        return new int[] { TokenTypes.CLASS_DEF };
+        return new int[] {TokenTypes.CLASS_DEF};
     }
 
     private boolean containsAtLeastOneTestAnnotation(DetailAST objBlock) {
@@ -58,8 +58,8 @@ public class TestClassWithRequiredSuffixCheck extends AbstractCheck {
         while (methodDef != null) {
             DetailAST modifiers = methodDef.findFirstToken(TokenTypes.MODIFIERS);
             if (modifiers != null) {
-                for (DetailAST modifier = modifiers.getFirstChild(); modifier
-                        != null; modifier = modifier.getNextSibling()) {
+                for (DetailAST modifier = modifiers.getFirstChild(); modifier != null; modifier =
+                    modifier.getNextSibling()) {
 
                     DetailAST annotationIdent = modifier.findFirstToken(TokenTypes.IDENT);
                     if (annotationIdent == null) {

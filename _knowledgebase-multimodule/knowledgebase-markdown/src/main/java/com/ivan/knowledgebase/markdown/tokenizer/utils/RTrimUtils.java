@@ -1,6 +1,6 @@
 package com.ivan.knowledgebase.markdown.tokenizer.utils;
 
-//CHECKSTYLE.SUPPRESS: AbbreviationAsWordInName
+// CHECKSTYLE.SUPPRESS: AbbreviationAsWordInName
 public enum RTrimUtils {
     INSTANCE;
 

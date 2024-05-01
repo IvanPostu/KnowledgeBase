@@ -25,12 +25,12 @@ class LineHeadingTokenizerTest {
         LineHeadingTokenizer tokenizer = new LineHeadingTokenizer(mockInlineLazyTokenizer);
 
         assertThat(tokenizer.resolveToken(input))
-                .get().satisfies(token -> {
-                    assertThat(token.getChildTokens()).isEqualTo(childTokens);
-                    assertThat(token.getType()).isEqualTo(TokenType.HEADING);
-                    assertThat(token.getText()).isEqualTo(expectedText);
-                    assertThat(token.getDepth()).isEqualTo(expectedDepth);
-                    assertThat(token.getRaw()).isEqualTo(input);
-                });
+            .get().satisfies(token -> {
+                assertThat(token.getChildTokens()).isEqualTo(childTokens);
+                assertThat(token.getType()).isEqualTo(TokenType.HEADING);
+                assertThat(token.getText()).isEqualTo(expectedText);
+                assertThat(token.getDepth()).isEqualTo(expectedDepth);
+                assertThat(token.getRaw()).isEqualTo(input);
+            });
     }
 }

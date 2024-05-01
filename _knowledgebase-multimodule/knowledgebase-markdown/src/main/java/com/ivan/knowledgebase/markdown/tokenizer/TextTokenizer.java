@@ -11,8 +11,8 @@ import com.ivan.knowledgebase.markdown.token.TextToken;
 
 public final class TextTokenizer implements Tokenizer<TextToken> {
     private static final String TEXT_REGEX = RegexBuilder
-            .createFromTemplate("^[^\\n]+")
-            .buildAsString();
+        .createFromTemplate("^[^\\n]+")
+        .buildAsString();
     private static final Pattern TEXT_PATTERN = Pattern.compile(TEXT_REGEX);
 
     private static final int GROUP_INDEX_0 = 0;
@@ -30,7 +30,7 @@ public final class TextTokenizer implements Tokenizer<TextToken> {
             String rawValue = matcher.group(GROUP_INDEX_0);
 
             return Optional.of(new TextToken(rawValue, rawValue,
-                    inlineLazyTokenizer.inline(rawValue, new LinkedList<>())));
+                inlineLazyTokenizer.inline(rawValue, new LinkedList<>())));
         }
         return Optional.empty();
     }

@@ -6,15 +6,15 @@ import org.testng.annotations.Test;
 
 class NormalizersTest {
     private static final PlainMarkdownNormalizer DEFAULT_NORMALIZER = Normalizers.INSTANCE
-            .create(NormalizerType.DEFAULT);
+        .create(NormalizerType.DEFAULT);
     private static final PlainMarkdownNormalizer PEDANTIC_NORMALIZER = Normalizers.INSTANCE
-            .create(NormalizerType.PEDANTIC);
+        .create(NormalizerType.PEDANTIC);
 
     @Test
     void testNormalizeSpacesAndTabsWithPedanticTrue() {
         String input = "This is a\n    "
-                + "test\n    "
-                + "string";
+            + "test\n    "
+            + "string";
         String expectedOutput = "This is a\n    test\n    string";
 
         assertThat(normalize(PEDANTIC_NORMALIZER, input)).isEqualTo(expectedOutput);

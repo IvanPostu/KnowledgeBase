@@ -38,7 +38,7 @@ public final class Blackbox<ENDPOINT> {
         WebTarget webTarget = client.target(baseUri);
 
         return WebResourceFactory.newResource(endpointInterface, webTarget, false,
-                new MultivaluedHashMap<String, Object>(), Collections.emptyList(), new Form());
+            new MultivaluedHashMap<String, Object>(), Collections.emptyList(), new Form());
     }
 
 }

@@ -21,11 +21,11 @@ class TextTokenizerTest {
         Tokenizer<TextToken> tokenizer = new TextTokenizer(mockInlineLazyTokenizer);
 
         assertThat(tokenizer.resolveToken("Hello World!"))
-                .get().satisfies(token -> {
-                    assertThat(token.getChildTokens()).isEqualTo(childTokens);
-                    assertThat(token.getText()).isEqualTo("Hello World!");
-                    assertThat(token.getRaw()).isEqualTo("Hello World!");
-                    assertThat(token.getType()).isEqualTo(TokenType.TEXT);
-                });
+            .get().satisfies(token -> {
+                assertThat(token.getChildTokens()).isEqualTo(childTokens);
+                assertThat(token.getText()).isEqualTo("Hello World!");
+                assertThat(token.getRaw()).isEqualTo("Hello World!");
+                assertThat(token.getType()).isEqualTo(TokenType.TEXT);
+            });
     }
 }

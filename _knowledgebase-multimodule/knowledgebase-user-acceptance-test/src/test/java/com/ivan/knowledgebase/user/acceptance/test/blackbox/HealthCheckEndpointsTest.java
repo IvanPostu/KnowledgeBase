@@ -25,7 +25,7 @@ class HealthCheckEndpointsTest {
     private static final Logger LOG = LoggerFactory.getLogger(HealthCheckEndpointsTest.class);
 
     private final HealthCheckEndpoints healthCheckEndpoints = Blackbox.createEndpoint(HealthCheckEndpoints.class)
-            .forKnowledgeBaseApi().build();
+        .forKnowledgeBaseApi().build();
 
     private String currentTestName;
 
@@ -66,7 +66,7 @@ class HealthCheckEndpointsTest {
         String outputDirectory = context.getOutputDirectory();
 
         ExtentReports extent = new ExtentReports(
-                outputDirectory.replace(' ', '_') + "/extentReport" + Instant.now().toEpochMilli() + ".html", false);
+            outputDirectory.replace(' ', '_') + "/extentReport" + Instant.now().toEpochMilli() + ".html", false);
         ExtentTest test1 = extent.startTest(currentTestName);
 
         test1.log(LogStatus.INFO, "Starting test case");

@@ -12,17 +12,17 @@ import com.ivan.knowledgebase.markdown.token.HeadingToken;
 public final class LineHeadingTokenizer implements Tokenizer<HeadingToken> {
     private static final String BULLET = "(?:[*+-]|\\d{1,9}[.)])";
     private static final String HEADING_REGEX = RegexBuilder
-            .createFromTemplate(
-                    "^(?!bullet |blockCode|fences|blockquote|heading|html)"
-                            + "((?:.|\\n(?!\\s*?\\n|bullet |blockCode|fences|blockquote|heading|html))+?)"
-                            + "\\n {0,3}(=+|-+) *(?:\\n+|$)")
-            .replacePlaceholder("bullet", BULLET)
-            .replacePlaceholder("blockCode", " {4}")
-            .replacePlaceholder("fences", " {0,3}(?:`{3,}|~{3,})")
-            .replacePlaceholder("blockquote", " {0,3}>")
-            .replacePlaceholder("heading", " {0,3}#{1,6}")
-            .replacePlaceholder("html", " {0,3}<[^\\n>]+>\\n")
-            .buildAsString();
+        .createFromTemplate(
+            "^(?!bullet |blockCode|fences|blockquote|heading|html)"
+                + "((?:.|\\n(?!\\s*?\\n|bullet |blockCode|fences|blockquote|heading|html))+?)"
+                + "\\n {0,3}(=+|-+) *(?:\\n+|$)")
+        .replacePlaceholder("bullet", BULLET)
+        .replacePlaceholder("blockCode", " {4}")
+        .replacePlaceholder("fences", " {0,3}(?:`{3,}|~{3,})")
+        .replacePlaceholder("blockquote", " {0,3}>")
+        .replacePlaceholder("heading", " {0,3}#{1,6}")
+        .replacePlaceholder("html", " {0,3}<[^\\n>]+>\\n")
+        .buildAsString();
     private static final Pattern HEADING_PATTERN = Pattern.compile(HEADING_REGEX);
 
     private static final int GROUP_INDEX_0 = 0;
@@ -48,7 +48,7 @@ public final class LineHeadingTokenizer implements Tokenizer<HeadingToken> {
             int depth = matcher.group(GROUP_INDEX_2).charAt(0) == '=' ? 1 : 2;
 
             return Optional.of(new HeadingToken(rawValue, text, depth,
-                    inlineLazyTokenizer.inline(text, new LinkedList<>())));
+                inlineLazyTokenizer.inline(text, new LinkedList<>())));
         }
         return Optional.empty();
     }

@@ -23,45 +23,45 @@ class UrlLinkTokenizerTest {
     @DataProvider
     private Object[][] urlLinksWithExpectedTextAndHref() {
         return new Object[][] {
-            { "https://www.example.com/fhqwhgads.",
+            {"https://www.example.com/fhqwhgads.",
                 "https://www.example.com/fhqwhgads",
-                "https://www.example.com/fhqwhgads" },
-            { "http://foo.com))",
+                "https://www.example.com/fhqwhgads"},
+            {"http://foo.com))",
                 "http://foo.com",
-                "http://foo.com" },
-            { "http://foo.com.))",
+                "http://foo.com"},
+            {"http://foo.com.))",
                 "http://foo.com",
-                "http://foo.com" },
-            { "https://www.example.com?test=quote-in-\"-url",
+                "http://foo.com"},
+            {"https://www.example.com?test=quote-in-\"-url",
                 "https://www.example.com?test=quote-in-&quot;-url",
-                "https://www.example.com?test=quote-in-\"-url" },
-            { "https://www.example.com?test=quote-in-'-url",
+                "https://www.example.com?test=quote-in-\"-url"},
+            {"https://www.example.com?test=quote-in-'-url",
                 "https://www.example.com?test=quote-in-&#39;-url",
-                "https://www.example.com?test=quote-in-'-url" },
-            { "www.commonmark.org",
+                "https://www.example.com?test=quote-in-'-url"},
+            {"www.commonmark.org",
                 "www.commonmark.org",
-                "http://www.commonmark.org" },
-            { "www.commonmark.org/a.b",
+                "http://www.commonmark.org"},
+            {"www.commonmark.org/a.b",
                 "www.commonmark.org/a.b",
-                "http://www.commonmark.org/a.b" },
-            { "www.google.com/search?q=Markup+(business)",
+                "http://www.commonmark.org/a.b"},
+            {"www.google.com/search?q=Markup+(business)",
                 "www.google.com/search?q=Markup+(business)",
-                "http://www.google.com/search?q=Markup+(business)" },
-            { "www.google.com/search?q=Markup+(business)",
+                "http://www.google.com/search?q=Markup+(business)"},
+            {"www.google.com/search?q=Markup+(business)",
                 "www.google.com/search?q=Markup+(business)",
-                "http://www.google.com/search?q=Markup+(business)" },
-            { "www.google.com/search?q=commonmark",
+                "http://www.google.com/search?q=Markup+(business)"},
+            {"www.google.com/search?q=commonmark",
                 "www.google.com/search?q=commonmark",
-                "http://www.google.com/search?q=commonmark" },
-            { "https://encrypted.google.com/search?q=Markup+(business)",
+                "http://www.google.com/search?q=commonmark"},
+            {"https://encrypted.google.com/search?q=Markup+(business)",
                 "https://encrypted.google.com/search?q=Markup+(business)",
-                "https://encrypted.google.com/search?q=Markup+(business)" },
-            { "https://example.com",
+                "https://encrypted.google.com/search?q=Markup+(business)"},
+            {"https://example.com",
                 "https://example.com",
-                "https://example.com" },
-            { "test@example.com",
+                "https://example.com"},
+            {"test@example.com",
                 "test@example.com",
-                "mailto:test@example.com" },
+                "mailto:test@example.com"},
         };
     }
 
@@ -71,8 +71,8 @@ class UrlLinkTokenizerTest {
         assertThat(token.getType()).isEqualTo(TokenType.URL_LINK);
         assertThat(token.getHref()).isEqualTo(expectedHref);
         assertThat(token.getChildTokens())
-                .usingRecursiveComparison()
-                .isEqualTo(Collections.<TextToken>singletonList(
-                        new TextToken(expectedText, expectedText, Collections.emptyList())));
+            .usingRecursiveComparison()
+            .isEqualTo(Collections.<TextToken>singletonList(
+                new TextToken(expectedText, expectedText, Collections.emptyList())));
     }
 }

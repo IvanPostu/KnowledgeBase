@@ -13,13 +13,13 @@ import com.ivan.knowledgebase.markdown.token.Token;
 
 public final class AutoLinkTokenizer implements Tokenizer<AutolinkToken> {
     private static final String AUTOLINK_REGEX = RegexBuilder
-            .createFromTemplate(
-                    "^<(scheme:[^\\s\\x00-\\x1f<>]*|email)>")
-            .replacePlaceholder("email", "[a-zA-Z0-9.!#$%&'*+/=?_`{|}~-]"
-                    + "+(@)[a-zA-Z0-9](?:[a-zA-Z0-9-]{0,61}[a-zA-Z0-9])"
-                    + "?(?:\\.[a-zA-Z0-9](?:[a-zA-Z0-9-]{0,61}[a-zA-Z0-9])?)+(?![-_])")
-            .replacePlaceholder("scheme", "[a-zA-Z][a-zA-Z0-9+.-]{1,31}")
-            .buildAsString();
+        .createFromTemplate(
+            "^<(scheme:[^\\s\\x00-\\x1f<>]*|email)>")
+        .replacePlaceholder("email", "[a-zA-Z0-9.!#$%&'*+/=?_`{|}~-]"
+            + "+(@)[a-zA-Z0-9](?:[a-zA-Z0-9-]{0,61}[a-zA-Z0-9])"
+            + "?(?:\\.[a-zA-Z0-9](?:[a-zA-Z0-9-]{0,61}[a-zA-Z0-9])?)+(?![-_])")
+        .replacePlaceholder("scheme", "[a-zA-Z][a-zA-Z0-9+.-]{1,31}")
+        .buildAsString();
     private static final Pattern AUTOLINK_PATTERN = Pattern.compile(AUTOLINK_REGEX);
 
     private static final int GROUP_INDEX_0 = 0;

@@ -12,8 +12,8 @@ import com.ivan.knowledgebase.markdown.tokenizer.utils.RTrimUtils;
 
 public final class HeadingTokenizer implements Tokenizer<HeadingToken> {
     private static final String HEADING_REGEX = RegexBuilder
-            .createFromTemplate("^ {0,3}(#{1,6})(?=\\s|$)(.*)(?:\\n+|$)")
-            .buildAsString();
+        .createFromTemplate("^ {0,3}(#{1,6})(?=\\s|$)(.*)(?:\\n+|$)")
+        .buildAsString();
     private static final Pattern HEADING_PATTERN = Pattern.compile(HEADING_REGEX);
 
     private static final Predicate<String> MATCHES_HASH_AT_END = Pattern.compile("/#$").asPredicate();
@@ -49,7 +49,7 @@ public final class HeadingTokenizer implements Tokenizer<HeadingToken> {
             }
 
             return Optional.of(new HeadingToken(rawValue, text, firstGroupValue.length(),
-                    inlineLazyTokenizer.inline(text, new LinkedList<>())));
+                inlineLazyTokenizer.inline(text, new LinkedList<>())));
         }
         return Optional.empty();
     }

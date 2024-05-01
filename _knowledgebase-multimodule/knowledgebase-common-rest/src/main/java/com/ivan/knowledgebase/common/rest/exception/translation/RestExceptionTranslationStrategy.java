@@ -7,7 +7,7 @@ import javax.ws.rs.ClientErrorException;
 public interface RestExceptionTranslationStrategy {
 
     default Exception translateException(List<Class<? extends Exception>> expectedExceptionTypes,
-            ClientErrorException clientRestException) {
+        ClientErrorException clientRestException) {
         return clientRestException;
     }
 

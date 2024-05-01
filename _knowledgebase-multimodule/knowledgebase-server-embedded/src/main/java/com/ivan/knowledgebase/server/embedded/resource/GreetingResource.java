@@ -1,6 +1,5 @@
 package com.ivan.knowledgebase.server.embedded.resource;
 
-
 import com.ivan.knowledgebase.server.embedded.service.EnglishGreetingService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
@@ -17,12 +16,10 @@ public class GreetingResource {
 
     private final EnglishGreetingService engService;
 
-
     @Autowired
     public GreetingResource(EnglishGreetingService engService) {
         this.engService = engService;
     }
-
 
     @GET
     @Path("/{lang: es|en}/{name}")

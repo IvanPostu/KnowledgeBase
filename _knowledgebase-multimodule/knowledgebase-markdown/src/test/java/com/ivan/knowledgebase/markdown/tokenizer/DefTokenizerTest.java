@@ -14,21 +14,21 @@ class DefTokenizerTest {
     void testRegularCaseWithAdditionalStringAtTheEnd() {
         String source = "[link]: https://example.com \"title\"\n\nhello\nworld\n";
         assertIsValidDefToken(source, "[link]: https://example.com \"title\"\n\n", "link", "https://example.com",
-                Optional.of("\"title\""));
+            Optional.of("\"title\""));
     }
 
     @Test
     void testRegularCaseWithTitle() {
         String source = "[link]: https://example.com \"title1\"";
         assertIsValidDefToken(source, "[link]: https://example.com \"title1\"", "link", "https://example.com",
-                Optional.of("\"title1\""));
+            Optional.of("\"title1\""));
     }
 
     @Test
     void testRegularCaseWithoutTitle() {
         String source = "[link]: https://example.com ";
         assertIsValidDefToken(source, "[link]: https://example.com ", "link", "https://example.com",
-                Optional.empty());
+            Optional.empty());
     }
 
     @Test(dataProvider = "invalidDefTokensParameters")
@@ -39,10 +39,10 @@ class DefTokenizerTest {
     @DataProvider(name = "invalidDefTokensParameters")
     Object[][] invalidDefTokensParameters() {
         return new Object[][] {
-            { "[link] https://example.com " },
-            { "[link]: https://example.com \"title1" },
-            { "qqq https://example.com " },
-            { "[link]1: qqq " },
+            {"[link] https://example.com "},
+            {"[link]: https://example.com \"title1"},
+            {"qqq https://example.com "},
+            {"[link]1: qqq "},
         };
     }
 
@@ -52,7 +52,7 @@ class DefTokenizerTest {
     }
 
     void assertIsValidDefToken(String source, String expectedRaw, String expectedReference, String expectedLink,
-            Optional<String> expectedTitle) {
+        Optional<String> expectedTitle) {
 
         DefTokenizer defTokenizer = new DefTokenizer();
         DefToken token = defTokenizer.resolveToken(source).orElseThrow(() -> new IllegalStateException());

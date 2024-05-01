@@ -33,7 +33,7 @@ class AutoLinkTokenizerTest {
         Assertions.assertThat(token.getHref()).isEqualTo(expectedHref);
 
         Assertions.assertThat(token.getChildTokens())
-                .usingRecursiveComparison()
-                .isEqualTo(Collections.<TextToken>singletonList(new TextToken(expectedText, expectedText, null)));
+            .usingRecursiveComparison()
+            .isEqualTo(Collections.<TextToken>singletonList(new TextToken(expectedText, expectedText, null)));
     }
 }

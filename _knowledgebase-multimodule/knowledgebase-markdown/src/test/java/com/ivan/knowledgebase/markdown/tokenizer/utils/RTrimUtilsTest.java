@@ -6,7 +6,7 @@ import org.testng.annotations.Test;
 
 import com.ivan.knowledgebase.markdown.tokenizer.utils.RTrimUtils;
 
-//CHECKSTYLE.SUPPRESS: AbbreviationAsWordInName
+// CHECKSTYLE.SUPPRESS: AbbreviationAsWordInName
 class RTrimUtilsTest {
     @Test
     void testTrim() {

@@ -10,8 +10,8 @@ import com.ivan.knowledgebase.markdown.tokenizer.utils.RTrimUtils;
 
 public final class IndentedCodeTokenizer implements Tokenizer<IndentedCodeToken> {
     private static final String INDENTED_CODE_REGEX = RegexBuilder
-            .createFromTemplate("^( {4}[^\\n]+(?:\\n(?: *(?:\\n|$))*)?)+")
-            .buildAsString();
+        .createFromTemplate("^( {4}[^\\n]+(?:\\n(?: *(?:\\n|$))*)?)+")
+        .buildAsString();
     private static final Pattern INDENTED_CODE_PATTERN = Pattern.compile(INDENTED_CODE_REGEX);
 
     private final boolean pedantic;
@@ -32,8 +32,8 @@ public final class IndentedCodeTokenizer implements Tokenizer<IndentedCodeToken>
             String sourceCode = rawValue.replaceAll("(?m)^ {1,4}", "");
 
             sourceCode = pedantic
-                    ? sourceCode
-                    : RTrimUtils.INSTANCE.rtrim(sourceCode, "\n");
+                ? sourceCode
+                : RTrimUtils.INSTANCE.rtrim(sourceCode, "\n");
 
             IndentedCodeToken codeToken = new IndentedCodeToken(rawValue, sourceCode);
             return Optional.of(codeToken);

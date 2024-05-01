@@ -11,9 +11,9 @@ import com.ivan.knowledgebase.markdown.token.FencedCodeToken;
 
 public final class FencedCodeTokenizer implements Tokenizer<FencedCodeToken> {
     private static final String FENCED_CODE_REGEX = RegexBuilder
-            .createFromTemplate("^ {0,3}(`{3,}(?=[^`\\n]*(?:\\n|$))|~{3,})"
-                    + "([^\\n]*)(?:\\n|$)(?:|([\\s\\S]*?)(?:\\n|$))(?: {0,3}\\1[~`]* *(?=\\n|$)|$)")
-            .buildAsString();
+        .createFromTemplate("^ {0,3}(`{3,}(?=[^`\\n]*(?:\\n|$))|~{3,})"
+            + "([^\\n]*)(?:\\n|$)(?:|([\\s\\S]*?)(?:\\n|$))(?: {0,3}\\1[~`]* *(?=\\n|$)|$)")
+        .buildAsString();
     private static final Pattern FENCED_CODE_PATTERN = Pattern.compile(FENCED_CODE_REGEX);
     private static final Pattern INDENT_TO_CODE = Pattern.compile("^(\\s+)(?:```)");
     private static final Pattern SPACES_AT_THE_BEGINING_OF_LINE = Pattern.compile("^\\s+");
@@ -37,7 +37,7 @@ public final class FencedCodeTokenizer implements Tokenizer<FencedCodeToken> {
             String rawValue = matcher.group(0);
             String code = indentCodeCompensation(rawValue, matcher.group(GROUP_INDEX_3));
             Optional<String> language = tryToGetLanguage(matcher.group(GROUP_INDEX_2))
-                    .map(this::replaceAnyPunctuationIfNeeded);
+                .map(this::replaceAnyPunctuationIfNeeded);
 
             if (language.isPresent()) {
                 return Optional.of(new FencedCodeToken(rawValue, code, language.get()));
@@ -58,17 +58,17 @@ public final class FencedCodeTokenizer implements Tokenizer<FencedCodeToken> {
         if (indentToCodeMatcher.find()) {
             String indentToCode = indentToCodeMatcher.group(GROUP_INDEX_1);
             return Stream.of(code.split("\n"))
-                    .map(node -> {
-                        Matcher spacesMatcher = SPACES_AT_THE_BEGINING_OF_LINE.matcher(node);
-                        if (spacesMatcher.find()) {
-                            String indentInNode = spacesMatcher.group(0);
-                            if (indentInNode.length() >= indentToCode.length()) {
-                                return node.substring(indentToCode.length());
-                            }
+                .map(node -> {
+                    Matcher spacesMatcher = SPACES_AT_THE_BEGINING_OF_LINE.matcher(node);
+                    if (spacesMatcher.find()) {
+                        String indentInNode = spacesMatcher.group(0);
+                        if (indentInNode.length() >= indentToCode.length()) {
+                            return node.substring(indentToCode.length());
                         }
-                        return node;
-                    })
-                    .collect(Collectors.joining("\n"));
+                    }
+                    return node;
+                })
+                .collect(Collectors.joining("\n"));
         }
 
         return code;

@@ -10,8 +10,8 @@ import com.ivan.knowledgebase.markdown.tokenizer.utils.EscapeUtils;
 
 public final class EscapeTokenizer implements Tokenizer<EscapeToken> {
     private static final String ESCAPE_REGEX = RegexBuilder
-            .createFromTemplate("^\\\\([!\"#$%&'()*+,\\-./:;<=>?@\\[\\]\\\\^_`\\{|\\}~])")
-            .buildAsString();
+        .createFromTemplate("^\\\\([!\"#$%&'()*+,\\-./:;<=>?@\\[\\]\\\\^_`\\{|\\}~])")
+        .buildAsString();
     private static final Pattern ESCAPE_PATTERN = Pattern.compile(ESCAPE_REGEX);
 
     private static final int GROUP_INDEX_0 = 0;

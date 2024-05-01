@@ -18,7 +18,7 @@ public class Main {
 
     static Server getApplicationServer(int port) {
         ResourceConfig config = new ResourceConfig()
-                .packages("com.ivan.knowledgebase.server.embedded.resource");
+            .packages("com.ivan.knowledgebase.server.embedded.resource");
 
         ServletContextHandler context = new ServletContextHandler(ServletContextHandler.SESSIONS);
         context.setErrorHandler(null);

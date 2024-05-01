@@ -31,7 +31,7 @@ class HtmlTokenizerTest {
     @Test
     void testHtmlWithComment() {
         assertHtmlToken("<div>html</div> "
-                + "<!-- <meta name=\"viewport\" content=\"width=device-width, initial-scale=1.0\"> -->", false);
+            + "<!-- <meta name=\"viewport\" content=\"width=device-width, initial-scale=1.0\"> -->", false);
     }
 
     private void assertHtmlToken(String htmlInput, boolean expectedIsPre) {

@@ -16,14 +16,14 @@ import com.ivan.knowledgebase.markdown.tokenizer.utils.EscapeUtils;
 
 public final class UrlLinkTokenizer implements Tokenizer<UrlLinkToken> {
     private static final String URLLINK_REGEX = RegexBuilder
-            .createFromTemplate(
-                    "^((?:ftp|https?):\\/\\/|www\\.)"
-                            + "(?:[a-zA-Z0-9\\-]+\\.?)+[^\\s<]*|^email")
-            .replacePlaceholder("email", "[A-Za-z0-9._+-]+(@)[a-zA-Z0-9-_]+(?:\\.[a-zA-Z0-9-_]*[a-zA-Z0-9])+(?![-_])")
-            .buildAsString();
+        .createFromTemplate(
+            "^((?:ftp|https?):\\/\\/|www\\.)"
+                + "(?:[a-zA-Z0-9\\-]+\\.?)+[^\\s<]*|^email")
+        .replacePlaceholder("email", "[A-Za-z0-9._+-]+(@)[a-zA-Z0-9-_]+(?:\\.[a-zA-Z0-9-_]*[a-zA-Z0-9])+(?![-_])")
+        .buildAsString();
     private static final Pattern AUTOLINK_PATTERN = Pattern.compile(URLLINK_REGEX);
     private static final Pattern BACKPEDAL = Pattern
-            .compile("(?:[^?!.,:;*_'\"~()&]+|\\([^)]*\\)|&(?![a-zA-Z0-9]+;$)|[?!.,:;*_'\"~)]+(?!$))+");
+        .compile("(?:[^?!.,:;*_'\"~()&]+|\\([^)]*\\)|&(?![a-zA-Z0-9]+;$)|[?!.,:;*_'\"~)]+(?!$))+");
 
     private static final int GROUP_INDEX_0 = 0;
     private static final int GROUP_INDEX_1 = 1;
@@ -52,7 +52,7 @@ public final class UrlLinkTokenizer implements Tokenizer<UrlLinkToken> {
             }
 
             List<Token> childTokens = Collections
-                    .singletonList(new TextToken(text, text, Collections.emptyList()));
+                .singletonList(new TextToken(text, text, Collections.emptyList()));
             return Optional.of(new UrlLinkToken(rawValue, text, href, childTokens));
         }
         return Optional.empty();
@@ -67,8 +67,8 @@ public final class UrlLinkTokenizer implements Tokenizer<UrlLinkToken> {
             Matcher matcher = BACKPEDAL.matcher(value);
             if (matcher.find()) {
                 value = matcher.group(GROUP_INDEX_0) == null
-                        ? ""
-                        : matcher.group(GROUP_INDEX_0);
+                    ? ""
+                    : matcher.group(GROUP_INDEX_0);
             }
         } while (!value.equals(prevValue));
 

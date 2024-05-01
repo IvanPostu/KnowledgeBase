@@ -22,14 +22,14 @@ public class TestClassWithForbiddenAccessModifiersCheck extends AbstractCheck {
     public void beginTree(DetailAST rootAst) {
         if (forbiddenAccessModifiers.isEmpty()) {
             throw new IllegalStateException(
-                    "The 'forbiddenAccessModifiers' property must have at least one element");
+                "The 'forbiddenAccessModifiers' property must have at least one element");
         }
         super.beginTree(rootAst);
     }
 
     @Override
     public int[] getDefaultTokens() {
-        return new int[] { TokenTypes.CLASS_DEF };
+        return new int[] {TokenTypes.CLASS_DEF};
     }
 
     @Override
@@ -43,12 +43,12 @@ public class TestClassWithForbiddenAccessModifiersCheck extends AbstractCheck {
 
             if (!errors.isEmpty()) {
                 log(ast.getLineNo(), String.format("Class "
-                        + className
-                        + " contains forbidden access modifiers: %s",
-                        errors.stream()
-                                .map(error -> String.format("%s:%s:%s", error.getAccessModifier(),
-                                        error.getEntityType(), error.getEntityName()))
-                                .collect(Collectors.joining(", ", "[", "]"))));
+                    + className
+                    + " contains forbidden access modifiers: %s",
+                    errors.stream()
+                        .map(error -> String.format("%s:%s:%s", error.getAccessModifier(),
+                            error.getEntityType(), error.getEntityName()))
+                        .collect(Collectors.joining(", ", "[", "]"))));
             }
 
         }
@@ -56,12 +56,12 @@ public class TestClassWithForbiddenAccessModifiersCheck extends AbstractCheck {
 
     @Override
     public int[] getAcceptableTokens() {
-        return new int[] { TokenTypes.CLASS_DEF };
+        return new int[] {TokenTypes.CLASS_DEF};
     }
 
     @Override
     public int[] getRequiredTokens() {
-        return new int[] { TokenTypes.CLASS_DEF };
+        return new int[] {TokenTypes.CLASS_DEF};
     }
 
     private List<Error> validateClassMembersAccessModifiers(DetailAST classDefAst) {
@@ -120,8 +120,8 @@ public class TestClassWithForbiddenAccessModifiersCheck extends AbstractCheck {
         while (methodDef != null) {
             DetailAST modifiers = methodDef.findFirstToken(TokenTypes.MODIFIERS);
             if (modifiers != null) {
-                for (DetailAST modifier = modifiers.getFirstChild(); modifier
-                        != null; modifier = modifier.getNextSibling()) {
+                for (DetailAST modifier = modifiers.getFirstChild(); modifier != null; modifier =
+                    modifier.getNextSibling()) {
 
                     DetailAST annotationIdent = modifier.findFirstToken(TokenTypes.IDENT);
                     if (annotationIdent == null) {

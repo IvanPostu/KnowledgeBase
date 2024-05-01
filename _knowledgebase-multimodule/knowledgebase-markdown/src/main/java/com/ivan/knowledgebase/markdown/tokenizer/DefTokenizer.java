@@ -12,13 +12,13 @@ public final class DefTokenizer implements Tokenizer<DefToken> {
     private static final int LINK_INDEX = 2;
     private static final int TITLE_INDEX = 3;
     private static final String DEF_REGEX = RegexBuilder
-            .createFromTemplate("^ {0,3}\\[(label)\\]: *(?:\\n *)"
-                    + "?([^<\\s][^\\s]*|<.*?>)"
-                    + "(?:(?: +(?:\\n *)?| *\\n *)(title))? *(?:\\n+|$)")
-            .replacePlaceholder("label", "(?!\\s*\\])(?:\\\\.|[^\\[\\]\\\\])+")
-            .replacePlaceholder("title", "(?:\"(?:\\\\\"?|[^\"\\\\])*\"|'[^'\\n]*"
-                    + "(?:\\n[^'\\n]+)*\\n?'|\\([^()]*\\))")
-            .buildAsString();
+        .createFromTemplate("^ {0,3}\\[(label)\\]: *(?:\\n *)"
+            + "?([^<\\s][^\\s]*|<.*?>)"
+            + "(?:(?: +(?:\\n *)?| *\\n *)(title))? *(?:\\n+|$)")
+        .replacePlaceholder("label", "(?!\\s*\\])(?:\\\\.|[^\\[\\]\\\\])+")
+        .replacePlaceholder("title", "(?:\"(?:\\\\\"?|[^\"\\\\])*\"|'[^'\\n]*"
+            + "(?:\\n[^'\\n]+)*\\n?'|\\([^()]*\\))")
+        .buildAsString();
     private static final Pattern DEF_PATTERN = Pattern.compile(DEF_REGEX);
 
     @Override

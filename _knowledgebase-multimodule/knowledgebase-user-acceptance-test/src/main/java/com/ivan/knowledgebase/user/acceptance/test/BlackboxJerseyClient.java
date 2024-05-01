@@ -44,7 +44,7 @@ public enum BlackboxJerseyClient {
         objectMapper.configure(SerializationFeature.WRITE_DATES_AS_TIMESTAMPS, false);
 
         return ClientBuilder.newClient(config)
-                .register(new JacksonJaxbJsonProvider(objectMapper, JacksonJaxbJsonProvider.DEFAULT_ANNOTATIONS));
+            .register(new JacksonJaxbJsonProvider(objectMapper, JacksonJaxbJsonProvider.DEFAULT_ANNOTATIONS));
     }
 
     private static HttpClientConnectionManager createConnectionManager() {

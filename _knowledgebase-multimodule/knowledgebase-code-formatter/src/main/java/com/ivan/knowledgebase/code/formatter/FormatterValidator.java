@@ -57,7 +57,7 @@ public enum FormatterValidator {
                         String formattedContent = document.get();
                         if (!formattedContent.equals(contentAsString)) {
                             try (FileWriter writer = new FileWriter(fileElement.getFile())) {
-
+                                writer.write(formattedContent);
                             } catch (IOException e) {
                                 LOG.warn("Was unable to change the file {}", fileElement.getTrimmedAbsoluteName(), e);
                             }
@@ -114,9 +114,14 @@ public enum FormatterValidator {
             });
         }
         try {
+            long startTime = System.currentTimeMillis();
             executor.shutdown();
             executor.awaitTermination(10, TimeUnit.MINUTES);
-            LOG.info(String.format("Total unformatted files: %s", countOfUnformattedFiles.get()));
+            double elapsedTimeSeconds = (System.currentTimeMillis() - startTime) / 1000.0;
+
+            LOG.info("Total unformatted files: {}, Time taken: {} seconds",
+                countOfUnformattedFiles.get(),
+                elapsedTimeSeconds);
         } catch (InterruptedException e) {
             e.printStackTrace();
             System.exit(1);

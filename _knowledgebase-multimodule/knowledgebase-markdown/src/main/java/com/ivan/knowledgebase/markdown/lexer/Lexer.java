@@ -16,9 +16,9 @@ public enum Lexer {
     INSTANCE;
 
     private static final PlainMarkdownNormalizer DEFAULT_NORMALIZER = Normalizers.INSTANCE
-            .create(NormalizerType.DEFAULT);
+        .create(NormalizerType.DEFAULT);
     private static final PlainMarkdownNormalizer PEDANTIC_NORMALIZER = Normalizers.INSTANCE
-            .create(NormalizerType.PEDANTIC);
+        .create(NormalizerType.PEDANTIC);
 
     public List<Token> lex(String sourceMarkdown, LexerOptions lexerOptions) {
         String changeableSource = normalize(sourceMarkdown, lexerOptions);
@@ -30,16 +30,14 @@ public enum Lexer {
         };
 
         List<? extends Tokenizer<? extends Token>> tokenizers = initializeTokenizers(lexerOptions,
-                inlineLazyTokenizer);
+            inlineLazyTokenizer);
         List<Token> result = new LinkedList<>();
-        
-        
 
         return null;
     }
 
     private List<? extends Tokenizer<? extends Token>> initializeTokenizers(LexerOptions lexerOptions,
-            InlineLazyTokenizer inlineLazyTokenizer) {
+        InlineLazyTokenizer inlineLazyTokenizer) {
         List<Tokenizer<? extends Token>> tokenizers = new LinkedList<>();
         tokenizers.add(new ParagraphTokenizer(inlineLazyTokenizer));
 
@@ -48,8 +46,8 @@ public enum Lexer {
 
     private String normalize(String source, LexerOptions lexerOptions) {
         PlainMarkdownNormalizer normalizer = lexerOptions.isPedantic()
-                ? PEDANTIC_NORMALIZER
-                : DEFAULT_NORMALIZER;
+            ? PEDANTIC_NORMALIZER
+            : DEFAULT_NORMALIZER;
         source = normalizer.normalizeTabsAndWhitespaces(source);
         source = normalizer.normalizeEndLines(source);
 

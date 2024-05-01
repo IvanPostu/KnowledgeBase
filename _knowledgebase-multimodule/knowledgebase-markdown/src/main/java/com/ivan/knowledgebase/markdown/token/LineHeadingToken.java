@@ -13,8 +13,8 @@ public final class LineHeadingToken extends AbstractToken implements ParentToken
         this.text = text;
         this.depth = depth;
         this.childTokens = childTokens == null
-                ? Collections.emptyList()
-                : Collections.unmodifiableList(childTokens);
+            ? Collections.emptyList()
+            : Collections.unmodifiableList(childTokens);
     }
 
     public String getText() {

@@ -17,22 +17,22 @@ class IndentedCodeTokenizerTest {
         Optional<IndentedCodeToken> codeToken = codeTokenizer.resolveToken("    code");
 
         assertCodeToken(codeToken,
-                "    code",
-                "code");
+            "    code",
+            "code");
     }
 
     @Test
     void testResolveIndentedMultilineCode() {
         Optional<IndentedCodeToken> codeToken = codeTokenizer
-                .resolveToken("    Hello world\n    123123\n    End Block\n");
+            .resolveToken("    Hello world\n    123123\n    End Block\n");
 
         assertCodeToken(codeToken,
-                "    Hello world\n    123123\n    End Block\n",
-                "Hello world\n123123\nEnd Block");
+            "    Hello world\n    123123\n    End Block\n",
+            "Hello world\n123123\nEnd Block");
     }
 
     private void assertCodeToken(Optional<IndentedCodeToken> codeToken, String expectedRawValue,
-            String expectedSourceCode) {
+        String expectedSourceCode) {
 
         assertThat(codeToken).get().satisfies(token -> {
             assertThat(token.getRaw()).isEqualTo(expectedRawValue);

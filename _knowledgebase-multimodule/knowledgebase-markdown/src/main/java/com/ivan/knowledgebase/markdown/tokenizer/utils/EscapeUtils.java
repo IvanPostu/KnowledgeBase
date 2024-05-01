@@ -11,7 +11,7 @@ public enum EscapeUtils {
 
     private static final Pattern ESCAPE = Pattern.compile("[&<>\"']");
     private static final Pattern ESCAPE_NO_ENCODE = Pattern
-            .compile("[<>\"']|&(?!(#\\d{1,7}|#[Xx][a-fA-F0-9]{1,6}|\\w+);)");
+        .compile("[<>\"']|&(?!(#\\d{1,7}|#[Xx][a-fA-F0-9]{1,6}|\\w+);)");
     private static final Map<Character, String> ESCAPE_REPLACEMENT = initializeEscapeReplacements();
 
     public String escape(String text, boolean encode) {
