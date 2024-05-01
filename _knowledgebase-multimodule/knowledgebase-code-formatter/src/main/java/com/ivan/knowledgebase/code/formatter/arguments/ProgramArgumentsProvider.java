@@ -13,8 +13,14 @@ import org.apache.commons.cli.HelpFormatter;
 import org.apache.commons.cli.Option;
 import org.apache.commons.cli.Options;
 import org.apache.commons.cli.ParseException;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
+
+import com.ivan.knowledgebase.code.formatter.FormatterValidator;
 
 public final class ProgramArgumentsProvider {
+    private static final Logger LOG = LoggerFactory.getLogger(ProgramArgumentsProvider.class);
+
     private final String[] args;
 
     public ProgramArgumentsProvider(String... args) {
@@ -30,7 +36,7 @@ public final class ProgramArgumentsProvider {
             cmd = parser.parse(options, args);
         } catch (ParseException e) {
             HelpFormatter formatter = new HelpFormatter();
-            System.out.println(e.getMessage());
+            LOG.error("CLI arguments parse error", e);
             formatter.printHelp("Application", options);
             System.exit(1);
         }
@@ -41,15 +47,25 @@ public final class ProgramArgumentsProvider {
         String baseDirectoryPath = cmd.hasOption("baseDirectoryPath")
             ? cmd.getOptionValue("baseDirectoryPath")
             : new File("").getAbsolutePath();
+        ch.qos.logback.classic.Level logLevel = parseLogLevel(cmd.getOptionValue("logLevel"));
 
         ArgumentsPojo argumentsPojo = new ArgumentsPojo(
             threadsCount,
             "true".equalsIgnoreCase(applyFormattingValue),
-            baseDirectoryPath);
+            baseDirectoryPath,
+            logLevel);
 
         logArguments(argumentsPojo);
 
         return argumentsPojo;
+    }
+
+    private ch.qos.logback.classic.Level parseLogLevel(String value) {
+        try {
+            return ch.qos.logback.classic.Level.valueOf(value);
+        } catch (Exception e) {
+            return ch.qos.logback.classic.Level.INFO;
+        }
     }
 
     private int parseThreadCount(String threadCountValue) {
@@ -80,10 +96,17 @@ public final class ProgramArgumentsProvider {
             }
         }
 
-        System.out.println(String.format("Arguments: %s", map));
+        LOG.info(String.format("Arguments: %s", map));
     }
 
     private Options configureOptions() {
+        Option logLevelOption = Option.builder()
+            .longOpt("logLevel")
+            .argName("logLevel")
+            .hasArg()
+            .required(false)
+            .desc("log level")
+            .build();
         Option parallelOption = Option.builder()
             .longOpt("threadsCount")
             .argName("threadsCount")
@@ -107,6 +130,7 @@ public final class ProgramArgumentsProvider {
             .build();
 
         return new Options()
+            .addOption(logLevelOption)
             .addOption(parallelOption)
             .addOption(applyFormattingOption)
             .addOption(baseDirectoryPathOption);

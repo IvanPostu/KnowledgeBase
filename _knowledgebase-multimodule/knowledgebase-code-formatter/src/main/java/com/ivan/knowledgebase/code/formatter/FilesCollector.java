@@ -5,13 +5,19 @@ import java.util.Collections;
 import java.util.LinkedList;
 import java.util.List;
 import java.util.function.Predicate;
+import java.util.function.UnaryOperator;
+import java.util.stream.Collectors;
 
 public final class FilesCollector {
 
-    public List<File> collectJavaFilesFromDirectory(String directoryPath) {
+    public List<FileElement> collectJavaFilesFromDirectory(String directoryPath) {
         List<File> files = findFilesRecursively(new File(directoryPath),
             absolutePath -> absolutePath.endsWith(".java"));
-        return Collections.unmodifiableList(files);
+        UnaryOperator<String> fileDirectoryPathTrimmer = value -> value.replaceFirst(directoryPath, "");
+
+        return files.stream()
+            .map(file -> new FileElement(file, fileDirectoryPathTrimmer.apply(file.getAbsolutePath())))
+            .collect(Collectors.toUnmodifiableList());
     }
 
     private static List<File> findFilesRecursively(File directory, Predicate<String> absolutePathPredicate) {
@@ -34,5 +40,24 @@ public final class FilesCollector {
             }
         }
         return Collections.unmodifiableList(result);
+    }
+
+    public static final class FileElement {
+        private final File file;
+        private final String trimmedAbsoluteName;
+
+        public FileElement(File file, String trimmedAbsoluteName) {
+            this.file = file;
+            this.trimmedAbsoluteName = trimmedAbsoluteName;
+        }
+
+        public File getFile() {
+            return file;
+        }
+
+        public String getTrimmedAbsoluteName() {
+            return trimmedAbsoluteName;
+        }
+
     }
 }
