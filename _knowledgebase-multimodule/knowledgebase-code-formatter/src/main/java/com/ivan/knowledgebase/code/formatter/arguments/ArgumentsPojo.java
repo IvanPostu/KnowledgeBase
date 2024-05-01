@@ -2,18 +2,18 @@ package com.ivan.knowledgebase.code.formatter.arguments;
 
 public final class ArgumentsPojo {
 
-    private final boolean parallel;
+    private final int threadsCount;
     private final boolean applyFormatting;
     private final String baseDirectoryPath;
 
-    public ArgumentsPojo(boolean parallel, boolean applyFormatting, String baseDirectoryPath) {
-        this.parallel = parallel;
+    public ArgumentsPojo(int threadsCount, boolean applyFormatting, String baseDirectoryPath) {
+        this.threadsCount = threadsCount;
         this.applyFormatting = applyFormatting;
         this.baseDirectoryPath = baseDirectoryPath;
     }
 
-    public boolean getParallel() {
-        return parallel;
+    public int getThreadsCount() {
+        return threadsCount;
     }
 
     public boolean getApplyFormatting() {

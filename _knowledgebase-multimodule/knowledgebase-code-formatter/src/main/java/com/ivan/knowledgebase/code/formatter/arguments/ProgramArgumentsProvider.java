@@ -31,24 +31,34 @@ public final class ProgramArgumentsProvider {
         } catch (ParseException e) {
             HelpFormatter formatter = new HelpFormatter();
             System.out.println(e.getMessage());
-            formatter.printHelp("MyApp", options);
+            formatter.printHelp("Application", options);
             System.exit(1);
         }
 
-        String parallelValue = cmd.getOptionValue("parallel");
         String applyFormattingValue = cmd.getOptionValue("applyFormatting");
+
+        int threadsCount = parseThreadCount(cmd.getOptionValue("threadsCount"));
         String baseDirectoryPath = cmd.hasOption("baseDirectoryPath")
             ? cmd.getOptionValue("baseDirectoryPath")
             : new File("").getAbsolutePath();
 
         ArgumentsPojo argumentsPojo = new ArgumentsPojo(
-            "true".equalsIgnoreCase(parallelValue),
+            threadsCount,
             "true".equalsIgnoreCase(applyFormattingValue),
             baseDirectoryPath);
 
         logArguments(argumentsPojo);
 
         return argumentsPojo;
+    }
+
+    private int parseThreadCount(String threadCountValue) {
+        try {
+            int value = Integer.valueOf(threadCountValue).intValue();
+            return value > 0 ? value : 1;
+        } catch (Exception e) {
+            return 1;
+        }
     }
 
     private void logArguments(ArgumentsPojo argumentsPojo) {
@@ -74,12 +84,12 @@ public final class ProgramArgumentsProvider {
     }
 
     private Options configureOptions() {
-        Option parallelOption = Option.builder("p")
-            .longOpt("parallel")
-            .argName("parallel")
+        Option parallelOption = Option.builder()
+            .longOpt("threadsCount")
+            .argName("threadsCount")
             .hasArg()
             .required(false)
-            .desc("flag to use parallelism")
+            .desc("threads count")
             .build();
         Option applyFormattingOption = Option.builder()
             .longOpt("applyFormatting")
