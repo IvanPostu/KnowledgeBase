@@ -1,4 +1,4 @@
-package com.ivan.knowledgebase.code.formatter;
+package com.ivan.knowledgebase.code.formatter.config;
 
 import java.io.IOException;
 import java.io.InputStream;

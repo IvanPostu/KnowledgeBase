@@ -13,21 +13,21 @@ import java.util.Map;
 import java.util.function.Predicate;
 import java.util.stream.Collectors;
 
-import javax.xml.parsers.DocumentBuilder;
-import javax.xml.parsers.DocumentBuilderFactory;
-import javax.xml.parsers.ParserConfigurationException;
-
 import org.eclipse.jdt.core.JavaCore;
 import org.eclipse.jdt.core.ToolFactory;
 import org.eclipse.jdt.core.formatter.CodeFormatter;
 import org.eclipse.jface.text.Document;
 import org.eclipse.text.edits.TextEdit;
-import org.xml.sax.SAXException;
+
+import com.ivan.knowledgebase.code.formatter.arguments.ArgumentsPojo;
+import com.ivan.knowledgebase.code.formatter.arguments.ProgramArgumentsProvider;
+import com.ivan.knowledgebase.code.formatter.config.ConfigurationProvider;
 
 public class Main {
 
     public static void main(String[] args) throws Exception {
-        String directoryPath = "/home/ivan/Projects/KnowledgeBase/_knowledgebase-multimodule";
+        ArgumentsPojo arguments = new ProgramArgumentsProvider(args).provide();
+        String directoryPath = arguments.getBaseDirectoryPath();
 
         List<File> files = findFilesRecursively(new File(directoryPath),
             absolutePath -> absolutePath.endsWith(".java"));
@@ -37,8 +37,7 @@ public class Main {
 
         int countOfUnformattedFiles = 0;
         for (File file : files) {
-            byte[] content = readFile(file);
-            String contentAsString = new String(content);
+            String contentAsString = new String(readFile(file));
 
             TextEdit edit = codeFormatter.format(CodeFormatter.K_COMPILATION_UNIT, contentAsString, 0,
                 contentAsString.length(), 0, null);
@@ -60,29 +59,6 @@ public class Main {
         if (countOfUnformattedFiles > 0) {
             System.exit(1);
         }
-    }
-
-    private static Map<String, String> getGlobalConfiguration(Map<String, String> configEntriesFromFile)
-        throws IOException {
-        Map<String, String> options = new LinkedHashMap<String, String>(JavaCore.getOptions());
-        options.put(JavaCore.COMPILER_SOURCE, JavaCore.VERSION_1_8);
-        options.put(JavaCore.COMPILER_COMPLIANCE, JavaCore.VERSION_1_8);
-        options.put(JavaCore.COMPILER_CODEGEN_TARGET_PLATFORM, JavaCore.VERSION_1_8);
-
-        List<String> unknownConfigurationKeys = new LinkedList<String>();
-        configEntriesFromFile.forEach((key, value) -> {
-            if (!options.containsKey(key)) {
-                unknownConfigurationKeys.add(key);
-            }
-            options.put(key, value);
-        });
-
-        if (!unknownConfigurationKeys.isEmpty()) {
-            throw new IllegalStateException("Formatter configuration has unknown fields: " + unknownConfigurationKeys
-                .stream().collect(Collectors.joining(",\n\t")));
-        }
-
-        return Collections.unmodifiableMap(options);
     }
 
     private static byte[] readFile(File file) {
@@ -116,18 +92,5 @@ public class Main {
             }
         }
         return Collections.unmodifiableList(result);
-    }
-
-    private static byte[] readInputStreamToByteArray(InputStream inputStream) throws IOException {
-        ByteArrayOutputStream buffer = new ByteArrayOutputStream();
-        int nRead;
-        byte[] data = new byte[2048];
-
-        while ((nRead = inputStream.read(data, 0, data.length)) != -1) {
-            buffer.write(data, 0, nRead);
-        }
-
-        buffer.flush();
-        return buffer.toByteArray();
     }
 }
