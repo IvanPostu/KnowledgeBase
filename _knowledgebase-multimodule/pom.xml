@@ -29,6 +29,7 @@
 		<maven-jxr-plugin.version>3.3.2</maven-jxr-plugin.version>
 		<maven-project-info-reports-plugin.version>3.0.0</maven-project-info-reports-plugin.version>
 		<maven-surefire-plugin.version>3.2.5</maven-surefire-plugin.version>
+		<maven-antrun-plugin.version>3.1.0</maven-antrun-plugin.version>
 	</properties>
 
 	<profiles>
@@ -60,7 +61,6 @@
 		<module>knowledgebase-markdown</module>
 		<module>knowledgebase-test-common</module>
 		<module>knowledgebase-shared</module>
-		<module>knowledgebase-code-formatter</module>
 	</modules>
 	<distributionManagement>
 		<site>
@@ -210,12 +210,14 @@
 					</execution>
 				</executions>
 			</plugin>
+
 			<plugin>
 				<artifactId>maven-antrun-plugin</artifactId>
-				<version>3.1.0</version>
+				<version>${maven-antrun-plugin.version}</version>
 				<executions>
+					<!--Manual build because checkstyle plugin depends on this module-->
 					<execution>
-						<id>run-checkstyle</id>
+						<id>build-checkstyle-module</id>
 						<goals>
 							<goal>run</goal>
 						</goals>
@@ -223,8 +225,7 @@
 						<inherited>false</inherited>
 						<configuration>
 							<target>
-								<echo>Build and Install local JAR checkstyle
-									module</echo>
+								<echo>Build and Install checkstyle module</echo>
 								<exec executable="mvnw" failonerror="true"
 									resultproperty="execResult">
 									<arg value="-f" />
@@ -236,8 +237,38 @@
 							</target>
 						</configuration>
 					</execution>
+
+					<execution>
+						<id>run-code-formatter</id>
+						<goals>
+							<goal>run</goal>
+						</goals>
+						<phase>validate</phase>
+						<inherited>false</inherited>
+						<configuration>
+							<target>
+								<exec executable="mvnw"
+									failonerror="true"
+									resultproperty="execResult">
+									<arg value="-f" />
+									<arg
+										value="${basedir}/knowledgebase-code-formatter/pom.xml" />
+									<arg
+										value="exec:java" />
+									<arg value="-q" />
+									<arg
+										line="-Dexec.args=&quot;--threadsCount 10 --logLevel=INFO &quot;" />
+									>
+									
+									<env key="JAVA_HOME"
+										value="${JAVA_HOME_17}" />
+								</exec>
+							</target>
+						</configuration>
+					</execution>
 				</executions>
 			</plugin>
+
 		</plugins>
 	</build>
 </project>
