@@ -1,70 +1,78 @@
-# Knowledge base
+# Knowledge Base
+This Java project provides a standalone, embedded web server optimized for fast operations with text data stored in Markdown format. Designed to efficiently parse and serve Markdown files.
 
-A standalone web server with a set of utilities intended to keep notes and information in a well structured format with a possibility to search and dive into it in an efficient way.
+## Setup
+In order to easily provide required environment variables, cli tools and dependencies for all platforms is used `nix-shell`.
 
-## Useful commands
+### Setup and startup (for development)
+1. `nix-shell ./default.nix --run bash`
+   - *(Optional) To explicitly set `JAVA_HOME` to jdk17, execute `nix-shell ./default.nix --argstr jdkVersion 17 --run bash`
+   - *(Optional) For eclipse run `mvnw clean eclipse:clean eclipse:eclipse`
+2. Run server side application in development mode: 
+   ```sh
+   # Default port 8080, workspaceDir ./tmp
+   # Debugger can be attached
+   $ run-server.sh
+   ```
+3. Run client side application in development mode: 
+   ```sh
+   # TODO
+   ```
+
+### Package artifact (for release)
 ```sh
-# Run nix-shell with default jdk8
-$ nix-shell --run bash
+#   TODO: 
+# - build client side
+# - build server side
+# - package everything in JAR file
+```
 
-# Run nix-shell with jdk17
-$ nix-shell ./default.nix --argstr jdkVersion 17 --run bash
+## Other
 
-# Package artifact
-$ run-rebuild-multimodule.sh
+### Project formatter
 
-# Run 
-$ run-rebuild-multimodule.sh  && java -jar $PROJECT_DIR/_knowledgebase-multimodule/knowledgebase-server-embedded/target/knowledgebase-server-embedded.jar
-# Or
-$ run-rebuild-multimodule.sh  && run-exec-embedded-server.sh
+#### Build JAR and run 
+```sh
+$ JAVA_HOME=$JAVA_HOME_17 mvnw -f $PROJECT_DIR/_knowledgebase-multimodule/knowledgebase-code-formatter/pom.xml clean install && $JAVA_HOME_17/bin/java -jar _knowledgebase-multimodule/knowledgebase-code-formatter/target/knowledgebase-code-formatter.jar --help
+```
 
-# Init project for eclipse
-$ mvnw clean eclipse:clean eclipse:eclipse
+#### Run inline (with project configuration)
+```sh
+$ JAVA_HOME=$JAVA_HOME_17 mvnw -f $PROJECT_DIR/_knowledgebase-multimodule/knowledgebase-code-formatter/pom.xml exec:java -Dexec.args="--threadsCount 10 --applyFormatting false --baseDirectoryPath=$PROJECT_DIR/_knowledgebase-multimodule --logLevel INFO --configurationFile $PROJECT_DIR/formats.xml"
+```
+
+### Maven
+```sh
+# Increment all projects versions
+$ mvnw versions:set -DnewVersion=1.0.4
+
+# Build project (tests + check-style)
+# -DskipTests -> skip tests execution
+# -Dmaven.test.skip=true -> skip tests compilation
+# -Dcheckstyle.skip=true -> skip checkstyle
+$ mvnw -f $PROJECT_DIR/_knowledgebase-multimodule/pom.xml clean install
+
+# Run only checkstyle for all modules
+$ mvnw -f $PROJECT_DIR/_knowledgebase-multimodule/pom.xml clean checkstyle:checkstyle-aggregate
+
+# Checkstyle internal project install globally
+$ mvnw -f $PROJECT_DIR/_knowledgebase-multimodule/knowledgebase-checkstyle/pom.xml clean install
+
+# Generate report for tests + checkstyle (acceptance tests are ignored)
+# Result path: $PROJECT_DIR/_knowledgebase-multimodule/target/staging/
+$ mvnw -f $PROJECT_DIR/_knowledgebase-multimodule/pom.xml clean site:site site:stage
+
+# Run user acceptance tests
+# Result path: $PROJECT_DIR/_knowledgebase-multimodule/knowledgebase-user-acceptance-test/target/surefire-reports/
+$ mvnw -f $PROJECT_DIR/_knowledgebase-multimodule/knowledgebase-user-acceptance-test/pom.xml clean test -Puser-acceptance-tests
 
 # Show tree of dependencies
 $ mvnw  dependency:tree -Ddetail=true
 
 # Create a module
 $ mvnw archetype:generate -DarchetypeGroupId=org.apache.maven.archetypes -DarchetypeArtifactId=maven-archetype-quickstart -DarchetypeVersion=1.4 -DgroupId={package.name} -DartifactId={snake-case-name}
-
-# Increment project versions
-$ mvnw versions:set -DnewVersion=1.0.4
-
-# Build project (tests + checkstyle)
-# -DskipTests -> skip tests execution
-# -Dmaven.test.skip=true -> skip tests compilation
-# -Dcheckstyle.skip=true -> skip checkstyle
-$ mvnw -f $PROJECT_DIR/_knowledgebase-multimodule/pom.xml clean install
-
-# Install without tests & checkstyle
-$ mvnw -f $PROJECT_DIR/_knowledgebase-multimodule/pom.xml clean install -DskipTests -Dcheckstyle.skip=true
-
-# Run tests (acceptance tests are ignored)
-$ mvnw -f $PROJECT_DIR/_knowledgebase-multimodule/pom.xml clean test
-# Run only checkstyle for all modules
-$ mvnw -f $PROJECT_DIR/_knowledgebase-multimodule/pom.xml clean checkstyle:checkstyle-aggregate
-
-# Checkstyle apply changes globally
-$ mvnw -f $PROJECT_DIR/_knowledgebase-multimodule/knowledgebase-checkstyle/pom.xml clean  install
-
-# Run checkstyle + unit tests
-$ mvnw -f $PROJECT_DIR/_knowledgebase-multimodule/pom.xml clean verify
-
-# Generate report for tests + checkstyle (acceptance tests are ignored)
-# Result path: /home/ivan/Projects/KnowledgeBase/_knowledgebase-multimodule/target/staging/
-$ mvnw -f $PROJECT_DIR/_knowledgebase-multimodule/pom.xml clean site:site site:stage
-
-# Run user acceptance tests
-# Result path: /home/ivan/Projects/KnowledgeBase/_knowledgebase-multimodule/knowledgebase-user-acceptance-test/target/surefire-reports/
-$ mvnw -f $PROJECT_DIR/_knowledgebase-multimodule/knowledgebase-user-acceptance-test/pom.xml clean test -Puser-acceptance-tests
-
-# Run code formatter check
-$ mvnw -f $PROJECT_DIR/_knowledgebase-multimodule/knowledgebase-code-formatter/pom.xml clean install && java -jar _knowledgebase-multimodule/knowledgebase-code-formatter/target/knowledgebase-code-formatter.jar --threadsCount 10 --applyFormatting true --baseDirectoryPath=$PROJECT_DIR/_knowledgebase-multimodule --logLevel INFO 
-
-$ $ mvnw -f $PROJECT_DIR/_knowledgebase-multimodule/knowledgebase-code-formatter/pom.xml clean install && java -jar _knowledgebase-multimodule/knowledgebase-code-formatter/target/knowledgebase-code-formatter.jar --help
 ```
-
-## How to supress checkstyle rules
+### How to suppress checkstyle rules
 ```java
     // CHECKSTYLE.SUPPRESS: MagicNumber
     private int number = 32;
@@ -76,13 +84,8 @@ $ $ mvnw -f $PROJECT_DIR/_knowledgebase-multimodule/knowledgebase-code-formatter
     private int number3 = 32;
 ```
 
-## How to run TestNG in eclipse
+### How to run TestNG in eclipse
 ```sh
-# 1. Install extension
+# 1. Install TestNG extension
 # 2. Change module's java version to the value which is greater than 8, e.g. 17
 ```
-
-
-## References
-
-- 

@@ -45,7 +45,13 @@ public class Main {
 
         String directoryPath = arguments.getBaseDirectoryPath();
         List<FileElement> files = FILES_COLLECTOR.collectJavaFilesFromDirectory(directoryPath);
-        Map<String, String> formatterConfiguration = ConfigurationProvider.getInstance().provideConfiguration();
+        Map<String, String> formatterConfiguration;
+        if (arguments.getConfigurationFilePath().isPresent()) {
+            formatterConfiguration = ConfigurationProvider.getInstance()
+                .provideConfiguration(arguments.getConfigurationFilePath().get());
+        } else {
+            formatterConfiguration = ConfigurationProvider.getInstance().provideConfiguration();
+        }
 
         if (arguments.getApplyFormatting()) {
             FormatterValidator.getInstance()

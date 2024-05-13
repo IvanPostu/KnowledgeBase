@@ -60,7 +60,6 @@
 		<module>knowledgebase-markdown</module>
 		<module>knowledgebase-test-common</module>
 		<module>knowledgebase-shared</module>
-		<module>knowledgebase-code-formatter</module>
 	</modules>
 	<distributionManagement>
 		<site>

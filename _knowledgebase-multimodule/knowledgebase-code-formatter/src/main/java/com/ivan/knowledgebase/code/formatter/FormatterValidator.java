@@ -119,7 +119,7 @@ public enum FormatterValidator {
             executor.awaitTermination(10, TimeUnit.MINUTES);
             double elapsedTimeSeconds = (System.currentTimeMillis() - startTime) / 1000.0;
 
-            LOG.info("Total unformatted files: {}, Time taken: {} seconds",
+            LOG.info("Total not properly formatted files: {}, Time taken: {} seconds",
                 countOfUnformattedFiles.get(),
                 elapsedTimeSeconds);
         } catch (InterruptedException e) {

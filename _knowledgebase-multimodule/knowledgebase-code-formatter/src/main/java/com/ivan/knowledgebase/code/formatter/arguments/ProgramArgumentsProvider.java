@@ -31,7 +31,7 @@ public final class ProgramArgumentsProvider {
 
     public void printHelp() {
         HelpFormatter formatter = new HelpFormatter();
-        formatter.printHelp("Help", options);
+        formatter.printHelp("Knowledge Base code formatter", options);
     }
 
     public ArgumentsPojo provide() {
@@ -47,6 +47,8 @@ public final class ProgramArgumentsProvider {
 
         String applyFormattingValue = cmd.getOptionValue("applyFormatting");
 
+        String configurationFileValue = cmd.getOptionValue("configurationFile");
+
         int threadsCount = parseThreadCount(cmd.getOptionValue("threadsCount"));
         String baseDirectoryPath = cmd.hasOption("baseDirectoryPath")
             ? cmd.getOptionValue("baseDirectoryPath")
@@ -58,7 +60,8 @@ public final class ProgramArgumentsProvider {
             "true".equalsIgnoreCase(applyFormattingValue),
             baseDirectoryPath,
             logLevel,
-            cmd.hasOption("help"));
+            cmd.hasOption("help"),
+            configurationFileValue);
 
         logArguments(argumentsPojo);
 
@@ -137,12 +140,20 @@ public final class ProgramArgumentsProvider {
             .required(false)
             .desc("absolute path to base directory which should be scanned recursively")
             .build();
+        Option configurationFileOption = Option.builder()
+            .longOpt("configurationFile")
+            .argName("configurationFile")
+            .hasArg()
+            .required(false)
+            .desc("eclipse formatter configuration file, e.g. 'formats.xml'")
+            .build();
 
         return new Options()
             .addOption(helpOption)
             .addOption(logLevelOption)
             .addOption(parallelOption)
             .addOption(applyFormattingOption)
-            .addOption(baseDirectoryPathOption);
+            .addOption(baseDirectoryPathOption)
+            .addOption(configurationFileOption);
     }
 }

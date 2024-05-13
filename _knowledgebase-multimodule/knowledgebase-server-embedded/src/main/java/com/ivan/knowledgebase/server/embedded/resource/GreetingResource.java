@@ -1,13 +1,14 @@
 package com.ivan.knowledgebase.server.embedded.resource;
 
-import com.ivan.knowledgebase.server.embedded.service.EnglishGreetingService;
-import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.stereotype.Component;
-
 import javax.ws.rs.GET;
 import javax.ws.rs.Path;
 import javax.ws.rs.PathParam;
 import javax.ws.rs.Produces;
+
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Component;
+
+import com.ivan.knowledgebase.server.embedded.service.EnglishGreetingService;
 
 @Component
 @Path("greeting")
